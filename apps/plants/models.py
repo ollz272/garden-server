@@ -19,7 +19,7 @@ class Plant(models.Model):
 
 
 class DataPoint(models.Model):
-    plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
+    plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name="plant_data")
     time = models.DateTimeField(auto_now_add=True)
     temperature = models.FloatField(null=True)
     light_level = models.FloatField(null=True)
