@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.utils.text import slugify
+from .managers import PlantDataManager
 
 
 class Plant(models.Model):
@@ -24,3 +25,17 @@ class DataPoint(models.Model):
     temperature = models.FloatField(null=True)
     light_level = models.FloatField(null=True)
     moisture_level = models.FloatField(null=True)
+
+    objects = PlantDataManager.as_manager()
+
+    class Meta:
+        ordering = ("-time",)
+
+    @property
+    def to_structured_data(self):
+        return {
+            'time': self.time,
+            'temperature': self.temperature,
+            'light_level': self.light_level,
+            'moisture_level': self.moisture_level
+        }

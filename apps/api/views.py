@@ -19,4 +19,4 @@ class PlantDataViewSet(viewsets.ModelViewSet):
     queryset = DataPoint.objects.all()
     serializer_class = DataPointSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['plant']
+    filterset_fields = ['plant', 'time']
