@@ -70,10 +70,10 @@ django-migrate:
 reset-db: drop-db create-db
 
 drop-db:
-	dropdb --if-exists gameserver_django
+	dropdb --if-exists gardenserver_django
 
 create-db:
-	createdb gameserver_django
+	createdb gardenserver_django
 
 # Black
 black-lint:
