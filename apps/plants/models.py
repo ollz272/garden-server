@@ -1,7 +1,6 @@
 from django.db import models
-
-# Create your models here.
 from django.utils.text import slugify
+
 from .managers import PlantDataManager
 
 
@@ -34,8 +33,8 @@ class DataPoint(models.Model):
     @property
     def to_structured_data(self):
         return {
-            'time': self.time,
-            'temperature': self.temperature,
-            'light_level': self.light_level,
-            'moisture_level': self.moisture_level
+            "time": self.time,
+            "temperature": self.temperature,
+            "light_level": self.light_level,
+            "moisture_level": self.moisture_level,
         }
