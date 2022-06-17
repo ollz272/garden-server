@@ -1,0 +1,15 @@
+{% extends "plants/base_update_or_create.html" %}
+{% load i18n crispy_forms_tags %}
+{% load static %}
+
+{% block extratitle %} - Create Plant {% endblock %}
+
+{% block header_text %}
+<h1>Create a Plant</h1>
+{% endblock %}
+
+
+{% block action_url %}{% url 'plant-create' %}{% endblock %}
+
+{% block form_submit_text %}Create{% endblock %}
+

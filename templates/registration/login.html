@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block extratitle %} - Login {% endblock %}
+
+{% block main %}
+    <h2>Login</h2>
+
+    {% if form.errors %}
+        <div class="errorlist">
+            <p>Your email and password didn't match. Please try again.</p>
+        </div>
+    {% endif %}
+    <div>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <fieldset class="center-align">
+                <div class="field">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="field">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+            </fieldset>
+            <input type="submit" value="login" class="btn btn__secondary center-align">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+
+        {# Assumes you setup the password_reset view in your URLconf #}
+    </div>
+{% endblock %}

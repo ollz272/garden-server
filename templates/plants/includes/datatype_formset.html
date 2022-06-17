@@ -1,0 +1,19 @@
+{% load crispy_forms_tags %}
+
+<div id="form_set">
+    <h2>Data types</h2>
+    {{ datatypes_formset.management_form|crispy }}
+    {% for form in datatypes_formset %}
+        {{ form.non_field_errors }}
+        {{ form.errors }}
+        <div id="{{ datatypes_formset.prefix }}">
+            {% crispy form %}
+        </div>
+    {% endfor %}
+
+    <div id="empty_form" style="display:none">
+        <table class='no_error'>
+            {% crispy datatypes_formset.empty_form %}
+        </table>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block extratitle %} - API details{% endblock %}
+
+{% block main %}
+<h2>How to add data to your plant.</h2>
+<p>To add data to your plant, you should use our API to post the right data types. We reccomend using a product like a
+raspberry pi or an aurdino to record the data and make requests to our server. For your plant, {{ plant.name }}, you
+can post in the following ways:</p>
+<div class="row">
+    <div class="col-md-4">Data Type</div>
+    <div class="col-md-4">URL</div>
+    <div class="col-md-4">Example data</div>
+    {% for data_type in data_types %}
+        <div class="col-md-4">{{ data_type }}</div>
+        <div class="col-md-4">{{ data_type.api_url }}</div>
+        <div class="col-md-4">{{ data_type.api_example_data }}</div>
+    {% endfor %}
+</div>
+{% endblock %}

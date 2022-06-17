@@ -21,6 +21,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
     path("plants/", include("plants.urls")),
+    path("accounts/", include("accounts.urls")),
 ]
 
 # add debug toolbar in urlpatterns

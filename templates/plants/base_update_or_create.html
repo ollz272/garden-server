@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n crispy_forms_tags %}
+{% load static %}
+
+{% block extra_header_js %}
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block main %}
+    {% block header_text %}
+        <h1>Create a Plant</h1>
+    {% endblock %}
+
+    {% if form.errors %}
+        <div class="errorlist">
+            <p>There are some errors.</p>
+        </div>
+    {% endif %}
+    <form method="post">
+        {% crispy form %}
+    </form>
+{% endblock %}
+
+{% block extra_footer_js %}
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    {# The below script calls the formset script with our custom parameters. #}
+    <script>
+        $(function() {
+          $('div#{{ datatypes_formset.prefix }}').formset({
+            formTemplate: '#empty_form',
+            prefix: "{{ datatypes_formset.prefix }}",
+            addText: 'New Data Type',
+            deleteText: 'Remove Data Type',
+            deleteCssClass: 'btn btn-outline-dark',
+            addCssClass: 'btn btn-outline-primary',
+          });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n crispy_forms_tags %}
+{% load static %}
+
+{% block extra_header_js %}
+    <!-- chartjs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
+{% endblock %}
+
+{% block main %}
+    <h2>Charts for {{ request.user }}'s {{ plant }}</h2>
+    <a href="{% url 'plant-list' %}">Back to all plants.</a>
+    <a href="{% url 'plant-update' pk=plant.pk %}">Make changes to plant.</a>
+    <a href="{% url 'plant-api-details' pk=plant.pk %}">View API details.</a>
+    <div class="row">
+        {% for chart in chart_data.values %}
+            {% include "plants/includes/individual_chart.html" %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block extra_footer_js %}
+    {{ chart_data|json_script:"chartData" }}
+    <script src="{% static 'js/plant_chart.js' %}"></script>
+{% endblock %}

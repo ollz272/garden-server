@@ -1,0 +1,15 @@
+{% extends "plants/base_update_or_create.html" %}
+{% load i18n crispy_forms_tags %}
+{% load static %}
+
+{% block extratitle %} - Update {{ plant.name }} {% endblock %}
+
+{% block header_text %}
+<h2>Update a {{ plant.name }}</h2>
+{% endblock %}
+
+
+{% block action_url %}{% url 'plant-update' pk=plant.pk %}{% endblock %}
+
+{% block form_submit_text %}Update{% endblock %}
+

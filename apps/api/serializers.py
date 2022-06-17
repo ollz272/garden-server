@@ -1,23 +1,43 @@
-from plants.models import DataPoint, Plant
+from plants.models import DataPoint, DataType, Plant
 from rest_framework import serializers
 
 
 class DataPointSerializer(serializers.ModelSerializer):
     class Meta:
         model = DataPoint
-        fields = ["plant", "time", "temperature", "light_level", "moisture_level"]
+        fields = ["plant", "time", "data_type", "data"]
+
+    def validate(self, data):
+        """
+        Check the data_type belongs to the plant.
+        """
+        if data["data_type"] not in data["plant"].data_types.all():
+            raise serializers.ValidationError(f"Data type does not belong to plant '{data['plant']}'.")
+
+        return data
 
 
 class PlantDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = DataPoint
-        fields = ["time", "temperature", "light_level", "moisture_level"]
+        fields = [
+            "time",
+            "data",
+        ]
 
 
-class PlantSerializer(serializers.ModelSerializer):
+class DataTypeSerializer(serializers.ModelSerializer):
     plant_data = PlantDataSerializer(many=True, read_only=True)
 
     class Meta:
+        model = DataType
+        fields = ["id", "name", "slug", "unit", "colour", "plant_data"]
+
+
+class PlantSerializer(serializers.ModelSerializer):
+    data_types = DataTypeSerializer(many=True, read_only=False)
+
+    class Meta:
         model = Plant
-        fields = ["id", "name", "indoor", "plant_data"]
+        fields = ["id", "name", "indoor", "data_types"]
         depth = 1
