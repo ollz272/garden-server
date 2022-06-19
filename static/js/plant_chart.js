@@ -1,6 +1,6 @@
 var chartData = JSON.parse(document.getElementById('chartData').textContent);
 
-function addChart(elementID, individualChartData){
+async function addChart(elementID, individualChartData){
     const myChart = new Chart(individualChartData.element_id, {
       type: 'line',
       data: {

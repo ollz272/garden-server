@@ -14,28 +14,20 @@ import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-r_r2a^j8p)6cef$go4hneuic&yve#8emfjl85xh$8_$b*mg4yh"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["127.0.0.1"]
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8020']
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+DEBUG = False
 
 # Application definition
 
-PROJECT_APPS_ROOT = BASE_DIR / "apps"
-sys.path.append(PROJECT_APPS_ROOT.as_posix())
+PROJECT_APPS_ROOT = os.path.join(BASE_DIR, 'apps')
+sys.path.append(PROJECT_APPS_ROOT)
 
 DEFAULT_APPS = [
     "django.contrib.admin",
@@ -49,7 +41,6 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
-    "debug_toolbar",
     "crispy_forms",
     "django_extensions",
 ]
@@ -63,7 +54,6 @@ PROJECT_APPS = [
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -154,15 +144,3 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-# this is the main reason for not showing up the toolbar
-if DEBUG:
-    # this is the main reason for not showing up the toolbar
-    import mimetypes
-
-    mimetypes.add_type("application/javascript", ".js", True)
-
-    DEBUG_TOOLBAR_CONFIG = {
-        "INTERCEPT_REDIRECTS": False,
-    }

@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import UniqueConstraint
-from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -27,22 +26,6 @@ class Plant(models.Model):
 
     def to_chart_data(self):
         charts = {}
-        for data_type in self.data_types.all():
-            data_points = self.plant_data.filter(data_type=data_type)
-            charts[data_type.slug] = {
-                "time": [data.time for data in data_points],
-                "data": [data.data for data in data_points],
-                "chart_title": f"Chart of {data_type.name}",
-                "element_id": f"chart-{data_type.slug}",
-                "unit": f"{data_type.unit}",
-                "colour": f"{data_type.colour}",
-            }
-
-        return charts
-
-    def to_chart_data_new(self):
-        charts = {}
-
         for data_type in self.data_types.all():
             data_points = self.plant_data.filter(data_type=data_type)
             charts[data_type.slug] = {
