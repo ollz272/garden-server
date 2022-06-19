@@ -7,6 +7,17 @@ ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = 'gardenserver'
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("DJANGO_DATABASE_NAME", "gardenserver_django"),
+        "USER": "",
+        "PASSWORD":  "",
+        "PORT": "5432",
+        "HOST":  "",
+    },
+}
+
 # Django debug toolbar - show locally unless DISABLE_TOOLBAR is enabled with environment vars
 # eg. DISABLE_TOOLBAR=1 ./manage.py runserver
 if not os.environ.get('DISABLE_TOOLBAR'):

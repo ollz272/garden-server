@@ -1,0 +1,10 @@
+pip==22.1.2
+setuptools==62.5.0
+wheel==0.37.1
+django==4.0.5
+djangorestframework==3.13.1
+psycopg2==2.9.3
+django-filter==22.1
+django-crispy-forms==1.14.0
+django-extra-views==0.14.0
+martor==1.6.13

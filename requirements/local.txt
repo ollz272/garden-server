@@ -1,0 +1,4 @@
+-r base.txt
+
+django-extensions==3.1.5
+django-debug-toolbar==3.4.0

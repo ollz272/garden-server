@@ -89,16 +89,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("DJANGO_DATABASE_NAME", "gardenserver_django"),
-        "USER": os.environ.get("DJANGO_DATABASE_USER"),
-        "PASSWORD":  os.environ.get("DJANGO_DATABASE_PASSWORD"),
-        "PORT": "5432",
-        "HOST":  os.environ.get("DJANGO_DATABASE_HOST"),
-    },
-}
+
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 

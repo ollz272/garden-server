@@ -31,7 +31,7 @@ install-local: pip-install-local
 
 # Pip
 pip-install-local: venv-check
-	pip install -r requirements.txt
+	pip install -r requirements/local.txt
 
 # Django
 django-check: django-check-missing-migrations django-check-validate-templates
