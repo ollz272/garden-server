@@ -16,5 +16,5 @@ RUN chown -R www-data:www-data /opt/app
 EXPOSE 8020
 STOPSIGNAL SIGTERM
 
-RUN python manage.py collectstatic --noinput --clear
+RUN python manage.py collectstatic --noinput --clear --settings project.settings.static
 CMD ["/opt/app/start_server.sh"]
