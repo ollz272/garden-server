@@ -1,8 +1,8 @@
 from .base import *
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOST', '').split(' ')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(' ')
 
-CSRF_TRUSTED_ORIGINS = [f"http://{host}" for host in os.environ.get('ALLOWED_HOST', '').split(' ')]
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 if os.environ.get("DEBUG"):
