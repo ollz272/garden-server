@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#!/usr/bin/env bash
+echo "Migrating.."
+python manage.py migrate
+
+
 # start-server.sh
 if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ] ; then
     (python manage.py createsuperuser --no-input)
