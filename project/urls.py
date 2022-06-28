@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -25,7 +27,7 @@ urlpatterns = [
 ]
 
 # add debug toolbar in urlpatterns
-if settings.DEBUG:
+if settings.DEBUG and not os.environ.get('DISABLE_TOOLBAR'):
     import debug_toolbar
 
     urlpatterns += [

@@ -90,7 +90,6 @@ WSGI_APPLICATION = "project.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Password validation

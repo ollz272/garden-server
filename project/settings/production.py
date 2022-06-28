@@ -5,6 +5,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOST', '').split(' ')
 CSRF_TRUSTED_ORIGINS = [f"http://{host}" for host in os.environ.get('ALLOWED_HOST', '').split(' ')]
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
+DEBUG = os.environ.get("DEBUG", False)
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
