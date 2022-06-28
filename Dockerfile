@@ -17,4 +17,5 @@ EXPOSE 8020
 STOPSIGNAL SIGTERM
 
 RUN python manage.py collectstatic --noinput --clear --settings project.settings.static
+ENTRYPOINT ["opt/app/docker-entrypoint.sh"]
 CMD ["/opt/app/start_server.sh"]
