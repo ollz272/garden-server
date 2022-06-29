@@ -13,13 +13,14 @@
     Plants.io {% block extratitle %} {% endblock %}
     </title>
 </head>
-
+{# todo add messages #}
 <body>
     {% block header %}
         {% include "includes/header.html" %}
     {% endblock %}
 
     <div class="container">
+        <h1>{% block title %}{% endblock %}</h1>
         {% block main %}
 
         {% endblock %}

@@ -42,6 +42,7 @@ DEFAULT_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
+    'wagtail.contrib.settings',
     'wagtail',
     'taggit',
     'modelcluster',
@@ -54,6 +55,8 @@ DEFAULT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "wagtail_links",
+    "wagtail_link_block",
     "rest_framework",
     "django_filters",
     "crispy_forms",
@@ -64,6 +67,8 @@ PROJECT_APPS = [
     "plants",
     "api",
     "accounts",
+    "pages",
+    "navigation",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -94,6 +99,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'wagtail.contrib.settings.context_processors.settings',
             ],
         },
     },
