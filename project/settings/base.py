@@ -29,7 +29,23 @@ DEBUG = False
 PROJECT_APPS_ROOT = os.path.join(BASE_DIR, 'apps')
 sys.path.append(PROJECT_APPS_ROOT)
 
+WAGTAIL_SITE_NAME = 'Garden Server'
+
 DEFAULT_APPS = [
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.contrib.settings',
+    'wagtail',
+    'taggit',
+    'modelcluster',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,6 +55,8 @@ DEFAULT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "wagtail_links",
+    "wagtail_link_block",
     "rest_framework",
     "django_filters",
     "crispy_forms",
@@ -49,6 +67,8 @@ PROJECT_APPS = [
     "plants",
     "api",
     "accounts",
+    "pages",
+    "navigation",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -61,6 +81,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -78,6 +99,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'wagtail.contrib.settings.context_processors.settings',
             ],
         },
     },
