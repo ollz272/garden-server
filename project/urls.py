@@ -41,6 +41,6 @@ if settings.DEBUG and not os.environ.get('DISABLE_TOOLBAR'):
 
     path('django-admin/', admin.site.urls),
 
-    # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's serving mechanism
+# For anything not caught by a more specific rule above, hand over to
+# Wagtail's serving mechanism
 urlpatterns += [re_path(r'', include(wagtail_urls))]

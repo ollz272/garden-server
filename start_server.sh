@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 echo "Migrating.."
-python manage.py migrate
+python manage.py migrate --settings="project.settings.production"
 
 
 # start-server.sh
