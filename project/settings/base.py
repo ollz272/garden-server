@@ -108,10 +108,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "project.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Password validation
@@ -156,3 +152,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+print(os.environ.get("DJANGO_SETTINGS_MODULE"))
