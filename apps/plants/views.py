@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from extra_views import (CreateWithInlinesView, NamedFormsetsMixin,
                          UpdateWithInlinesView)
-from plants.forms import DataTypeInline, PlantForm, DataTypeFormHelper
+from plants.forms import DataTypeFormHelper, DataTypeInline, PlantForm
 from plants.mixins import PlantViewMixin
 from plants.models import Plant
 
@@ -26,7 +26,7 @@ class CreatePlantView(LoginRequiredMixin, PlantViewMixin, CreateWithInlinesView,
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['datatypes_formset_helper'] = DataTypeFormHelper()
+        context["datatypes_formset_helper"] = DataTypeFormHelper()
         return context
 
     def get_success_url(self):
@@ -42,7 +42,7 @@ class UpdatePlantView(LoginRequiredMixin, PlantViewMixin, UpdateWithInlinesView,
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['datatypes_formset_helper'] = DataTypeFormHelper()
+        context["datatypes_formset_helper"] = DataTypeFormHelper()
         return context
 
     def get_success_url(self):

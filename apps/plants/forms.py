@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Div, HTML, Button, ButtonHolder
+from crispy_forms.layout import HTML, Button, ButtonHolder, Div, Layout, Submit
 from django import forms
 from extra_views import InlineFormSetFactory
 from plants.models import DataType, Plant
@@ -19,36 +19,24 @@ class PlantDataFilterForm(forms.Form):
 
 
 class DataTypeForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
             Div(
-                'id',
-                Div(
-                    "name",
-                    css_class="col"
-                ),
-                Div(
-                    "unit",
-                    css_class="col"
-                ),
-                Div(
-                    "colour",
-                    css_class="col"
-                ),
-                css_class="row"
+                "id",
+                Div("name", css_class="col"),
+                Div("unit", css_class="col"),
+                Div("colour", css_class="col"),
+                css_class="row",
             ),
         )
 
     class Meta:
         model = DataType
         fields = ("name", "unit", "colour")
-        widgets = {
-            'id': forms.HiddenInput
-        }
+        widgets = {"id": forms.HiddenInput}
 
 
 class DataTypeFormHelper(FormHelper):
@@ -73,7 +61,6 @@ class DataTypeInline(InlineFormSetFactory):
 
 
 class PlantForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -88,7 +75,7 @@ class PlantForm(forms.ModelForm):
                 HTML('{% include "plants/includes/datatype_formset.html" %}'),
                 css_class="form",
             ),
-            ButtonHolder(Submit('save', 'Save', css_class='submit')),
+            ButtonHolder(Submit("save", "Save", css_class="submit")),
         )
 
     class Meta:

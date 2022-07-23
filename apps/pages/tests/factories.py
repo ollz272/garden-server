@@ -1,5 +1,5 @@
-import wagtail_factories
 import factory
+import wagtail_factories
 
 from apps.pages.models import HomePage
 
@@ -10,4 +10,3 @@ class HomePageFactory(wagtail_factories.PageFactory):
 
     class Meta:
         model = HomePage
-

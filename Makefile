@@ -48,9 +48,9 @@ django-collectstatic:
 django-check-validate-templates:
 	./manage.py validate_templates --verbosity 0
 
-django-dev-createsuperuser: DJANGO_DEV_USERNAME ?= _dev@dev.ngo
+django-dev-createsuperuser: DJANGO_DEV_USERNAME ?= admin@admin.co.uk
 django-dev-createsuperuser: DJANGO_DEV_PASSWORD ?= password
-django-dev-createsuperuser: DJANGO_DEV_EMAIL ?= _dev@dev.ngo
+django-dev-createsuperuser: DJANGO_DEV_EMAIL ?= admin@admin.co.uk
 django-dev-createsuperuser:
 	@echo "import sys; from django.contrib.auth import get_user_model; obj = get_user_model().objects.create_superuser('$(DJANGO_DEV_USERNAME)', '$(DJANGO_DEV_EMAIL)', '$(DJANGO_DEV_PASSWORD)');" | python manage.py shell >> /dev/null
 	@echo
