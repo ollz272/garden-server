@@ -17,4 +17,5 @@ EXPOSE 8020
 STOPSIGNAL SIGTERM
 
 RUN python manage.py collectstatic --noinput --clear --settings project.settings.static
+RUN python manage.py update_index --settings project.settings.static
 CMD ["/opt/app/start_server.sh"]

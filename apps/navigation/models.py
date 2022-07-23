@@ -1,9 +1,8 @@
+from navigation.blocks import LinksBlock
 from wagtail.admin.panels import MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.fields import StreamField
-
-from navigation.blocks import LinksBlock
 
 
 @register_setting(icon="list")

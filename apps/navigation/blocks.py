@@ -1,4 +1,4 @@
-from wagtail.blocks import StructBlock, StreamBlock, CharBlock
+from wagtail.blocks import CharBlock, StreamBlock, StructBlock
 from wagtail_link_block.blocks import LinkBlock
 
 

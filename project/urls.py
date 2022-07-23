@@ -24,23 +24,23 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
-    path('admin/', include(wagtailadmin_urls)),
-    path('documents/', include(wagtaildocs_urls)),
+    path("admin/", include(wagtailadmin_urls)),
+    path("documents/", include(wagtaildocs_urls)),
     path("api/", include("api.urls")),
     path("plants/", include("plants.urls")),
     path("accounts/", include("accounts.urls")),
 ]
 
 # add debug toolbar in urlpatterns
-if settings.DEBUG and not os.environ.get('DISABLE_TOOLBAR'):
+if settings.DEBUG and not os.environ.get("DISABLE_TOOLBAR"):
     import debug_toolbar
 
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
     ]
 
-    path('django-admin/', admin.site.urls),
+    path("django-admin/", admin.site.urls),
 
 # For anything not caught by a more specific rule above, hand over to
 # Wagtail's serving mechanism
-urlpatterns += [re_path(r'', include(wagtail_urls))]
+urlpatterns += [re_path(r"", include(wagtail_urls))]

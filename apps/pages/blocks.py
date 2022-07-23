@@ -1,4 +1,4 @@
-from wagtail.blocks import StreamBlock, RichTextBlock
+from wagtail.blocks import RichTextBlock, StreamBlock
 
 
 class HomePageStreamBlock(StreamBlock):
