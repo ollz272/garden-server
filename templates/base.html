@@ -20,13 +20,15 @@
     {% endblock %}
 
     <div class="container">
-        <h1>{% block title %}{% endblock %}</h1>
+        <h1>{% block title %}Garden Server{% endblock %}</h1>
         {% block main %}
 
         {% endblock %}
     </div>
 
 </body>
+
+{% include 'includes/footer.html' %}
 
 {% block extra_footer_js %}
 
