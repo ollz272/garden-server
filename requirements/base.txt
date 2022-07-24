@@ -12,3 +12,4 @@ martor==1.6.13
 wagtail==3.0.1
 wagtail-links==2.4.4
 wagtail-link-block==0.1.5
+django-colorfield==0.7.2

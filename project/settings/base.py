@@ -61,6 +61,7 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "crispy_forms",
     "django_extensions",
+    "colorfield",
 ]
 
 PROJECT_APPS = [

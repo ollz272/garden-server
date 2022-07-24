@@ -30,3 +30,10 @@ class PageHTML(BaseSetting):
 
     class Meta:
         verbose_name = "Page HTML"
+
+
+@register_setting(icon="link")
+class SocialAccounts(BaseSetting):
+    twitter_url = models.URLField(blank=True, help_text="The URL for the Twitter page")
+    linkedin_url = models.URLField(blank=True, help_text="The URL for the LinkedIn page")
+    github_url = models.URLField(blank=True, help_text="The URL for the Github page")
