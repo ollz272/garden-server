@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import UniqueConstraint
+from django.urls import reverse
 from django.utils.text import slugify
+from colorfield.fields import ColorField
 
 
 class Plant(models.Model):
@@ -49,7 +51,12 @@ class DataType(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField()
     unit = models.CharField(max_length=50)
-    colour = models.CharField(max_length=50, help_text="")  # change to colour field?
+    colour = models.CharField(max_length=50)
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=("plant", "colour"), name="unique_chart_colour",)
+        ]
 
     def __str__(self):
         return self.name
@@ -60,7 +67,7 @@ class DataType(models.Model):
 
     @property
     def api_url(self):
-        return None
+        return reverse("datapoint-list")
 
     @property
     def api_example_data(self):

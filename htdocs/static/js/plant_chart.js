@@ -9,13 +9,18 @@ async function addChart(elementID, individualChartData){
               label: individualChartData.chart_title,
               data: individualChartData.data,
               borderWidth: 1,
-              backgroundColor: 'rgba(82, 99, 255, 0.5)',
+              backgroundColor: individualChartData.colour,
               tension: 0.1,
           },]
       },
       options: {
           normalized: true,
           responsive: true,
+          tooltips: {
+              callbacks: {
+                label: (item) => `${item.yLabel} individualChartData.unit`,
+              },
+          },
           scales: {
               y: {
                   beginAtZero: true

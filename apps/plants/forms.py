@@ -36,7 +36,10 @@ class DataTypeForm(forms.ModelForm):
     class Meta:
         model = DataType
         fields = ("name", "unit", "colour")
-        widgets = {"id": forms.HiddenInput}
+        widgets = {
+            "id": forms.HiddenInput,
+            "colour": forms.TextInput(attrs={"type": "color"})
+        }
 
 
 class DataTypeFormHelper(FormHelper):
