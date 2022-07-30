@@ -1,7 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Button, ButtonHolder, Div, Layout, Submit
 from django import forms
+from django.forms import SelectDateWidget
+from django_filters.fields import DateTimeRangeField
+from django_filters.widgets import RangeWidget
 from extra_views import InlineFormSetFactory
+from psycopg2._range import DateTimeTZRange
+
 from plants.models import DataType, Plant
 
 
@@ -10,12 +15,36 @@ class PlantDataFilterForm(forms.Form):
     This form doesn't contain any actual logic - but helps to keep
     the peace re. layout & CSRF between Crispy Forms and django_filters.
     """
+    start_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
+    end_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, plant, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.disable_csrf = True
-        self.helper.add_input(Submit("submit", "Submit"))
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            "start_date",
+            "end_date",
+        )
+
+        self.plant = plant
+        self.fields['start_date'].initial = self.plant.plant_data.order_by('time').first().time
+        self.fields['end_date'].initial = self.plant.plant_data.order_by('-time').first().time
+
+    def clean(self):
+        cleaned_date = super().clean()
+        return cleaned_date
+
+    def chart_data(self):
+        return self.plant.to_chart_data(
+            time_from=self.cleaned_data['start_date'],
+            time_to=self.cleaned_data['end_date'],
+        )
+
+    class Meta:
+        model = Plant
+        fields = ("start_date", "end_date")
 
 
 class DataTypeForm(forms.ModelForm):

@@ -2,9 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import FormMixin
 from extra_views import (CreateWithInlinesView, NamedFormsetsMixin,
                          UpdateWithInlinesView)
-from plants.forms import DataTypeFormHelper, DataTypeInline, PlantForm
+
+from plants.filters import PlantDataFilter
+from plants.forms import DataTypeFormHelper, DataTypeInline, PlantForm, PlantDataFilterForm
 from plants.mixins import PlantViewMixin
 from plants.models import Plant
 
@@ -58,9 +61,10 @@ class ListPlantView(LoginRequiredMixin, PlantViewMixin, ListView):
     context_object_name = "plants"
 
 
-class PlantChartView(LoginRequiredMixin, PlantViewMixin, DetailView):
+class PlantChartView(LoginRequiredMixin, PlantViewMixin, FormMixin, DetailView):
     model = Plant
     template_name = "plants/charts.html"
+    form_class = PlantDataFilterForm
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -68,9 +72,20 @@ class PlantChartView(LoginRequiredMixin, PlantViewMixin, DetailView):
 
         return super().get_queryset().filter(user=self.request.user)
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['plant'] = self.object
+        if data := self.request.GET:
+            kwargs['data'] = data
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["chart_data"] = self.object.to_chart_data()
+        form = self.get_form()
+        if self.request.GET and form.is_valid():
+            context["chart_data"] = form.chart_data()
+        else:
+            context["chart_data"] = self.object.to_chart_data()
         return context
 
 

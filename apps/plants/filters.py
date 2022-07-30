@@ -5,26 +5,17 @@ from plants.models import DataPoint, Plant
 
 
 class PlantDataFilter(django_filters.FilterSet):
-    plant = django_filters.ModelMultipleChoiceFilter(
-        queryset=Plant.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        to_field_name="id",
-        conjoined=True,
-        method="filter_plants",
-    )
 
     time = django_filters.DateTimeFromToRangeFilter(
         field_name="time", widget=django_filters.widgets.RangeWidget(attrs={"type": "datetime-local"})
     )
 
     class Meta:
-        model = DataPoint
+        model = Plant
         form = PlantDataFilterForm
-        fields = ["plant", "time"]
+        fields = ["time"]
 
     @property
     def qs(self):
         return super().qs.order_by("time")
 
-    def filter_plants(self, queryset, name, value):
-        return queryset.filter(plant__in=value)
