@@ -26,10 +26,18 @@ class Plant(models.Model):
         self.slug = slugify(self.name, allow_unicode=True)
         return super().save(*args, **kwargs)
 
-    def to_chart_data(self):
+    def to_chart_data(self, time_from=None, time_to=None):
+        """
+        Returns a usable dictionary representing the object as a chart - with optional start & end dates.
+        """
         charts = {}
         for data_type in self.data_types.all():
             data_points = self.plant_data.filter(data_type=data_type)
+            if time_from:
+                data_points = data_points.filter(time__gte=time_from)
+            if time_to:
+                data_points = data_points.filter(time__lte=time_to)
+
             charts[data_type.slug] = {
                 "time": [data.time for data in data_points],
                 "data": [data.data for data in data_points],

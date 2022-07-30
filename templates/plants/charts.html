@@ -14,6 +14,13 @@
     <a href="{% url 'plant-list' %}">Back to all plants.</a>
     <a href="{% url 'plant-update' pk=plant.pk %}">Make changes to plant.</a>
     <a href="{% url 'plant-api-details' pk=plant.pk %}">View API details.</a>
+    <div class="container center">
+        <form method="get" action=".">
+            {% crispy form %}
+            <button aria-label="Filter data" type="submit" class="button-primary">Filter data</button>
+        </form>
+    </div>
+
     <div class="row">
         {% for chart in chart_data.values %}
             {% include "plants/includes/individual_chart.html" %}

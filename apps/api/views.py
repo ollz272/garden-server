@@ -1,4 +1,7 @@
 import django_filters.rest_framework
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.throttling import UserRateThrottle
+
 from api.serializers import DataPointSerializer, PlantSerializer
 from plants.models import DataPoint, Plant
 from rest_framework import viewsets
@@ -8,6 +11,8 @@ from rest_framework.response import Response
 
 class PlantViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Plant.objects.all().prefetch_related("plant_data", "data_types__plant_data")
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [UserRateThrottle]
     serializer_class = PlantSerializer
 
     def get_queryset(self):
@@ -22,7 +27,7 @@ class PlantViewSet(viewsets.ReadOnlyModelViewSet):
         This endpoint will return an objects chart data.
 
         Each chart object will have various properties, including its time series, data series, and various metadata.
-        This can be used to populate charts outside of the main website!
+        This can be used to populate charts outside the main website!
         """
 
         return Response(self.get_object().to_chart_data())
@@ -30,6 +35,7 @@ class PlantViewSet(viewsets.ReadOnlyModelViewSet):
 
 class PlantDataViewSet(viewsets.ModelViewSet):
     queryset = DataPoint.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = DataPointSerializer
 
     def get_queryset(self):
