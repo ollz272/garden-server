@@ -6,6 +6,7 @@ from django_filters.fields import DateTimeRangeField
 from django_filters.widgets import RangeWidget
 from extra_views import InlineFormSetFactory
 from psycopg2._range import DateTimeTZRange
+from rest_framework.exceptions import ValidationError
 
 from plants.models import DataType, Plant
 
@@ -29,11 +30,16 @@ class PlantDataFilterForm(forms.Form):
         )
 
         self.plant = plant
-        self.fields['start_date'].initial = self.plant.plant_data.order_by('time').first().time
-        self.fields['end_date'].initial = self.plant.plant_data.order_by('-time').first().time
+        if first_time := self.plant.plant_data.order_by('time').first():
+            self.fields['start_date'].initial = first_time.time
+
+        if last_time := self.plant.plant_data.order_by('-time').first():
+            self.fields['end_date'].initial = last_time.time
 
     def clean(self):
         cleaned_date = super().clean()
+        if cleaned_date['start_date'] > cleaned_date['end_date']:
+            self.add_error(None, ValidationError("Start date must come before end date."))
         return cleaned_date
 
     def chart_data(self):
