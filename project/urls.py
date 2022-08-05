@@ -39,7 +39,7 @@ if settings.DEBUG and not os.environ.get("DISABLE_TOOLBAR"):
         path("__debug__/", include(debug_toolbar.urls)),
     ]
 
-    path("django-admin/", admin.site.urls),
+path("django-admin/", admin.site.urls),
 
 # For anything not caught by a more specific rule above, hand over to
 # Wagtail's serving mechanism

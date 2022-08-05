@@ -154,3 +154,19 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CACHES = dict()
+if os.environ.get("REDIS_SERVERS"):
+    CACHES["default"] = {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.environ["REDIS_SERVERS"].split(" "),
+        "KEY_PREFIX": "{}:cache".format(os.environ["REDIS_PREFIX"]),
+    }
+    CACHES["renditions"] = {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.environ["REDIS_SERVERS"].split(" "),
+        "KEY_PREFIX": "{}:cache".format(os.environ["REDIS_PREFIX"]),
+    }
+else:
+    CACHES["default"] = {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}
+    CACHES["renditions"] = {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}

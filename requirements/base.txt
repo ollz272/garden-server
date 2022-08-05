@@ -13,3 +13,5 @@ wagtail==3.0.1
 wagtail-links==2.4.4
 wagtail-link-block==0.1.5
 django-colorfield==0.7.2
+redis==4.3.4
+hiredis==2.0.0
