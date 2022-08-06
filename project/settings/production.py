@@ -27,3 +27,18 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = "eu-west-2"
 AWS_S3_ADDRESSING_STYLE = "virtual"
+
+# Cache sessions for optimum performance
+if os.environ.get("REDIS_SERVERS"):
+    SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+# Cache pages to a bare minimum to ensure decent performance under high load
+MIDDLEWARE = (
+    [
+        "cookiefilter.middleware.CookieFilterMiddleware",
+        "django.middleware.cache.UpdateCacheMiddleware",
+    ]
+    + MIDDLEWARE
+    + ["django.middleware.cache.FetchFromCacheMiddleware"]
+)
+CACHE_MIDDLEWARE_SECONDS = 30
