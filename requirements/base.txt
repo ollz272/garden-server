@@ -3,7 +3,7 @@ setuptools==63.2.0
 wheel==0.37.1
 django==4.0.6
 djangorestframework==3.13.1
-psycopg2==2.9.3
+psycopg2==2.9.4
 django-filter==21.1
 django-crispy-forms==1.14.0
 django-extra-views==0.14.0

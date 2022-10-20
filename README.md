@@ -28,7 +28,11 @@ You can create new plants to be tracked with at:
 `127.0.0.1:8000/plants/create/`
 
 You can then post data points to:
-`127.0.0.1:8000/api/plant-data/{id}/`
+`127.0.0.1:8000/api/plant-data/`
+With data, like:
+```json
+{"plant": 1, "data_type": 1, "data": "YOUR DATA HERE - MUST BE A NUMBER!"}
+```
 
 And view charts at:
 `127.0.0.1:8000/plants/chart/{id}/`
