@@ -18,4 +18,3 @@ class PlantDataFilter(django_filters.FilterSet):
     @property
     def qs(self):
         return super().qs.order_by("time")
-

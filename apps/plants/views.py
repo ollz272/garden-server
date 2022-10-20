@@ -5,9 +5,9 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 from extra_views import (CreateWithInlinesView, NamedFormsetsMixin,
                          UpdateWithInlinesView)
-
 from plants.filters import PlantDataFilter
-from plants.forms import DataTypeFormHelper, DataTypeInline, PlantForm, PlantDataFilterForm
+from plants.forms import (DataTypeFormHelper, DataTypeInline,
+                          PlantDataFilterForm, PlantForm)
 from plants.mixins import PlantViewMixin
 from plants.models import Plant
 
@@ -74,9 +74,9 @@ class PlantChartView(LoginRequiredMixin, PlantViewMixin, FormMixin, DetailView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['plant'] = self.object
+        kwargs["plant"] = self.object
         if data := self.request.GET:
-            kwargs['data'] = data
+            kwargs["data"] = data
         return kwargs
 
     def get_context_data(self, **kwargs):

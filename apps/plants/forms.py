@@ -5,10 +5,9 @@ from django.forms import SelectDateWidget
 from django_filters.fields import DateTimeRangeField
 from django_filters.widgets import RangeWidget
 from extra_views import InlineFormSetFactory
+from plants.models import DataType, Plant
 from psycopg2._range import DateTimeTZRange
 from rest_framework.exceptions import ValidationError
-
-from plants.models import DataType, Plant
 
 
 class PlantDataFilterForm(forms.Form):
@@ -16,6 +15,7 @@ class PlantDataFilterForm(forms.Form):
     This form doesn't contain any actual logic - but helps to keep
     the peace re. layout & CSRF between Crispy Forms and django_filters.
     """
+
     start_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
     end_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
 
@@ -30,22 +30,22 @@ class PlantDataFilterForm(forms.Form):
         )
 
         self.plant = plant
-        if first_time := self.plant.plant_data.order_by('time').first():
-            self.fields['start_date'].initial = first_time.time
+        if first_time := self.plant.plant_data.order_by("time").first():
+            self.fields["start_date"].initial = first_time.time
 
-        if last_time := self.plant.plant_data.order_by('-time').first():
-            self.fields['end_date'].initial = last_time.time
+        if last_time := self.plant.plant_data.order_by("-time").first():
+            self.fields["end_date"].initial = last_time.time
 
     def clean(self):
         cleaned_date = super().clean()
-        if cleaned_date['start_date'] > cleaned_date['end_date']:
+        if cleaned_date["start_date"] > cleaned_date["end_date"]:
             self.add_error(None, ValidationError("Start date must come before end date."))
         return cleaned_date
 
     def chart_data(self):
         return self.plant.to_chart_data(
-            time_from=self.cleaned_data['start_date'],
-            time_to=self.cleaned_data['end_date'],
+            time_from=self.cleaned_data["start_date"],
+            time_to=self.cleaned_data["end_date"],
         )
 
     class Meta:
@@ -71,10 +71,7 @@ class DataTypeForm(forms.ModelForm):
     class Meta:
         model = DataType
         fields = ("name", "unit", "colour")
-        widgets = {
-            "id": forms.HiddenInput,
-            "colour": forms.TextInput(attrs={"type": "color"})
-        }
+        widgets = {"id": forms.HiddenInput, "colour": forms.TextInput(attrs={"type": "color"})}
 
 
 class DataTypeFormHelper(FormHelper):

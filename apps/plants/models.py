@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models import UniqueConstraint
 from django.urls import reverse
 from django.utils.text import slugify
-from colorfield.fields import ColorField
 
 
 class Plant(models.Model):
@@ -17,7 +16,7 @@ class Plant(models.Model):
     slug = models.SlugField()
 
     class Meta:
-        constraints = [UniqueConstraint(fields=["user", "name"], name="unique_plant_name_for_user")]
+        constraints = [UniqueConstraint(fields=["user", "name"], name="unique_plant_name_for_user"),]
 
     def __str__(self):
         return self.name

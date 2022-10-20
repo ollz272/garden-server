@@ -1,12 +1,11 @@
 import django_filters.rest_framework
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.throttling import UserRateThrottle
-
 from api.serializers import DataPointSerializer, PlantSerializer
 from plants.models import DataPoint, Plant
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle
 
 
 class PlantViewSet(viewsets.ReadOnlyModelViewSet):
