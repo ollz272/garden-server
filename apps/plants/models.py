@@ -16,7 +16,9 @@ class Plant(models.Model):
     slug = models.SlugField()
 
     class Meta:
-        constraints = [UniqueConstraint(fields=["user", "name"], name="unique_plant_name_for_user"),]
+        constraints = [
+            UniqueConstraint(fields=["user", "name"], name="unique_plant_name_for_user"),
+        ]
 
     def __str__(self):
         return self.name
@@ -62,7 +64,10 @@ class DataType(models.Model):
 
     class Meta:
         constraints = [
-            UniqueConstraint(fields=("plant", "colour"), name="unique_chart_colour",)
+            UniqueConstraint(
+                fields=("plant", "colour"),
+                name="unique_chart_colour",
+            )
         ]
 
     def __str__(self):

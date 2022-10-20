@@ -2,12 +2,12 @@ from django import forms
 from django.db import models
 # Create your models here.
 from wagtail.admin.panels import FieldPanel, HelpPanel
-from wagtail.contrib.settings.models import BaseSetting
+from wagtail.contrib.settings.models import BaseSetting, BaseSiteSetting
 from wagtail.contrib.settings.registry import register_setting
 
 
 @register_setting(icon="code")
-class PageHTML(BaseSetting):
+class PageHTML(BaseSiteSetting):
     header_html = models.TextField("Header HTML", blank=True)
     footer_html = models.TextField("Footer HTML", blank=True)
 
@@ -33,7 +33,7 @@ class PageHTML(BaseSetting):
 
 
 @register_setting(icon="link")
-class SocialAccounts(BaseSetting):
+class SocialAccounts(BaseSiteSetting):
     twitter_url = models.URLField(blank=True, help_text="The URL for the Twitter page")
     linkedin_url = models.URLField(blank=True, help_text="The URL for the LinkedIn page")
     github_url = models.URLField(blank=True, help_text="The URL for the Github page")

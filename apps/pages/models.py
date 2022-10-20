@@ -22,17 +22,17 @@ class BasePage(Page):
 
 class HomePage(BasePage):
     max_count = 1
-    content = StreamField(HomePageStreamBlock, blank=True)
+    content = StreamField(HomePageStreamBlock, blank=True, use_json_field=True)
 
-    content_panels = BasePage.content_panels + [StreamFieldPanel("content")]
+    content_panels = BasePage.content_panels + [FieldPanel("content")]
 
     subpage_types = ["BlogIndexPage", "StandardPage"]
 
 
 class StandardPage(BasePage):
-    content = StreamField(HomePageStreamBlock, blank=True)
+    content = StreamField(HomePageStreamBlock, blank=True, use_json_field=True)
 
-    content_panels = BasePage.content_panels + [StreamFieldPanel("content")]
+    content_panels = BasePage.content_panels + [FieldPanel("content")]
 
 
 class BlogIndexPage(BasePage):
@@ -45,7 +45,7 @@ class BlogDetailPage(BasePage):
 
     abstract = models.TextField(blank=True)
 
-    content = StreamField(HomePageStreamBlock)
+    content = StreamField(HomePageStreamBlock, use_json_field=True)
 
     content_panels = BasePage.content_panels + [
         MultiFieldPanel(
@@ -54,5 +54,5 @@ class BlogDetailPage(BasePage):
             ],
             heading="Meta",
         ),
-        StreamFieldPanel("content"),
+        FieldPanel("content"),
     ]
