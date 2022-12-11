@@ -9,7 +9,7 @@ SECRET_KEY = "gardenserver"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": 'timescale.db.backends.postgresql',
         "NAME": os.environ.get("DJANGO_DATABASE_NAME", "gardenserver_django"),
         "USER": "",
         "PASSWORD": "",

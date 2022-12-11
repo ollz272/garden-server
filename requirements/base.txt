@@ -15,3 +15,4 @@ django-colorfield==0.7.2
 redis==4.3.4
 hiredis==2.0.0
 django-cookiefilter==0.1
+django-timescaledb==0.2.12

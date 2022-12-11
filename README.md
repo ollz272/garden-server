@@ -5,12 +5,12 @@ For production running, we also require an S3 bucket and Redis for caching.
 ## Development setup
 
 It's recommended you use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
-You will also need a locally running postgres database running. This _can_ be changed to sqlite but requires updating the settings.
-
+You will also need a locally running postgres database running. You will also need to install timescale db, as we rely
+on it for timeseries related queries. [Some documentation can be found here](https://docs.timescale.com/install/latest/self-hosted/installation-debian/).
 Presuming you are using those tools, getting started on this project is pretty straightforward:
 
 ```console
-$ mkproject --force --python=3.10 garden_server
+$ mkproject --force --python=3.11 garden-server
 $ workon gardenserver
 $ make reset
 ```
