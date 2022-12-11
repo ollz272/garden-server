@@ -1,8 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import UniqueConstraint
+from django.db.models import UniqueConstraint, Avg
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
+from timescale.db.models.fields import TimescaleDateTimeField
+from timescale.db.models.managers import TimescaleManager
 
 
 class Plant(models.Model):
@@ -33,15 +36,17 @@ class Plant(models.Model):
         """
         charts = {}
         for data_type in self.data_types.all():
-            data_points = self.plant_data.filter(data_type=data_type)
+            data_points = DataPoint.timescale.filter(data_type=data_type, plant=self)
             if time_from:
                 data_points = data_points.filter(time__gte=time_from)
             if time_to:
                 data_points = data_points.filter(time__lte=time_to)
 
+            data_points= data_points.time_bucket('time', '1 minutes').annotate(avg_data=Avg('data'))
+
             charts[data_type.slug] = {
-                "time": [data.time for data in data_points],
-                "data": [data.data for data in data_points],
+                "time": [data['bucket'] for data in data_points],
+                "data": [data['avg_data'] for data in data_points],
                 "chart_title": f"Chart of {data_type.name}",
                 "element_id": f"chart-{data_type.slug}",
                 "unit": f"{data_type.unit}",
@@ -92,9 +97,13 @@ class DataPoint(models.Model):
     """
 
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name="plant_data")
-    time = models.DateTimeField(auto_now_add=True)
+    time = TimescaleDateTimeField(default=timezone.now, interval="5 minutes")
     data_type = models.ForeignKey(DataType, on_delete=models.CASCADE, related_name="plant_data")
     data = models.FloatField()
+
+    # Managers
+    objects = models.Manager()
+    timescale = TimescaleManager()
 
     class Meta:
         ordering = ("-time",)

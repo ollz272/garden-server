@@ -55,13 +55,13 @@ DEFAULT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "wagtail_links",
     "wagtail_link_block",
     "rest_framework",
     "django_filters",
     "crispy_forms",
     "django_extensions",
     "colorfield",
+
 ]
 
 PROJECT_APPS = [

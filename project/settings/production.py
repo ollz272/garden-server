@@ -10,7 +10,7 @@ if os.environ.get("DEBUG"):
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": 'timescale.db.backends.postgresql',
         "NAME": os.environ.get("DJANGO_DATABASE_NAME", "gardenserver_django"),
         "USER": os.environ.get("DJANGO_DATABASE_USER"),
         "PASSWORD": os.environ.get("DJANGO_DATABASE_PASSWORD"),
