@@ -1,5 +1,5 @@
 pip==22.3
-setuptools==65.5.1
+setuptools==65.6.3
 wheel==0.38.1
 django==4.1.2
 djangorestframework==3.14.0
