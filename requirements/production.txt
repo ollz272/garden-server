@@ -3,4 +3,4 @@
 gunicorn==20.1.0
 django-storages==1.12.3
 boto3==1.24.41
-botocore==1.29.43
+botocore==1.29.44
