@@ -57,11 +57,11 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     "wagtail_link_block",
     "rest_framework",
+    "rest_framework.authtoken",
     "django_filters",
     "crispy_forms",
     "django_extensions",
     "colorfield",
-
 ]
 
 PROJECT_APPS = [

@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import UniqueConstraint, Avg
+from django.db.models import Avg, UniqueConstraint
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
@@ -42,11 +42,11 @@ class Plant(models.Model):
             if time_to:
                 data_points = data_points.filter(time__lte=time_to)
 
-            data_points= data_points.time_bucket('time', '1 minutes').annotate(avg_data=Avg('data'))
+            data_points = data_points.time_bucket("time", "1 minutes").annotate(avg_data=Avg("data"))
 
             charts[data_type.slug] = {
-                "time": [data['bucket'] for data in data_points],
-                "data": [data['avg_data'] for data in data_points],
+                "time": [data["bucket"] for data in data_points],
+                "data": [data["avg_data"] for data in data_points],
                 "chart_title": f"Chart of {data_type.name}",
                 "element_id": f"chart-{data_type.slug}",
                 "unit": f"{data_type.unit}",

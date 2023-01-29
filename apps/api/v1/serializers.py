@@ -31,13 +31,15 @@ class DataTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DataType
-        fields = ["id", "name", "slug", "unit", "colour", "plant_data"]
+        fields = ["id", "name", "slug", "unit", "colour", "plant", "plant_data"]
 
 
 class PlantSerializer(serializers.ModelSerializer):
-    data_types = DataTypeSerializer(many=True, read_only=False)
+    data_types = DataTypeSerializer(many=True, read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Plant
-        fields = ["id", "name", "indoor", "data_types"]
+        fields = ["id", "user", "name", "indoor", "data_types"]
+        read_only_fields = ("user",)
         depth = 1

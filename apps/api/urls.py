@@ -1,9 +1,11 @@
-from rest_framework import routers
+"""
+Versioned API url.
+"""
+from django.conf.urls import include
+from django.urls import path
 
-from apps.api.views import PlantDataViewSet, PlantViewSet
+from .v1.routes import get_router_urls as get_v1_router_urls
 
-router = routers.SimpleRouter()
-router.register(r"plant", PlantViewSet)
-router.register(r"plant-data", PlantDataViewSet)
-
-urlpatterns = router.urls
+urlpatterns = [
+    path("v1/", include(get_v1_router_urls())),
+]
