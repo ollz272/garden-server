@@ -7,6 +7,10 @@ jobs:
     timeout-minutes: 10
     env:
       DJANGO_SETTINGS_MODULE: 'project.settings.testing'
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: password
+      TOX_TESTENV_PASSENV: "PG*"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,6 +32,16 @@ jobs:
       - name: Isort Lint
         run: isort --check-only --diff apps project -l 120
 
+      - name: Configure Postgres (for faster tests)
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: password
+        run: |
+          psql -c "ALTER SYSTEM SET fsync=off;"
+          psql -c "ALTER SYSTEM SET full_page_writes=off;"
+          psql -c "SELECT pg_reload_conf();"
+
       - name: Migrations Check
         run: python manage.py makemigrations --check --dry-run
 
@@ -37,3 +51,12 @@ jobs:
       - name: Django Tests
         run:
           coverage run --include="apps/*" ./manage.py test --noinput . apps
+
+    services:
+      postgres:
+        image: postgres:12-alpine
+        env:
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
