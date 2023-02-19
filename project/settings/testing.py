@@ -4,7 +4,7 @@ import dj_database_url
 
 from .base import *  # noqa
 
-DATABASES = {"default": dj_database_url.config(default="postgis:///test_acts435_django")}
+DATABASES = {"default": dj_database_url.config(default="postgres:///test_gardenserver_django")}
 DATABASES["default"]["TEST"] = {"NAME": DATABASES["default"]["NAME"]}
 
 SECRET_KEY = "secret"
