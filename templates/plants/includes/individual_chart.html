@@ -1,5 +1,6 @@
 <div class="col-md-6">
   <h3>{{ chart.chart_title }}</h3>
+  <a href="{% url 'update-sensor' plant_pk=chart.plant_id sensor_pk=chart.sensor_id %}">Edit Sensor</a>
   <div style="height: 300px width: 300px">
     <canvas id="{{ chart.element_id }}" width="400" height="400"></canvas>
   </div>

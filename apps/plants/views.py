@@ -1,58 +1,41 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import FormMixin
-from extra_views import (CreateWithInlinesView, NamedFormsetsMixin,
-                         UpdateWithInlinesView)
-from plants.filters import PlantDataFilter
-from plants.forms import (DataTypeFormHelper, DataTypeInline,
-                          PlantDataFilterForm, PlantForm)
+from django.views.generic.edit import CreateView, FormMixin, UpdateView
+from plants.forms import PlantDataFilterForm, PlantForm, SensorForm
 from plants.mixins import PlantViewMixin
-from plants.models import Plant
+from plants.models import Plant, Sensor
 
 
-class CreatePlantView(LoginRequiredMixin, PlantViewMixin, CreateWithInlinesView, NamedFormsetsMixin):
+class CreatePlantView(LoginRequiredMixin, PlantViewMixin, CreateView):
     model = Plant
     form_class = PlantForm
-    inlines = [DataTypeInline]
-    inlines_names = ["datatypes_formset"]
     template_name = "plants/create.html"
 
-    def forms_valid(self, form, inlines):
-        obj = form.save(commit=False)
-        obj.user = self.request.user
-        obj.save()
-        for formset in inlines:
-            formset.save()
-        return HttpResponseRedirect(self.get_success_url())
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["datatypes_formset_helper"] = DataTypeFormHelper()
-        return context
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
     def get_success_url(self):
-        return reverse("plant-chart", kwargs={"pk": self.object.pk})
+        return reverse("plant-chart", kwargs={"plant_pk": self.object.pk})
 
 
-class UpdatePlantView(LoginRequiredMixin, PlantViewMixin, UpdateWithInlinesView, NamedFormsetsMixin):
+class UpdatePlantView(LoginRequiredMixin, PlantViewMixin, UpdateView):
     model = Plant
     form_class = PlantForm
-    inlines = [DataTypeInline]
-    inlines_names = ["datatypes_formset"]
     template_name = "plants/update.html"
+    pk_url_kwarg = "plant_pk"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["datatypes_formset_helper"] = DataTypeFormHelper()
-        return context
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
 
     def get_success_url(self):
-        return reverse("plant-chart", kwargs={"pk": self.object.pk})
-
-    def forms_invalid(self, form, inlines):
-        return super().forms_invalid(form, inlines)
+        return reverse("plant-chart", kwargs={"plant_pk": self.object.pk})
 
 
 class ListPlantView(LoginRequiredMixin, PlantViewMixin, ListView):
@@ -65,6 +48,7 @@ class PlantChartView(LoginRequiredMixin, PlantViewMixin, FormMixin, DetailView):
     model = Plant
     template_name = "plants/charts.html"
     form_class = PlantDataFilterForm
+    pk_url_kwarg = "plant_pk"
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -96,9 +80,69 @@ class PlantApiInfoView(LoginRequiredMixin, PlantViewMixin, DetailView):
 
     model = Plant
     template_name = "plants/api_details.html"
+    pk_url_kwarg = "plant_pk"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["data_types"] = self.object.data_types.all()
+        context["sensors"] = self.object.sensors.all()
 
         return context
+
+
+class SensorCreateView(CreateView):
+    model = Sensor
+    form_class = SensorForm
+    template_name = "plants/create_sensor.html"
+    plant_url_kwarg = "plant_pk"
+
+    def get_plant(self):
+        plant_pk = self.kwargs.get(self.plant_url_kwarg)
+        return get_object_or_404(Plant.objects.filter(user=self.request.user), pk=plant_pk)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["plant"] = self.get_plant()
+        return kwargs
+
+    def get(self, *args, **kwargs):
+        self.plant = self.get_plant()
+        return super().get(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        self.plant = self.get_plant()
+        return super().post(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse("plant-chart", kwargs={"plant_pk": self.plant.pk})
+
+
+class SensorUpdateView(UpdateView):
+    model = Sensor
+    form_class = SensorForm
+    template_name = "plants/update_sensor.html"
+    pk_url_kwarg = "sensor_pk"
+    plant_url_kwarg = "plant_pk"
+    context_object_name = "sensor"
+
+    def get_queryset(self):
+        return Sensor.objects.filter(plant=self.plant)
+
+    def get_plant(self):
+        plant_pk = self.kwargs.get(self.plant_url_kwarg)
+        return get_object_or_404(Plant.objects.filter(user=self.request.user), pk=plant_pk)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["plant"] = self.get_plant()
+        return kwargs
+
+    def get(self, *args, **kwargs):
+        self.plant = self.get_plant()
+        return super().get(*args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        self.plant = self.get_plant()
+        return super().post(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse("plant-chart", kwargs={"plant_pk": self.plant.pk})

@@ -1,11 +1,9 @@
 import abc
 
-from api.v1.serializers import (DataPointSerializer, DataTypeSerializer,
-                                PlantSerializer)
-from plants.models import DataPoint, DataType, Plant
+from api.v1.serializers import DataPointSerializer, PlantSerializer, SensorSerializer
+from plants.models import DataPoint, Plant, Sensor
 from rest_framework import status, viewsets
-from rest_framework.authentication import (SessionAuthentication,
-                                           TokenAuthentication)
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -22,7 +20,7 @@ class PlantBelongsToUserMixin:
 
 
 class PlantViewSet(viewsets.ModelViewSet):
-    queryset = Plant.objects.all().prefetch_related("plant_data", "data_types__plant_data")
+    queryset = Plant.objects.all().prefetch_related("plant_data", "sensors__plant_data")
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     throttle_classes = [UserRateThrottle]
@@ -49,7 +47,7 @@ class PlantViewSet(viewsets.ModelViewSet):
         return Response(self.get_object().to_chart_data())
 
     @action(detail=True, methods=["post"])
-    def create_data_type(self, request, pk=None):
+    def create_sensor(self, request, pk=None):
         """
         Endpoint to create a data type for a plant
         """
@@ -57,12 +55,12 @@ class PlantViewSet(viewsets.ModelViewSet):
         return Response({})
 
     @action(detail=True, methods=["get"])
-    def get_data_types(self, request, pk=None):
+    def get_sensors(self, request, pk=None):
         """
         Endpoint to create a data type for a plant
         """
 
-        return Response(DataTypeSerializer(DataType.objects.filter(plant_id=pk), many=True).data)
+        return Response(SensorSerializer(Sensor.objects.filter(plant_id=pk), many=True).data)
 
     @action(detail=True, methods=["post"])
     def create_data(self, request, pk=None):
@@ -79,18 +77,18 @@ class PlantViewSet(viewsets.ModelViewSet):
         """
         resp = {
             data_type.id: [DataPointSerializer(dp).data for dp in data_type.plant_data.all()]
-            for data_type in DataType.objects.filter(plant_id=pk).prefetch_related("plant_data")
+            for data_type in Sensor.objects.filter(plant_id=pk).prefetch_related("plant_data")
         }
         return Response(resp)
 
 
-class DataTypeViewSet(PlantBelongsToUserMixin, viewsets.ModelViewSet):
-    queryset = DataType.objects.all()
+class SensorViewSet(PlantBelongsToUserMixin, viewsets.ModelViewSet):
+    queryset = Sensor.objects.all()
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-    serializer_class = DataTypeSerializer
+    serializer_class = SensorSerializer
 
-    def get_plant(self, serializer: DataTypeSerializer) -> Plant:
+    def get_plant(self, serializer: SensorSerializer) -> Plant:
         plant = serializer.data["plant"]
         return Plant.objects.get(id=plant)
 
@@ -107,7 +105,7 @@ class PlantDataViewSet(PlantBelongsToUserMixin, viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     serializer_class = DataPointSerializer
 
-    def get_plant(self, serializer: DataTypeSerializer) -> Plant:
+    def get_plant(self, serializer: SensorSerializer) -> Plant:
         plant = serializer.data["plant"]
         return Plant.objects.get(id=plant)
 

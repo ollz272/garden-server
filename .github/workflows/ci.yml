@@ -1,0 +1,71 @@
+name: CI
+on: pull_request
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-20.04
+    timeout-minutes: 10
+    env:
+      DJANGO_SETTINGS_MODULE: 'project.settings.testing'
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: password
+      TOX_TESTENV_PASSENV: "PG*"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Ubuntu packages
+        run: |
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libgdal26
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements/testing.txt
+      - name: Black Lint
+        run: black --line-length 120 --exclude '/migrations/' --check apps project
+
+      - name: Isort Lint
+        run: isort --check-only --diff apps project -l 120
+
+      - name: Configure Postgres (for faster tests)
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: password
+        run: |
+          psql -c "ALTER SYSTEM SET fsync=off;"
+          psql -c "ALTER SYSTEM SET full_page_writes=off;"
+          psql -c "SELECT pg_reload_conf();"
+
+      - name: Migrations Check
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: password
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Template Check
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: password
+        run: python manage.py validate_templates --verbosity 0
+
+      - name: Django Tests
+        run:
+          coverage run --include="apps/*" ./manage.py test --noinput . apps
+
+    services:
+      postgres:
+        image: timescale/timescaledb:latest-pg14
+        env:
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_gardenserver_django
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5

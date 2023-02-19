@@ -23,20 +23,3 @@
         {% crispy form %}
     </form>
 {% endblock %}
-
-{% block extra_footer_js %}
-    <script src="{% static 'js/jquery.formset.js' %}"></script>
-    {# The below script calls the formset script with our custom parameters. #}
-    <script>
-        $(function() {
-          $('div#{{ datatypes_formset.prefix }}').formset({
-            formTemplate: '#empty_form',
-            prefix: "{{ datatypes_formset.prefix }}",
-            addText: 'New Data Type',
-            deleteText: 'Remove Data Type',
-            deleteCssClass: 'btn btn-outline-dark',
-            addCssClass: 'btn btn-outline-primary',
-          });
-        });
-    </script>
-{% endblock %}

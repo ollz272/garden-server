@@ -5,11 +5,11 @@
 {% block extratitle %} - Update {{ plant.name }} {% endblock %}
 
 {% block header_text %}
-<h2>Update {{ plant.name }}</h2>
+<h2>Create a Sensor</h2>
 {% endblock %}
 
 
-{% block action_url %}{% url 'plant-update' plant_pk=plant.pk %}{% endblock %}
+{% block action_url %}{% url 'sensor-create' plant_pk=plant.pk %}{% endblock %}
 
-{% block form_submit_text %}Update{% endblock %}
+{% block form_submit_text %}Create{% endblock %}
 

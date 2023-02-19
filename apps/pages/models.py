@@ -1,11 +1,6 @@
 from django.db import models
-# Create your models here.
-from django.utils.functional import cached_property
-from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import (FieldPanel, InlinePanel, MultiFieldPanel,
-                                  StreamFieldPanel)
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.fields import StreamField
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.models import Page
 
 from apps.pages.blocks import HomePageStreamBlock
@@ -13,7 +8,7 @@ from apps.pages.blocks import HomePageStreamBlock
 
 class BasePage(Page):
     """
-    Just a placeholder for now incase I want to add any commmon page logic - not an abstract model incase we want to do
+    Just a placeholder for now incase I want to add any common page logic - not an abstract model incase we want to do
     any filtering on pages more generally!
     """
 

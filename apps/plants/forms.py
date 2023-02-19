@@ -1,12 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Button, ButtonHolder, Div, Layout, Submit
+from crispy_forms.layout import HTML, ButtonHolder, Div, Layout, Submit
 from django import forms
-from django.forms import SelectDateWidget
-from django_filters.fields import DateTimeRangeField
-from django_filters.widgets import RangeWidget
 from extra_views import InlineFormSetFactory
-from plants.models import DataType, Plant
-from psycopg2._range import DateTimeTZRange
+from plants.models import Plant, Sensor
 from rest_framework.exceptions import ValidationError
 
 
@@ -48,68 +44,16 @@ class PlantDataFilterForm(forms.Form):
             time_to=self.cleaned_data["end_date"],
         )
 
-    class Meta:
-        model = Plant
-        fields = ("start_date", "end_date")
-
-
-class DataTypeForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                "id",
-                Div("name", css_class="col"),
-                Div("unit", css_class="col"),
-                Div("colour", css_class="col"),
-                css_class="row",
-            ),
-        )
-
-    class Meta:
-        model = DataType
-        fields = ("name", "unit", "colour")
-        widgets = {"id": forms.HiddenInput, "colour": forms.TextInput(attrs={"type": "color"})}
-
-
-class DataTypeFormHelper(FormHelper):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.form_tag = False
-        self.disable_csrf = True
-        self.render_hidden_fields = True
-
-
-class DataTypeInline(InlineFormSetFactory):
-    form_class = DataTypeForm
-    model = DataType
-    factory_kwargs = {
-        "extra": 0,
-        "validate_min": True,
-        "can_delete": True,
-        "validate_max": True,
-        "max_num": 4,
-        "min_num": 1,
-    }
-
 
 class PlantForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.user = user
         self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.disable_csrf = True
-        self.render_hidden_fields = True
         self.helper.layout = Layout(
             "name",
             "indoor",
-            Div(
-                HTML('{% include "plants/includes/datatype_formset.html" %}'),
-                css_class="form",
-            ),
             ButtonHolder(Submit("save", "Save", css_class="submit")),
         )
 
@@ -119,3 +63,39 @@ class PlantForm(forms.ModelForm):
             "name",
             "indoor",
         )
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if self.user:
+            instance.user = self.user
+
+        instance.save()
+        return instance
+
+
+class SensorForm(forms.ModelForm):
+    def __init__(self, plant: Plant = None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.plant = plant
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div("name", css_class="col"),
+            Div("unit", css_class="col"),
+            Div("colour", css_class="col"),
+            ButtonHolder(Submit("save", "Save", css_class="submit")),
+        )
+
+    class Meta:
+        model = Sensor
+        fields = ("name", "unit", "colour")
+        widgets = {"colour": forms.TextInput(attrs={"type": "color"})}
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+
+        if self.plant:
+            instance.plant = self.plant
+
+        instance.save()
+        return instance
