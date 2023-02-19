@@ -4,7 +4,16 @@ import dj_database_url
 
 from .base import *  # noqa
 
-DATABASES = {"default": dj_database_url.config(default="postgres:///test_gardenserver_django")}
+DATABASES = {
+    "default": {
+        "ENGINE": "timescale.db.backends.postgresql",
+        "NAME": os.environ.get("DJANGO_DATABASE_NAME", "gardenserver_django"),
+        "USER": "postgres",
+        "PASSWORD": "password",
+        "PORT": "5432",
+        "HOST": "localhost",
+    },
+}
 DATABASES["default"]["TEST"] = {"NAME": DATABASES["default"]["NAME"]}
 
 SECRET_KEY = "secret"
