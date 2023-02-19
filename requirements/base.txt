@@ -16,3 +16,4 @@ redis==4.4.2
 hiredis==2.1.1
 django-cookiefilter==0.1
 django-timescaledb==0.2.12
+dj-database-url==1.2.0
