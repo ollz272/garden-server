@@ -43,9 +43,17 @@ jobs:
           psql -c "SELECT pg_reload_conf();"
 
       - name: Migrations Check
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: password
         run: python manage.py makemigrations --check --dry-run
 
       - name: Template Check
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: password
         run: python manage.py validate_templates --verbosity 0
 
       - name: Django Tests
