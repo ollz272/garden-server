@@ -12,8 +12,9 @@
 {% block main %}
     <h2>Charts for {{ request.user }}'s {{ plant }}</h2>
     <a href="{% url 'plant-list' %}">Back to all plants.</a>
-    <a href="{% url 'plant-update' pk=plant.pk %}">Make changes to plant.</a>
-    <a href="{% url 'plant-api-details' pk=plant.pk %}">View API details.</a>
+    <a href="{% url 'plant-update' plant_pk=plant.pk %}">Make changes to plant.</a>
+    <a href="{% url 'create-sensor' plant_pk=plant.pk %}">Create a Sensor</a>
+    <a href="{% url 'plant-api-details' plant_pk=plant.pk %}">View API details.</a>
     <div class="container center">
         <form method="get" action=".">
             {% crispy form %}

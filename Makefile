@@ -12,7 +12,7 @@ format: ## Run this project's code formatters.
 format: black-format isort-format
 
 lint: ## Lint the project.
-lint: black-lint isort-lint flake8-lint
+lint: black-lint isort-lint
 
 # Virtual Environments
 venv-check:
@@ -88,10 +88,10 @@ pipdeptree-check:
 
 # ISort
 isort-lint:
-	isort --check-only --diff apps project
+	isort --check-only --diff apps project -l 120
 
 isort-format:
-	isort apps project
+	isort apps project -l 120
 
 # Flake8
 flake8-lint:

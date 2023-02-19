@@ -1,10 +1,10 @@
-from api.v1.views import DataTypeViewSet, PlantDataViewSet, PlantViewSet
+from api.v1.views import PlantDataViewSet, PlantViewSet, SensorViewSet
 from rest_framework.routers import APIRootView, DefaultRouter
 
 MODEL_PREFIX = "v1"
 ROUTES = [
     ["plants", "v1-plants", PlantViewSet],
-    ["plant-data-types", "v1-plant-data-types", DataTypeViewSet],
+    ["sensors", "v1-plant-sensors", SensorViewSet],
     ["plant-data", "v1-plant-data", PlantDataViewSet],
 ]
 

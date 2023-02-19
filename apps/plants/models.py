@@ -35,8 +35,8 @@ class Plant(models.Model):
         Returns a usable dictionary representing the object as a chart - with optional start & end dates.
         """
         charts = {}
-        for data_type in self.data_types.all():
-            data_points = DataPoint.timescale.filter(data_type=data_type, plant=self)
+        for sensor in self.sensors.all():
+            data_points = DataPoint.timescale.filter(sensor=sensor, plant=self)
             if time_from:
                 data_points = data_points.filter(time__gte=time_from)
             if time_to:
@@ -44,24 +44,26 @@ class Plant(models.Model):
 
             data_points = data_points.time_bucket("time", "1 minutes").annotate(avg_data=Avg("data"))
 
-            charts[data_type.slug] = {
+            charts[sensor.slug] = {
                 "time": [data["bucket"] for data in data_points],
                 "data": [data["avg_data"] for data in data_points],
-                "chart_title": f"Chart of {data_type.name}",
-                "element_id": f"chart-{data_type.slug}",
-                "unit": f"{data_type.unit}",
-                "colour": f"{data_type.colour}",
+                "chart_title": f"Chart of {sensor.name}",
+                "element_id": f"chart-{sensor.slug}",
+                "unit": f"{sensor.unit}",
+                "colour": f"{sensor.colour}",
+                "sensor_id": sensor.id,
+                "plant_id": self.id,
             }
 
         return charts
 
 
-class DataType(models.Model):
+class Sensor(models.Model):
     """
     The type of data to record.
     """
 
-    plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name="data_types")
+    plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name="sensors")
     name = models.CharField(max_length=50)
     slug = models.SlugField()
     unit = models.CharField(max_length=50)
@@ -84,11 +86,11 @@ class DataType(models.Model):
 
     @property
     def api_url(self):
-        return reverse("datapoint-list")
+        return reverse("v1-plant-sensors-list")
 
     @property
     def api_example_data(self):
-        return {"plant": self.plant.id, "data_type": self.id, "data": "YOUR DATA HERE - MUST BE A NUMBER!"}
+        return {"plant": self.plant.id, "sensor": self.id, "data": "YOUR DATA HERE - MUST BE A NUMBER!"}
 
 
 class DataPoint(models.Model):
@@ -98,7 +100,7 @@ class DataPoint(models.Model):
 
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name="plant_data")
     time = TimescaleDateTimeField(default=timezone.now, interval="5 minutes")
-    data_type = models.ForeignKey(DataType, on_delete=models.CASCADE, related_name="plant_data")
+    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name="plant_data")
     data = models.FloatField()
 
     # Managers
