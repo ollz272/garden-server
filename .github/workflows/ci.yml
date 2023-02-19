@@ -5,6 +5,8 @@ jobs:
     name: Test
     runs-on: ubuntu-20.04
     timeout-minutes: 10
+    env:
+      DJANGO_SETTINGS_MODULE: 'project.settings.testing'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -29,7 +31,5 @@ jobs:
         run: python manage.py validate_templates --verbosity 0
 
       - name: Django Tests
-        env:
-          DJANGO_SETTINGS_MODULE: 'project.settings.testing'
         run:
           coverage run --include="apps/*" ./manage.py test --noinput . apps
