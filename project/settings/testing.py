@@ -11,8 +11,6 @@ SECRET_KEY = "secret"
 
 STATIC_ROOT = "/static"
 
-INSTALLED_APPS += ["django_extensions"]
-
 # Test Runner
 # - Use XMLTestRunner for tox to output per test XML files
 # - Output these to a separate directory to avoid clutter
