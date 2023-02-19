@@ -23,5 +23,5 @@ STATIC_ROOT = "/static"
 # Test Runner
 # - Use XMLTestRunner for tox to output per test XML files
 # - Output these to a separate directory to avoid clutter
-TEST_RUNNER = "core.test_runners.XMLTestRunner"
+TEST_RUNNER = "xmlrunner.extra.djangotestrunner.XMLTestRunner"
 TEST_OUTPUT_DIR = "reports"
