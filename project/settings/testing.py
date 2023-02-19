@@ -9,7 +9,7 @@ DATABASES["default"]["TEST"] = {"NAME": DATABASES["default"]["NAME"]}
 
 SECRET_KEY = "secret"
 
-STATIC_ROOT = os.environ["STATIC_ROOT"]
+STATIC_ROOT = "/static"
 
 INSTALLED_APPS += ["django_extensions"]
 
