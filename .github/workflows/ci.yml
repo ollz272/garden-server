@@ -9,9 +9,13 @@ jobs:
       DJANGO_SETTINGS_MODULE: 'project.settings.testing'
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - name: Install Ubuntu packages
+        run: |
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libgdal26
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.11'
       - name: Install dependencies
