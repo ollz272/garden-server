@@ -37,7 +37,8 @@ pip-install-local: venv-check
 django-check: django-check-missing-migrations django-check-validate-templates
 
 django-test: django-collectstatic
-	PYTHONWARNINGS=all coverage run --include="apps/*" ./manage.py test --noinput . apps
+	PYTHONWARNINGS=all coverage run --include="apps/*" --omit=*/migrations/* ./manage.py test --noinput . apps
+	PYTHONWARNINGS=all coverage report -m --fail-under 97
 
 django-check-missing-migrations:
 	./manage.py makemigrations --check --dry-run

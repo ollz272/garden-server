@@ -1,7 +1,6 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, ButtonHolder, Div, Layout, Submit
+from crispy_forms.layout import ButtonHolder, Div, Layout, Submit
 from django import forms
-from extra_views import InlineFormSetFactory
 from plants.models import Plant, Sensor
 from rest_framework.exceptions import ValidationError
 
