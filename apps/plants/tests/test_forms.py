@@ -1,7 +1,6 @@
 import datetime
 
 from accounts.tests.factories import UserFactory
-from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.test import TestCase
 from plants.forms import PlantDataFilterForm, PlantForm, SensorForm

@@ -98,6 +98,7 @@ class TestPlantUpdateView(WebTest):
 class TestPlantChartView(WebTest):
     def setUp(self) -> None:
         self.user = UserFactory()
+        self.user = UserFactory(is_superuser=True)
         self.app.set_user(self.user)
         self.url_name = "plant-chart"
         self.plant = PlantFactory(user=self.user)
