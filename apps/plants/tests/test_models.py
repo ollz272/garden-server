@@ -1,3 +1,5 @@
+import datetime
+
 from accounts.tests.factories import UserFactory
 from django.db import IntegrityError
 from django.test import TestCase
@@ -17,6 +19,35 @@ class PlantTest(TestCase):
         PlantFactory.create(user=user, name="test")
         with self.assertRaises(IntegrityError):
             PlantFactory.create(user=user, name="test")
+
+    def test_plant_chart_data(self):
+        obj = PlantFactory()
+        sensor = SensorFactory(plant=obj)
+        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 0, 0, 0), data=0)
+        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 1, 0, 0), data=1)
+        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 2, 0, 0), data=2)
+        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 3, 0, 0), data=3)
+        chart_data = obj.to_chart_data(
+            time_from=datetime.datetime(2023, 2, 20, 1, 0, 0), time_to=datetime.datetime(2023, 2, 20, 2, 0, 0)
+        )
+        self.assertEqual(
+            chart_data,
+            {
+                sensor.slug: {
+                    "time": [
+                        datetime.datetime(2023, 2, 20, 1, 0, 0, tzinfo=datetime.timezone.utc),
+                        datetime.datetime(2023, 2, 20, 2, 0, 0, tzinfo=datetime.timezone.utc),
+                    ],
+                    "data": [1.0, 2.0],
+                    "chart_title": f"Chart of {sensor.name}",
+                    "element_id": f"chart-{sensor.slug}",
+                    "unit": f"{sensor.unit}",
+                    "colour": f"{sensor.colour}",
+                    "sensor_id": sensor.id,
+                    "plant_id": obj.id,
+                }
+            },
+        )
 
     def test_str(self):
         obj = PlantFactory.create()

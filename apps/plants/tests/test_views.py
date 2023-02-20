@@ -1,3 +1,5 @@
+import datetime
+
 from accounts.tests.factories import UserFactory
 from django.test import TestCase
 from django.urls import reverse
@@ -95,12 +97,42 @@ class TestPlantUpdateView(WebTest):
 
 class TestPlantChartView(WebTest):
     def setUp(self) -> None:
+        self.user = UserFactory()
         self.user = UserFactory(is_superuser=True)
         self.app.set_user(self.user)
         self.url_name = "plant-chart"
         self.plant = PlantFactory(user=self.user)
 
     def test_plant_chart_200(self):
+        resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
+        self.assertEqual(resp.status_code, 200)
+
+    def test_plant_chart_200_query_params(self):
+        resp = self.app.get(
+            reverse(self.url_name, kwargs={"plant_pk": self.plant.id}),
+            params={
+                "start_date": datetime.datetime(2023, 2, 20, 0, 0, 0),
+                "end_date": datetime.datetime(2023, 2, 21, 0, 0, 0),
+            },
+        )
+        self.assertEqual(resp.status_code, 200)
+
+    def test_plant_chart_200_super_user(self):
+        user = UserFactory(is_superuser=True)
+        self.app.set_user(user)
+        resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
+        self.assertEqual(resp.status_code, 200)
+
+
+class TestApiInfoView(WebTest):
+    def setUp(self) -> None:
+        self.user = UserFactory(is_superuser=True)
+        self.app.set_user(self.user)
+        self.url_name = "plant-api-details"
+        self.plant = PlantFactory(user=self.user)
+        self.sensor = SensorFactory(plant=self.plant)
+
+    def test_api_detail_view_200(self):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
         self.assertEqual(resp.status_code, 200)
 

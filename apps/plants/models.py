@@ -42,7 +42,7 @@ class Plant(models.Model):
             if time_to:
                 data_points = data_points.filter(time__lte=time_to)
 
-            data_points = data_points.time_bucket("time", "1 minutes").annotate(avg_data=Avg("data"))
+            data_points = data_points.time_bucket("time", "1 minutes").annotate(avg_data=Avg("data")).order_by("time")
 
             charts[sensor.slug] = {
                 "time": [data["bucket"] for data in data_points],
