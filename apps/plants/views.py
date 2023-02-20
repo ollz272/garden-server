@@ -44,7 +44,7 @@ class ListPlantView(LoginRequiredMixin, PlantViewMixin, ListView):
     context_object_name = "plants"
 
 
-class PlantChartView(LoginRequiredMixin, PlantViewMixin, FormMixin, DetailView):
+class PlantChartView(LoginRequiredMixin, FormMixin, DetailView):
     model = Plant
     template_name = "plants/charts.html"
     form_class = PlantDataFilterForm

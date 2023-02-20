@@ -57,8 +57,9 @@ jobs:
         run: python manage.py validate_templates --verbosity 0
 
       - name: Django Tests
-        run:
-          coverage run --include="apps/*" ./manage.py test --noinput . apps
+        run: |
+          PYTHONWARNINGS=all coverage run --include="apps/*" --omit=*/migrations/* ./manage.py test --noinput . apps
+          PYTHONWARNINGS=all coverage report -m --fail-under 97
 
     services:
       postgres:
