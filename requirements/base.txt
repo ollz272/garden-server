@@ -12,7 +12,7 @@ martor==1.6.18
 wagtail==4.0.4
 wagtail-link-block==0.1.5
 django-colorfield==0.8.0
-redis==4.4.2
+redis==4.5.1
 hiredis==2.2.2
 django-cookiefilter==0.1
 django-timescaledb==0.2.12
