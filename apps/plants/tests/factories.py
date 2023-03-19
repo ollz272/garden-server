@@ -1,12 +1,12 @@
 import datetime as dt
 
 import factory
-import faker
 from accounts.tests.factories import UserFactory
+from factory.django import DjangoModelFactory
 from plants import models
 
 
-class PlantFactory(factory.DjangoModelFactory):
+class PlantFactory(DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     name = factory.Sequence(lambda n: f"plant {n}")
     indoor = True
@@ -15,7 +15,7 @@ class PlantFactory(factory.DjangoModelFactory):
         model = models.Plant
 
 
-class SensorFactory(factory.DjangoModelFactory):
+class SensorFactory(DjangoModelFactory):
     plant = factory.SubFactory(PlantFactory)
     name = factory.Sequence(lambda n: f"sensor {n}")
     unit = factory.Sequence(lambda n: f"unit {n}")
@@ -25,7 +25,7 @@ class SensorFactory(factory.DjangoModelFactory):
         model = models.Sensor
 
 
-class DataPointFactory(factory.DjangoModelFactory):
+class DataPointFactory(DjangoModelFactory):
     plant = factory.SubFactory(PlantFactory)
     sensor = factory.SubFactory(SensorFactory)
     time = dt.date.today()
