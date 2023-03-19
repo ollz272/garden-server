@@ -1,9 +1,8 @@
 import datetime as dt
 
 import factory
-from factory.django import DjangoModelFactory
-
 from accounts.tests.factories import UserFactory
+from factory.django import DjangoModelFactory
 from plants import models
 
 
