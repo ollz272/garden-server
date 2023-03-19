@@ -49,7 +49,7 @@ class PlantViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=["post"])
     def create_sensor(self, request, pk=None):
         """
-        Endpoint to create a data type for a plant
+        Endpoint to create a sensor for a plant
         """
 
         return Response({})
