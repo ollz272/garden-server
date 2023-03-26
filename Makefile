@@ -23,6 +23,13 @@ run-server:
 makemigrations:
 	poetry run ./manage.py makemigrations
 
+run-tests:
+	poetry run ./manage.py test
+
+test: poetry-install run-tests
+
+
+
 # Pip
 pip-install-local: venv-check
 	pip install -r requirements/local.txt

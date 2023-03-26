@@ -15,10 +15,17 @@ class PlantFactory(DjangoModelFactory):
         model = models.Plant
 
 
+class SensorUnitFactory(DjangoModelFactory):
+    name = factory.Sequence(lambda n: f"unit {n}")
+
+    class Meta:
+        model = models.SensorUnit
+
+
 class SensorFactory(DjangoModelFactory):
     plant = factory.SubFactory(PlantFactory)
     name = factory.Sequence(lambda n: f"sensor {n}")
-    unit = factory.Sequence(lambda n: f"unit {n}")
+    unit = factory.SubFactory(SensorUnitFactory)
     colour = "..."
 
     class Meta:

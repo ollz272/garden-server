@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import DataPoint, Plant
+from .models import DataPoint, Plant, SensorUnit
 
 
 @admin.register(Plant)
@@ -13,3 +13,8 @@ class PlantAdmin(admin.ModelAdmin):
 class PlantDataPointAdmin(admin.ModelAdmin):
     list_filter = ("plant",)
     list_select_related = ("plant",)
+
+
+@admin.register(SensorUnit)
+class PlantAdmin(admin.ModelAdmin):
+    fields = ("name",)

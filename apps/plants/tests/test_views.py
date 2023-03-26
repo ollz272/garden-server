@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django_webtest import WebTest
 from plants.models import Plant, Sensor
-from plants.tests.factories import PlantFactory, SensorFactory
+from plants.tests.factories import PlantFactory, SensorFactory, SensorUnitFactory
 
 
 class TestListPlantView(TestCase):
@@ -143,6 +143,7 @@ class TestCreateSensorView(WebTest):
         self.app.set_user(self.user)
         self.url_name = "create-sensor"
         self.plant = PlantFactory(user=self.user)
+        self.sensor_unit = SensorUnitFactory()
 
     def test_create_sensor_200(self):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
@@ -157,7 +158,7 @@ class TestCreateSensorView(WebTest):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
         form = resp.forms[0]
         form["name"] = "test"
-        form["unit"] = "test"
+        form["unit"] = self.sensor_unit.id
         form["colour"] = "test"
         resp = form.submit()
         self.assertEqual(resp.status_code, 302)
@@ -165,7 +166,7 @@ class TestCreateSensorView(WebTest):
         sensor = Sensor.objects.get(name="test")
         self.assertEqual(sensor.plant, self.plant)
         self.assertEqual(sensor.name, "test")
-        self.assertEqual(sensor.unit, "test")
+        self.assertEqual(sensor.unit, self.sensor_unit)
         self.assertEqual(sensor.colour, "test")
 
     def test_update_plant_200_submit_form_error(self):
@@ -185,6 +186,7 @@ class TestUpdateSensorView(WebTest):
         self.url_name = "update-sensor"
         self.plant = PlantFactory(user=self.user)
         self.sensor = SensorFactory(plant=self.plant)
+        self.sensor_unit = SensorUnitFactory()
 
     def test_update_sensor_200(self):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.pk}))
@@ -209,7 +211,7 @@ class TestUpdateSensorView(WebTest):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.id}))
         form = resp.forms[0]
         form["name"] = "test"
-        form["unit"] = "test"
+        form["unit"] = self.sensor_unit.id
         form["colour"] = "test"
         resp = form.submit()
         self.assertEqual(resp.status_code, 302)
@@ -217,7 +219,7 @@ class TestUpdateSensorView(WebTest):
         sensor = Sensor.objects.get(name="test")
         self.assertEqual(sensor.plant, self.plant)
         self.assertEqual(sensor.name, "test")
-        self.assertEqual(sensor.unit, "test")
+        self.assertEqual(sensor.unit, self.sensor_unit)
         self.assertEqual(sensor.colour, "test")
 
     def test_update_plant_200_submit_form_error(self):

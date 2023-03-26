@@ -58,6 +58,18 @@ class Plant(models.Model):
         return charts
 
 
+class SensorUnit(models.Model):
+    """A unit a sensor is allowed to take.
+
+    This is an admin controlled model.
+    """
+
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Sensor(models.Model):
     """
     The type of data to record.
@@ -66,7 +78,7 @@ class Sensor(models.Model):
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name="sensors")
     name = models.CharField(max_length=50)
     slug = models.SlugField()
-    unit = models.CharField(max_length=50)
+    unit = models.ForeignKey(SensorUnit, on_delete=models.SET_NULL, null=True)
     colour = models.CharField(max_length=50)
 
     class Meta:
