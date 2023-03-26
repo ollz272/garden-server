@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.test import TestCase
 from plants.forms import PlantDataFilterForm, PlantForm, SensorForm
 from plants.models import Plant, Sensor
-from plants.tests.factories import DataPointFactory, PlantFactory, SensorFactory
+from plants.tests.factories import DataPointFactory, PlantFactory, SensorFactory, SensorUnitFactory
 
 
 class TestPlantForm(TestCase):
@@ -25,16 +25,19 @@ class TestPlantForm(TestCase):
 
 
 class TestSensorForm(TestCase):
+    def setUp(self) -> None:
+        self.sensor_unit = SensorUnitFactory()
+
     def test_create_sensor(self):
         plant = PlantFactory()
-        sensor_form = SensorForm(plant=plant, data={"name": "test", "unit": "test", "colour": "test"})
+        sensor_form = SensorForm(plant=plant, data={"name": "test", "unit": self.sensor_unit.id, "colour": "test"})
         sensor_form.save()
 
         self.assertTrue(Sensor.objects.filter(name="test").exists())
         self.assertTrue(Sensor.objects.get(name="test").plant == plant)
 
     def test_create_sensor_no_plant(self):
-        sensor_form = SensorForm(data={"name": "test", "unit": "test", "colour": "test"})
+        sensor_form = SensorForm(data={"name": "test", "unit": self.sensor_unit.id, "colour": "test"})
         with self.assertRaises(IntegrityError):
             sensor_form.save()
 
