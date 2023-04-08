@@ -20,7 +20,7 @@ class PlantBelongsToUserMixin:
 
 
 class PlantViewSet(viewsets.ModelViewSet):
-    queryset = Plant.objects.all().prefetch_related("plant_data", "sensors__plant_data")
+    queryset = Plant.objects.all().prefetch_related("sensors", "sensors__plant_data")
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     throttle_classes = [UserRateThrottle]
