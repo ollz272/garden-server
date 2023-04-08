@@ -28,7 +28,7 @@ async function addChart(elementID, individualChartData){
               x: {
                 type: 'time',
                 time: {
-                    parser: 'YYYY-MM-DDTHH:mm:ss'
+                    parser: 'YYYY-MM-DDTHH:mm:ss',
                     unit: 'seconds'
                 },
               },
