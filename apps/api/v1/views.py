@@ -2,7 +2,7 @@ import abc
 
 from api.v1.serializers import DataPointSerializer, PlantSerializer, SensorSerializer
 from plants.models import DataPoint, Plant, Sensor
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated

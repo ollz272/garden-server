@@ -16,11 +16,13 @@ django-extra-views = "0.14.0"
 django-extensions = "3.2.1"
 martor = "1.6.18"
 django-colorfield = "0.8.0"
-redis = "4.5.3"
+redis = "4.5.4"
 hiredis = "2.2.2"
 django-cookiefilter = "0.1"
 django-timescaledb = "0.2.12"
 dj-database-url = "1.2.0"
+ruff = "^0.0.261"
+pre-commit = "^3.2.2"
 
 
 [tool.poetry.group.local.dependencies]
@@ -47,3 +49,19 @@ isort = "5.12.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.per-file-ignores]
+"project/settings/*.py" = ["F405", "F403"]
+"apps/*/apps.py" = ['F401']
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+
+[tool.isort]
+py_version=311
+line_length = 120

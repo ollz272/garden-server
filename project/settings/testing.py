@@ -1,6 +1,5 @@
 # Tests are performed on a test_ database, however to avoid any connections/queries going to
 # another database we also set this as the 'default' as well
-import dj_database_url
 
 from .base import *  # noqa
 

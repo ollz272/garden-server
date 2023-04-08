@@ -4,14 +4,13 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('plants', '0002_alter_datapoint_data_type'),
+        ("plants", "0002_alter_datapoint_data_type"),
     ]
 
     operations = [
         migrations.AddConstraint(
-            model_name='datatype',
-            constraint=models.UniqueConstraint(fields=('plant', 'colour'), name='unique_chart_colour'),
+            model_name="datatype",
+            constraint=models.UniqueConstraint(fields=("plant", "colour"), name="unique_chart_colour"),
         ),
     ]

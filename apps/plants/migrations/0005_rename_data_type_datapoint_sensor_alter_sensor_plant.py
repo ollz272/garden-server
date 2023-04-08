@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("plants", "0004_rename_datatype_sensor_alter_datapoint_time"),
     ]

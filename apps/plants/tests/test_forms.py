@@ -17,7 +17,7 @@ class TestPlantForm(TestCase):
         self.assertTrue(Plant.objects.filter(name="test").exists())
 
     def test_create_plant_no_user(self):
-        user = UserFactory()
+        UserFactory()
         plant_form = PlantForm(data={"name": "test", "indoor": True})
 
         with self.assertRaises(IntegrityError):
@@ -30,7 +30,10 @@ class TestSensorForm(TestCase):
 
     def test_create_sensor(self):
         plant = PlantFactory()
-        sensor_form = SensorForm(plant=plant, data={"name": "test", "unit": self.sensor_unit.id, "colour": "test"})
+        sensor_form = SensorForm(
+            plant=plant,
+            data={"name": "test", "unit": self.sensor_unit.id, "colour": "test"},
+        )
         sensor_form.save()
 
         self.assertTrue(Sensor.objects.filter(name="test").exists())
@@ -46,10 +49,30 @@ class TestPlantDataFilterForm(TestCase):
     def setUp(self) -> None:
         self.plant = PlantFactory()
         self.sensor = SensorFactory(plant=self.plant)
-        DataPointFactory(sensor=self.sensor, plant=self.plant, time=datetime.datetime(2023, 2, 20, 0, 0, 0), data=0)
-        DataPointFactory(sensor=self.sensor, plant=self.plant, time=datetime.datetime(2023, 2, 20, 1, 0, 0), data=1)
-        DataPointFactory(sensor=self.sensor, plant=self.plant, time=datetime.datetime(2023, 2, 20, 2, 0, 0), data=2)
-        DataPointFactory(sensor=self.sensor, plant=self.plant, time=datetime.datetime(2023, 2, 20, 3, 0, 0), data=3)
+        DataPointFactory(
+            sensor=self.sensor,
+            plant=self.plant,
+            time=datetime.datetime(2023, 2, 20, 0, 0, 0),
+            data=0,
+        )
+        DataPointFactory(
+            sensor=self.sensor,
+            plant=self.plant,
+            time=datetime.datetime(2023, 2, 20, 1, 0, 0),
+            data=1,
+        )
+        DataPointFactory(
+            sensor=self.sensor,
+            plant=self.plant,
+            time=datetime.datetime(2023, 2, 20, 2, 0, 0),
+            data=2,
+        )
+        DataPointFactory(
+            sensor=self.sensor,
+            plant=self.plant,
+            time=datetime.datetime(2023, 2, 20, 3, 0, 0),
+            data=3,
+        )
 
     def test_form_data_validator(self):
         form = PlantDataFilterForm(

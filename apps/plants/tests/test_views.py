@@ -189,26 +189,41 @@ class TestUpdateSensorView(WebTest):
         self.sensor_unit = SensorUnitFactory()
 
     def test_update_sensor_200(self):
-        resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.pk}))
+        resp = self.app.get(
+            reverse(
+                self.url_name,
+                kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.pk},
+            )
+        )
         self.assertEqual(resp.status_code, 200)
 
     def test_create_sensor_404_no_access_to_plant(self):
         plant = PlantFactory()
         sensor = SensorFactory(plant=plant)
         resp = self.app.get(
-            reverse(self.url_name, kwargs={"plant_pk": plant.id, "sensor_pk": sensor.id}), expect_errors=True
+            reverse(self.url_name, kwargs={"plant_pk": plant.id, "sensor_pk": sensor.id}),
+            expect_errors=True,
         )
         self.assertEqual(resp.status_code, 404)
 
     def test_create_sensor_404_sensor_doesnt_belong_to_plant(self):
         sensor = SensorFactory()
         resp = self.app.get(
-            reverse(self.url_name, kwargs={"plant_pk": self.plant.id, "sensor_pk": sensor.id}), expect_errors=True
+            reverse(
+                self.url_name,
+                kwargs={"plant_pk": self.plant.id, "sensor_pk": sensor.id},
+            ),
+            expect_errors=True,
         )
         self.assertEqual(resp.status_code, 404)
 
     def test_update_plant_301_submit_form(self):
-        resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.id}))
+        resp = self.app.get(
+            reverse(
+                self.url_name,
+                kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.id},
+            )
+        )
         form = resp.forms[0]
         form["name"] = "test"
         form["unit"] = self.sensor_unit.id
@@ -223,7 +238,12 @@ class TestUpdateSensorView(WebTest):
         self.assertEqual(sensor.colour, "test")
 
     def test_update_plant_200_submit_form_error(self):
-        resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.id}))
+        resp = self.app.get(
+            reverse(
+                self.url_name,
+                kwargs={"plant_pk": self.plant.id, "sensor_pk": self.sensor.id},
+            )
+        )
         form = resp.forms[0]
         form["name"] = ""
         form["unit"] = ""
