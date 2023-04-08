@@ -34,7 +34,7 @@ class TestPlantListAPIView(TestCase):
     def test_view_200_queries(self):
         url = "v1-plants-list"
         self.client.force_login(self.super_user)
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(4):
             resp = self.client.get(reverse(url))
         self.assertEqual(resp.status_code, 200)
 
