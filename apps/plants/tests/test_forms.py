@@ -17,7 +17,7 @@ class TestPlantForm(TestCase):
         self.assertTrue(Plant.objects.filter(name="test").exists())
 
     def test_create_plant_no_user(self):
-        user = UserFactory()
+        UserFactory()
         plant_form = PlantForm(data={"name": "test", "indoor": True})
 
         with self.assertRaises(IntegrityError):

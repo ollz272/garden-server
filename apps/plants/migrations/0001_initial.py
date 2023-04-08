@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,41 +14,51 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Plant',
+            name="Plant",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256)),
-                ('indoor', models.BooleanField()),
-                ('slug', models.SlugField()),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=256)),
+                ("indoor", models.BooleanField()),
+                ("slug", models.SlugField()),
+                ("user", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
-            name='DataType',
+            name="DataType",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('slug', models.SlugField()),
-                ('unit', models.CharField(max_length=50)),
-                ('colour', models.CharField(max_length=50)),
-                ('plant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='data_types', to='plants.plant')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=50)),
+                ("slug", models.SlugField()),
+                ("unit", models.CharField(max_length=50)),
+                ("colour", models.CharField(max_length=50)),
+                (
+                    "plant",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, related_name="data_types", to="plants.plant"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='DataPoint',
+            name="DataPoint",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('time', models.DateTimeField(auto_now_add=True)),
-                ('data', models.FloatField()),
-                ('data_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plants.datatype')),
-                ('plant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='plant_data', to='plants.plant')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("time", models.DateTimeField(auto_now_add=True)),
+                ("data", models.FloatField()),
+                ("data_type", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="plants.datatype")),
+                (
+                    "plant",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, related_name="plant_data", to="plants.plant"
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-time',),
+                "ordering": ("-time",),
             },
         ),
         migrations.AddConstraint(
-            model_name='plant',
-            constraint=models.UniqueConstraint(fields=('user', 'name'), name='unique_plant_name_for_user'),
+            model_name="plant",
+            constraint=models.UniqueConstraint(fields=("user", "name"), name="unique_plant_name_for_user"),
         ),
     ]

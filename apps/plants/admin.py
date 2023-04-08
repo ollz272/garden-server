@@ -16,5 +16,5 @@ class PlantDataPointAdmin(admin.ModelAdmin):
 
 
 @admin.register(SensorUnit)
-class PlantAdmin(admin.ModelAdmin):
+class SensorUnitAdmin(admin.ModelAdmin):
     fields = ("name",)
