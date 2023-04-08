@@ -23,12 +23,33 @@ class PlantTest(TestCase):
     def test_plant_chart_data(self):
         obj = PlantFactory()
         sensor = SensorFactory(plant=obj)
-        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 0, 0, 0), data=0)
-        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 1, 0, 0), data=1)
-        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 2, 0, 0), data=2)
-        DataPointFactory(sensor=sensor, plant=obj, time=datetime.datetime(2023, 2, 20, 3, 0, 0), data=3)
+        DataPointFactory(
+            sensor=sensor,
+            plant=obj,
+            time=datetime.datetime(2023, 2, 20, 0, 0, 0),
+            data=0,
+        )
+        DataPointFactory(
+            sensor=sensor,
+            plant=obj,
+            time=datetime.datetime(2023, 2, 20, 1, 0, 0),
+            data=1,
+        )
+        DataPointFactory(
+            sensor=sensor,
+            plant=obj,
+            time=datetime.datetime(2023, 2, 20, 2, 0, 0),
+            data=2,
+        )
+        DataPointFactory(
+            sensor=sensor,
+            plant=obj,
+            time=datetime.datetime(2023, 2, 20, 3, 0, 0),
+            data=3,
+        )
         chart_data = obj.to_chart_data(
-            time_from=datetime.datetime(2023, 2, 20, 1, 0, 0), time_to=datetime.datetime(2023, 2, 20, 2, 0, 0)
+            time_from=datetime.datetime(2023, 2, 20, 1, 0, 0),
+            time_to=datetime.datetime(2023, 2, 20, 2, 0, 0),
         )
         self.assertEqual(
             chart_data,
@@ -79,7 +100,11 @@ class SensorTest(TestCase):
         sensor = SensorFactory.create(plant=plant, colour="test")
         self.assertEqual(
             sensor.api_example_data,
-            {"plant": plant.id, "sensor": sensor.id, "data": "YOUR DATA HERE - MUST BE A NUMBER!"},
+            {
+                "plant": plant.id,
+                "sensor": sensor.id,
+                "data": "YOUR DATA HERE - MUST BE A NUMBER!",
+            },
         )
 
 

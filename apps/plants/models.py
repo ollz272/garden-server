@@ -102,7 +102,11 @@ class Sensor(models.Model):
 
     @property
     def api_example_data(self):
-        return {"plant": self.plant.id, "sensor": self.id, "data": "YOUR DATA HERE - MUST BE A NUMBER!"}
+        return {
+            "plant": self.plant.id,
+            "sensor": self.id,
+            "data": "YOUR DATA HERE - MUST BE A NUMBER!",
+        }
 
 
 class DataPoint(models.Model):

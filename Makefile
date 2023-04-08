@@ -5,17 +5,17 @@ PROJECT_SLUG=new-game-server
 reset: ## Reset your local environment. Useful after switching branches, etc.
 reset: poetry-install reset-db django-migrate django-user-passwords django-dev-createsuperuser
 
-check: ## Check for any obvious errors in the project's setup.
+check: # Check for any obvious errors in the project's setup.
 check: pipdeptree-check django-check
 
 format: ## Run this project's code formatters.
 format: black-format isort-format
 
 lint: ## Lint the project.
-lint: black-lint isort-lint
+lint: black-lint isort-lint ruff-lint
 
 poetry-install:
-	poetry install
+	poetry install --sync
 
 run-server:
 	poetry run ./manage.py runserver
@@ -79,10 +79,10 @@ create-db:
 
 # Black
 black-lint:
-	black --line-length 120 --exclude '/migrations/' --check apps project
+	poetry run black --check apps project
 
 black-format:
-	black --line-length 120 --exclude '/migrations/' apps project
+	poetry run black apps project
 
 #pipdeptree
 pipdeptree-check:
@@ -90,11 +90,10 @@ pipdeptree-check:
 
 # ISort
 isort-lint:
-	isort --check-only --diff apps project -l 120
+	poetry run isort --check-only --diff apps project
 
 isort-format:
-	isort apps project -l 120
+	poetry run isort apps project
 
-# Flake8
-flake8-lint:
-	flake8 apps project
+ruff-lint:
+	poetry run ruff check .
