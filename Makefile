@@ -79,10 +79,10 @@ create-db:
 
 # Black
 black-lint:
-	poetry run black --line-length 120 --check apps project
+	poetry run black --check apps project
 
 black-format:
-	poetry run black --line-length 120 apps project
+	poetry run black apps project
 
 #pipdeptree
 pipdeptree-check:
@@ -90,10 +90,10 @@ pipdeptree-check:
 
 # ISort
 isort-lint:
-	poetry run isort --check-only --diff apps project -l 120
+	poetry run isort --check-only --diff apps project
 
 isort-format:
-	poetry run isort apps project -l 120
+	poetry run isort apps project
 
 ruff-lint:
 	poetry run ruff check .

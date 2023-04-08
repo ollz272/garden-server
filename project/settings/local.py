@@ -30,5 +30,9 @@ if not os.environ.get("DISABLE_TOOLBAR"):
     ] + MIDDLEWARE
 
     DEBUG_TOOLBAR_CONFIG = {
-        "SKIP_TEMPLATE_PREFIXES": ("django/forms/widgets/", "admin/widgets/", "bootstrap/"),
+        "SKIP_TEMPLATE_PREFIXES": (
+            "django/forms/widgets/",
+            "admin/widgets/",
+            "bootstrap/",
+        ),
     }

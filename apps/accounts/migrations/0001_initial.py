@@ -14,6 +14,9 @@ def make_tokens(apps, schema_editor):
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL), ("authtoken", "0003_tokenproxy")]
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ("authtoken", "0003_tokenproxy"),
+    ]
 
     operations = [migrations.RunPython(make_tokens)]

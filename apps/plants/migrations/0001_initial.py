@@ -16,17 +16,39 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Plant",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("name", models.CharField(max_length=256)),
                 ("indoor", models.BooleanField()),
                 ("slug", models.SlugField()),
-                ("user", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
             name="DataType",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("name", models.CharField(max_length=50)),
                 ("slug", models.SlugField()),
                 ("unit", models.CharField(max_length=50)),
@@ -34,7 +56,9 @@ class Migration(migrations.Migration):
                 (
                     "plant",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, related_name="data_types", to="plants.plant"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="data_types",
+                        to="plants.plant",
                     ),
                 ),
             ],
@@ -42,14 +66,30 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="DataPoint",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("time", models.DateTimeField(auto_now_add=True)),
                 ("data", models.FloatField()),
-                ("data_type", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="plants.datatype")),
+                (
+                    "data_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="plants.datatype",
+                    ),
+                ),
                 (
                     "plant",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, related_name="plant_data", to="plants.plant"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="plant_data",
+                        to="plants.plant",
                     ),
                 ),
             ],

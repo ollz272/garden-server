@@ -37,6 +37,9 @@ jobs:
       - name: Isort Lint
         run: poetry run isort --check-only --diff apps project -l 120
 
+      - name: Ruff Lint
+        run: poetry run ruff check .
+
       - name: Configure Postgres (for faster tests)
         env:
           PGHOST: localhost
