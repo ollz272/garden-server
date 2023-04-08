@@ -5,7 +5,8 @@ from plants.models import Plant
 
 class PlantDataFilter(django_filters.FilterSet):
     time = django_filters.DateTimeFromToRangeFilter(
-        field_name="time", widget=django_filters.widgets.RangeWidget(attrs={"type": "datetime-local"})
+        field_name="time",
+        widget=django_filters.widgets.RangeWidget(attrs={"type": "datetime-local"}),
     )
 
     class Meta:

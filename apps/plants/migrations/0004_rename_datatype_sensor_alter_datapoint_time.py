@@ -6,7 +6,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("plants", "0003_datatype_unique_chart_colour"),
     ]
