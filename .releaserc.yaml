@@ -1,3 +1,12 @@
-{
-  "branches": ["main"]
-}
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - releaseRules:
+        - type: "chore"
+          scope: "deps"
+          release: "patch"
+
+branches:
+  - "main"
+  - "+([0-9])?(.{+([0-9]),x}).x"
+
+tagFormat: "${version}"
