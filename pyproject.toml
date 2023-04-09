@@ -7,45 +7,45 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-Django = "^4.1.7"
-djangorestframework = "3.14.0"
-psycopg2 = "2.9.5"
+Django = "^4.2.0"
+djangorestframework = "^3.14.0"
 django-filter = "22.1"
-django-crispy-forms = "1.14.0"
-django-extra-views = "0.14.0"
-django-extensions = "3.2.1"
+django-crispy-forms = "^1.14.0"
+django-extra-views = "^0.14.0"
+django-extensions = "^3.2.1"
 martor = "1.6.18"
-django-colorfield = "0.8.0"
+django-colorfield = "^0.8.0"
 redis = "4.5.4"
 hiredis = "2.2.2"
 django-cookiefilter = "0.1"
-django-timescaledb = "0.2.12"
+django-timescaledb = "^0.2.12"
 dj-database-url = "1.2.0"
 ruff = "^0.0.261"
 pre-commit = "^3.2.2"
 parameterized = "^0.9.0"
+psycopg = "^3.1.8"
 
 
 [tool.poetry.group.local.dependencies]
-django-debug-toolbar = "3.8.1"
+django-debug-toolbar = "^4.0.0"
 
 
 [tool.poetry.group.prod.dependencies]
-gunicorn = "20.1.0"
-django-storages = "1.13.2"
-boto3 = "1.26.85"
+gunicorn = "^20.1.0"
+django-storages = "^1.13.2"
+boto3 = "^1.26.85"
 
 
 [tool.poetry.group.test.dependencies]
-coverage = "7.2.1"
-django-webtest = "1.9.10"
-factory-boy = "3.2.1"
-faker = "17.6.0"
-flake8 = "6.0.0"
-pipdeptree = "2.5.2"
-unittest-xml-reporting = "3.2.0"
-black = "23.1.0"
-isort = "5.12.0"
+coverage = "^7.2.1"
+django-webtest = "^1.9.10"
+factory-boy = "^3.2.1"
+faker = "^17.6.0"
+flake8 = "^6.0.0"
+pipdeptree = "^2.5.2"
+unittest-xml-reporting = "^3.2.0"
+black = "^23.1.0"
+isort = "^5.12.0"
 
 [build-system]
 requires = ["poetry-core"]
