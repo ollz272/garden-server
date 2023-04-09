@@ -3,6 +3,7 @@ import datetime
 from accounts.tests.factories import UserFactory
 from django.db import IntegrityError
 from django.test import TestCase
+from parameterized import parameterized
 from plants.forms import PlantDataFilterForm, PlantForm, SensorForm
 from plants.models import Plant, Sensor
 from plants.tests.factories import DataPointFactory, PlantFactory, SensorFactory, SensorUnitFactory
@@ -90,6 +91,7 @@ class TestPlantDataFilterForm(TestCase):
             data={
                 "start_date": datetime.datetime(2023, 2, 20, 1, 0, 0),
                 "end_date": datetime.datetime(2023, 2, 20, 2, 0, 0),
+                "resolution": "PT1S",
             },
         )
 
@@ -113,3 +115,17 @@ class TestPlantDataFilterForm(TestCase):
                 }
             },
         )
+
+    @parameterized.expand(("PT1S", "PT1M", "PT60M", "P1D"))
+    def test_form_to_chart_data_period(self, resolution):
+        form = PlantDataFilterForm(
+            self.plant,
+            data={
+                "start_date": datetime.datetime(2023, 2, 20, 1, 0, 0),
+                "end_date": datetime.datetime(2023, 2, 20, 2, 0, 0),
+                "resolution": resolution,
+            },
+        )
+
+        form.is_valid()
+        form.chart_data()

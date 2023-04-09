@@ -8,6 +8,7 @@ class PlantDataFilter(django_filters.FilterSet):
         field_name="time",
         widget=django_filters.widgets.RangeWidget(attrs={"type": "datetime-local"}),
     )
+    resolution = django_filters.ChoiceFilter()
 
     class Meta:
         model = Plant
