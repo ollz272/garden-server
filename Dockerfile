@@ -9,13 +9,12 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 RUN mkdir -p /opt/app
 COPY . /opt/app
 WORKDIR /opt/app
-RUN pip install -r requirements/production.txt --cache-dir /opt/app/pip_cache
-RUN chown -R www-data:www-data /opt/app
+RUN pip install poetry
+RUN poetry install
 
 # start server
 EXPOSE 8020
 STOPSIGNAL SIGTERM
 
-RUN python manage.py collectstatic --noinput --clear --settings project.settings.static
-RUN python manage.py update_index --settings project.settings.static
+RUN poetry run python manage.py collectstatic --noinput --clear --settings project.settings.static
 CMD ["/opt/app/start_server.sh"]
