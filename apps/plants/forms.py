@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Div, Layout, Submit
 from django import forms
+from plants.choices import PeriodResolutionChoices
 from plants.models import Plant, Sensor
 from rest_framework.exceptions import ValidationError
 
@@ -13,16 +14,14 @@ class PlantDataFilterForm(forms.Form):
 
     start_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
     end_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={"type": "datetime-local"}))
+    resolution = forms.ChoiceField(choices=PeriodResolutionChoices.choices)
 
     def __init__(self, plant, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.disable_csrf = True
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            "start_date",
-            "end_date",
-        )
+        self.helper.layout = Layout("start_date", "end_date", "resolution")
 
         self.plant = plant
         if first_time := self.plant.plant_data.order_by("time").first():
@@ -41,6 +40,7 @@ class PlantDataFilterForm(forms.Form):
         return self.plant.to_chart_data(
             time_from=self.cleaned_data["start_date"],
             time_to=self.cleaned_data["end_date"],
+            resolution=self.cleaned_data["resolution"],
         )
 
 

@@ -30,7 +30,7 @@ class Plant(models.Model):
         self.slug = slugify(self.name, allow_unicode=True)
         return super().save(*args, **kwargs)
 
-    def to_chart_data(self, time_from=None, time_to=None):
+    def to_chart_data(self, time_from=None, time_to=None, resolution=None):
         """
         Returns a usable dictionary representing the object as a chart - with optional start & end dates.
         """
@@ -42,7 +42,12 @@ class Plant(models.Model):
             if time_to:
                 data_points = data_points.filter(time__lte=time_to)
 
-            data_points = data_points.time_bucket("time", "1 minutes").annotate(avg_data=Avg("data")).order_by("time")
+            if resolution:
+                data_points = (
+                    data_points.time_bucket("time", resolution).annotate(avg_data=Avg("data")).order_by("time")
+                )
+            else:
+                data_points = data_points.time_bucket("time", "PT1M").annotate(avg_data=Avg("data")).order_by("time")
 
             charts[sensor.slug] = {
                 "time": [data["bucket"] for data in data_points],
