@@ -8,6 +8,24 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 if os.environ.get("DEBUG"):
     DEBUG = True
 
+if not os.environ.get("DISABLE_TOOLBAR"):
+    INSTALLED_APPS += [
+        "debug_toolbar",
+    ]
+
+    MIDDLEWARE = [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ] + MIDDLEWARE
+
+    DEBUG_TOOLBAR_CONFIG = {
+        "SKIP_TEMPLATE_PREFIXES": (
+            "django/forms/widgets/",
+            "admin/widgets/",
+            "bootstrap/",
+        ),
+    }
+
+
 DATABASES = {
     "default": {
         "ENGINE": "timescale.db.backends.postgresql",
@@ -20,13 +38,8 @@ DATABASES = {
 }
 
 
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID")
-AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_SIGNATURE_VERSION = "s3v4"
-AWS_S3_REGION_NAME = "eu-west-2"
-AWS_S3_ADDRESSING_STYLE = "virtual"
+GS_BUCKET = "gardenserver_bucket"
+GS_PROJECT_ID = "gardenserver"
 
 # Cache sessions for optimum performance
 if os.environ.get("REDIS_SERVERS"):
