@@ -1,20 +1,22 @@
 # syntax=docker/dockerfile:1
 FROM python:3.11-bullseye
-RUN apt-get update && apt-get install nginx vim -y --no-install-recommends
-COPY nginx.default /etc/nginx/sites-available/default
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
 
+RUN mkdir /app
+WORKDIR /app
 
-RUN mkdir -p /opt/app
-COPY . /opt/app
-WORKDIR /opt/app
-RUN pip install poetry
-RUN poetry install
+RUN pip install --no-cache-dir poetry==1.4.2 && poetry config virtualenvs.create false
+COPY poetry.lock pyproject.toml README.md /app/
+
+# to prevent poetry from installing my actual app,
+# and keep docker able to cache layers
+RUN mkdir -p /app/src/app && touch /app/src/app/__init__.py && poetry install -n
+
+# now actually copy the real contents of my app
+COPY . /app/src/app
 
 # start server
 EXPOSE 8020
 STOPSIGNAL SIGTERM
+WORKDIR /app/src/app
 
-RUN poetry run python manage.py collectstatic --noinput --clear --settings project.settings.static
-CMD ["/opt/app/start_server.sh"]
+CMD ["/app/src/app/start_server.sh"]

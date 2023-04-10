@@ -1552,7 +1552,22 @@ WebOb = ">=1.2"
 docs = ["Sphinx (>=1.8.1)", "docutils", "pylons-sphinx-themes (>=1.0.8)"]
 tests = ["PasteDeploy", "WSGIProxy2", "coverage", "pyquery", "pytest", "pytest-cov"]
 
+[[package]]
+name = "whitenoise"
+version = "6.4.0"
+description = "Radically simplified static file serving for WSGI applications"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "whitenoise-6.4.0-py3-none-any.whl", hash = "sha256:599dc6ca57e48929dfeffb2e8e187879bfe2aed0d49ca419577005b7f2cc930b"},
+    {file = "whitenoise-6.4.0.tar.gz", hash = "sha256:a02d6660ad161ff17e3042653c8e3f5ecbb2a2481a006bde125b9efb9a30113a"},
+]
+
+[package.extras]
+brotli = ["Brotli"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "7ad0dbe69de52a2452e7121e074529ce651c29b3978417eb27b4adbf2c25500e"
+content-hash = "dcda346495fdd47fa41bbfbff988b9c1be8161f81f4fce27729a2d054853475f"
