@@ -8,6 +8,9 @@ jobs:
   release:
     name: Semantic Release
     runs-on: ubuntu-latest
+    outputs:
+      new_release_published: ${{ steps.semantic.outputs.new_release_published  }}
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -22,16 +25,16 @@ jobs:
       needs: release
       runs-on: ubuntu-latest
       steps:
-        - name: Push to GCR
-          if: needs.release.semantic.outputs.new_release_published == 'true'
-          uses: zRafikFarhad/push-to-gcr-github-action@v5-beta'
-          with:
-            gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
-            registry: gcr.io
-            project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
-            image_name: ${{ secrets.GCLOUD_IMAGE_NAME }}
-            image_tag: latest,${{ needs.release.semantic.outputs.new_release_version }}
-            dockerfile: ./Dockerfile
+      - name: Push to GCR
+        if: needs.release.outputs.new_release_published == 'true'
+        uses: RafikFarhad/push-to-gcr-github-action@v5-beta
+        with:
+          gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          registry: gcr.io
+          project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
+          image_name: ${{ secrets.GCLOUD_IMAGE_NAME }}
+          image_tag: latest,${{ needs.release.outputs.new_release_version }}
+          dockerfile: ./Dockerfile
 
   migrate:
       runs-on: ubuntu-latest
@@ -39,23 +42,23 @@ jobs:
       steps:
         - name: Setup Python
           uses: actions/setup-python@v3
-          if: needs.release.semantic.outputs.new_release_published == 'true'
+          if: needs.release.outputs.new_release_published == 'true'
           with:
             python-version: '3.11'
         - name: Install Poetry
           uses: snok/install-poetry@v1
-          if: needs.release.semantic.outputs.new_release_published == 'true'
+          if: needs.release.outputs.new_release_published == 'true'
           with:
             virtualenvs-create: true
             virtualenvs-in-project: true
             installer-parallel: true
         - name: Install dependencies
-          if: needs.release.semantic.outputs.new_release_published == 'true'
+          if: needs.release.outputs.new_release_published == 'true'
           run: |
             poetry install
 
         - name: Migrate
-          if: needs.release.semantic.outputs.new_release_published == 'true'
+          if: needs.release.outputs.new_release_published == 'true'
           run: poetry run ./manage.py migrate --settings="project.settings.production"
           env:
             DJANGO_DATABASE_NAME: ${{ secrets.DJANGO_DATABASE_NAME }}
@@ -71,14 +74,14 @@ jobs:
     needs: [release, migrate, gcr-push]
     steps:
       - id: auth
-        if: needs.release.semantic.outputs.new_release_published == 'true'
+        if: needs.release.outputs.new_release_published == 'true'
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
 
       - id: deploy
-        if: needs.release.semantic.outputs.new_release_published == 'true'
+        if: needs.release.outputs.new_release_published == 'true'
         name: Deploy to GCR
         uses: google-github-actions/deploy-cloudrun@v1
         with:
