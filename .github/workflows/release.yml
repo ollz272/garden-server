@@ -12,6 +12,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Semantic Release
+      id: semantic
       uses: cycjimmy/semantic-release-action@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push to GCR
+      if: steps.semantic.outputs.new_release_published == 'true'
+      uses: RafikFarhad/push-to-gcr-github-action@v5-beta
+      with:
+        gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+        registry: gcr.io
+        project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
+        image_name: ${{ secrets.GCLOUD_IMAGE_NAME }}
+        image_tag: latest,${{ steps.semantic.outputs.new_release_version }}
+        dockerfile: ./Dockerfile
