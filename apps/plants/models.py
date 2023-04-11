@@ -43,11 +43,9 @@ class Plant(models.Model):
                 data_points = data_points.filter(time__lte=time_to)
 
             if resolution:
-                data_points = (
-                    data_points.time_bucket("time", resolution).annotate(avg_data=Avg("data")).order_by("time")
-                )
+                data_points = data_points.time_bucket("time", resolution).annotate(avg_data=Avg("data"))
             else:
-                data_points = data_points.time_bucket("time", "PT1M").annotate(avg_data=Avg("data")).order_by("time")
+                data_points = data_points.time_bucket("time", "PT1M").annotate(avg_data=Avg("data"))
 
             charts[sensor.slug] = {
                 "time": [data["bucket"] for data in data_points],
@@ -127,9 +125,6 @@ class DataPoint(models.Model):
     # Managers
     objects = models.Manager()
     timescale = TimescaleManager()
-
-    class Meta:
-        ordering = ("-time",)
 
     def __str__(self):
         return f"Data point for {self.plant} at {self.time}"
