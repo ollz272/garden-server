@@ -12,10 +12,11 @@ jobs:
       new_release_published: ${{ steps.semantic.outputs.new_release_published }}
       new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: test
-      run: echo "tadaaa ${{ steps.semantic.outputs.new_release_published }}, ${{ steps.semantic.outputs.new_release_version }}"
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
   
   gcr-push:
