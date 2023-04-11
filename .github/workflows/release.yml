@@ -12,13 +12,14 @@ jobs:
       new_release_published: ${{ steps.semantic.outputs.new_release_published }}
       new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
-      - name: Semantic Release
-        id: semantic
-        uses: cycjimmy/semantic-release-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-  
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Semantic Release
+      id: semantic
+      uses: cycjimmy/semantic-release-action@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   gcr-push:
       name: Push to GCR
       needs: release
