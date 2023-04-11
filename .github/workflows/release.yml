@@ -28,45 +28,49 @@ jobs:
         dockerfile: ./Dockerfile
 
   migrate:
-    - name: Setup Python
-      uses: actions/setup-python@v3
-      if: steps.semantic.outputs.new_release_published == 'true'
-      with:
-        python-version: '3.11'
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      if: steps.semantic.outputs.new_release_published == 'true'
-      with:
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-        installer-parallel: true
-    - name: Install dependencies
-      if: steps.semantic.outputs.new_release_published == 'true'
-      run: |
-        poetry install
+      runs-on: ubuntu-latest
+      steps:
+        - name: Setup Python
+          uses: actions/setup-python@v3
+          if: steps.semantic.outputs.new_release_published == 'true'
+          with:
+            python-version: '3.11'
+        - name: Install Poetry
+          uses: snok/install-poetry@v1
+          if: steps.semantic.outputs.new_release_published == 'true'
+          with:
+            virtualenvs-create: true
+            virtualenvs-in-project: true
+            installer-parallel: true
+        - name: Install dependencies
+          if: steps.semantic.outputs.new_release_published == 'true'
+          run: |
+            poetry install
 
-    - name: Migrate
-      if: steps.semantic.outputs.new_release_published == 'true'
-      run: poetry run ./manage.py migrate --settings="project.settings.production"
-      env:
-        DJANGO_DATABASE_NAME: ${{ secrets.DJANGO_DATABASE_NAME }}
-        DJANGO_DATABASE_USER: ${{ secrets.DJANGO_DATABASE_USER }}
-        DJANGO_DATABASE_PASSWORD: ${{ secrets.DJANGO_DATABASE_PASSWORD }}
-        DJANGO_DATABASE_HOST: ${{ secrets.DJANGO_DATABASE_HOST }}
-        DJANGO_SETTINGS_MODULE: project.settings.production
-        ALLOWED_HOSTS: 127.0.0.1
-        CSRF_TRUSTED_ORIGINS: http://127.0.0.1
+        - name: Migrate
+          if: steps.semantic.outputs.new_release_published == 'true'
+          run: poetry run ./manage.py migrate --settings="project.settings.production"
+          env:
+            DJANGO_DATABASE_NAME: ${{ secrets.DJANGO_DATABASE_NAME }}
+            DJANGO_DATABASE_USER: ${{ secrets.DJANGO_DATABASE_USER }}
+            DJANGO_DATABASE_PASSWORD: ${{ secrets.DJANGO_DATABASE_PASSWORD }}
+            DJANGO_DATABASE_HOST: ${{ secrets.DJANGO_DATABASE_HOST }}
+            DJANGO_SETTINGS_MODULE: project.settings.production
+            ALLOWED_HOSTS: 127.0.0.1
+            CSRF_TRUSTED_ORIGINS: http://127.0.0.1
 
-  deploy:
-    - id: auth
-      name: Authenticate to Google Cloud
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
+  deploy:      
+    runs-on: ubuntu-latest
+    steps:
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
 
-    - id: deploy
-      name: Deploy to GCR
-      uses: google-github-actions/deploy-cloudrun@v1
-      with:
-        service: garden-server
-        image: gcr.io/garden-server-381815/garden-server${{ steps.semantic.outputs.new_release_version }}
+      - id: deploy
+        name: Deploy to GCR
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: garden-server
+          image: gcr.io/garden-server-381815/garden-server${{ steps.semantic.outputs.new_release_version }}
