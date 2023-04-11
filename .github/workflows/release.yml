@@ -9,22 +9,22 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
     outputs:
-      new_release_published: ${{ steps.semantic.outputs.new_release_published  }}
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
       new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Semantic Release
-      id: semantic
-      uses: cycjimmy/semantic-release-action@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: test
+      run: echo "tadaaa ${{ steps.semantic.outputs.new_release_published }}, ${{ steps.semantic.outputs.new_release_version }}"
+    
   
   gcr-push:
       name: Push to GCR
       needs: release
       runs-on: ubuntu-latest
       steps:
+      - name: test?
+        run: echo "${{ needs.release.outputs.new_release_published }}, ${{ needs.release.outputs.new_release_version }}"
       - name: Push to GCR
         if: needs.release.outputs.new_release_published == 'true'
         uses: RafikFarhad/push-to-gcr-github-action@v5-beta
