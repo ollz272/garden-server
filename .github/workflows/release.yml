@@ -27,21 +27,26 @@ jobs:
         image_tag: latest,${{ steps.semantic.outputs.new_release_version }}
         dockerfile: ./Dockerfile
 
+  migrate:
     - name: Setup Python
       uses: actions/setup-python@v3
+      if: steps.semantic.outputs.new_release_published == 'true'
       with:
         python-version: '3.11'
     - name: Install Poetry
       uses: snok/install-poetry@v1
+      if: steps.semantic.outputs.new_release_published == 'true'
       with:
         virtualenvs-create: true
         virtualenvs-in-project: true
         installer-parallel: true
     - name: Install dependencies
+      if: steps.semantic.outputs.new_release_published == 'true'
       run: |
         poetry install
 
     - name: Migrate
+      if: steps.semantic.outputs.new_release_published == 'true'
       run: poetry run ./manage.py migrate --settings="project.settings.production"
       env:
         DJANGO_DATABASE_NAME: ${{ secrets.DJANGO_DATABASE_NAME }}
@@ -52,6 +57,7 @@ jobs:
         ALLOWED_HOSTS: 127.0.0.1
         CSRF_TRUSTED_ORIGINS: http://127.0.0.1
 
+  deploy:
     - id: auth
       name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
