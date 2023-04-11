@@ -15,8 +15,11 @@ RUN mkdir -p /app/src/app && touch /app/src/app/__init__.py && poetry install -n
 COPY . /app/src/app
 
 # start server
-EXPOSE 8020
+EXPOSE 8000
 STOPSIGNAL SIGTERM
 WORKDIR /app/src/app
 
-CMD ["/app/src/app/start_server.sh"]
+RUN ./manage.py collectstatic --noinput --clear --settings project.settings.production
+
+
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "project.wsgi"]
