@@ -26,3 +26,26 @@ jobs:
         image_name: ${{ secrets.GCLOUD_IMAGE_NAME }}
         image_tag: latest,${{ steps.semantic.outputs.new_release_version }}
         dockerfile: ./Dockerfile
+
+    - name: Setup Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+    - name: Install dependencies
+      run: |
+        poetry install
+
+    - name: Migrate
+      run: poetry run ./manage.py migrate --settings="project.settings.production"
+      env:
+        DJANGO_DATABASE_NAME=${{ secrets.DJANGO_DATABASE_NAME }}
+        DJANGO_DATABASE_USER=${{ secrets.DJANGO_DATABASE_USER }}
+        DJANGO_DATABASE_PASSWORD=${{ secrets.DJANGO_DATABASE_PASSWORD }}
+        DJANGO_DATABASE_HOST=${{ secrets.DJANGO_DATABASE_HOST }}
+        DJANGO_SETTINGS_MODULE=project.settings.production
