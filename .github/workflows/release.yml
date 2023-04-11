@@ -51,3 +51,16 @@ jobs:
         DJANGO_SETTINGS_MODULE: project.settings.production
         ALLOWED_HOSTS: 127.0.0.1
         CSRF_TRUSTED_ORIGINS: http://127.0.0.1
+
+    - id: auth
+      name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
+
+    - id: deploy
+      name: Deploy to GCR
+      uses: google-github-actions/deploy-cloudrun@v1
+      with:
+        service: garden-server
+        image: gcr.io/garden-server-381815/garden-server${{ steps.semantic.outputs.new_release_version }}
