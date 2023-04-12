@@ -19,8 +19,8 @@ plugins:
           countMatches: true
         - files:
             - "service.yaml"
-          from: "eu.gcr.io/development-170812/timescale-api:.*"
-          to: "eu.gcr.io/development-170812/timescale-api:${nextRelease.version}"
+          from: "gcr.io/garden-server-381815/garden-server:.*"
+          to: "gcr.io/garden-server-381815/garden-server:${nextRelease.version}"
           results:
             - file: "service.yaml"
               hasChanged: true
