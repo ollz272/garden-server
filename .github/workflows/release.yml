@@ -94,5 +94,4 @@ jobs:
         name: Deploy to GCR
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service: garden-server
-          image: gcr.io/garden-server-381815/garden-server:${{ needs.release.outputs.new_release_version }}
+          metadata: ./service.yaml

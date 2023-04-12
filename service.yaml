@@ -1,0 +1,125 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: garden-server
+  namespace: '400668159616'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/400668159616/services/garden-server
+  uid: 2ad77f6b-2258-4702-9bc2-16c63dcdd4dc
+  resourceVersion: AAX5Hnt0bvs
+  generation: 10
+  creationTimestamp: '2023-04-10T18:55:32.385539Z'
+  labels:
+    cloud.googleapis.com/location: europe-west1
+  annotations:
+    run.googleapis.com/client-name: cloud-console
+    serving.knative.dev/creator: oli.edmund.parker@gmail.com
+    serving.knative.dev/lastModifier: oli.edmund.parker@gmail.com
+    run.googleapis.com/operation-id: 0f14d534-9526-4cd8-9373-152369832368
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+spec:
+  template:
+    metadata:
+      name: garden-server-00010-nev
+      annotations:
+        run.googleapis.com/client-name: cloud-console
+        autoscaling.knative.dev/maxScale: '4'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 30
+      serviceAccountName: 400668159616-compute@developer.gserviceaccount.com
+      containers:
+      - image: gcr.io/garden-server-381815/garden-server:1.2.8
+        ports:
+        - name: http1
+          containerPort: 8000
+        env:
+        - name: DJANGO_SETTINGS_MODULE
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_SETTINGS_MODULE
+        - name: DJANGO_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_DATABASE_PASSWORD
+        - name: DJANGO_DATABASE_HOST
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_DATABASE_HOST
+        - name: DJANGO_SUPERUSER_EMAIL
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_SUPERUSER_EMAIL
+        - name: DJANGO_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_DATABASE_NAME
+        - name: DJANGO_SUPERUSER_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_SUPERUSER_USERNAME
+        - name: CSRF_TRUSTED_ORIGINS
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: CSRF_TRUSTED_ORIGINS
+        - name: ALLOWED_HOSTS
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: ALLOWED_HOST
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: SECRET_KEY
+        - name: DJANGO_DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_DATABASE_USER
+        - name: DJANGO_SUPERUSER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: latest
+              name: DJANGO_SUPERUSER_PASSWORD
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+          tcpSocket:
+            port: 8000
+  traffic:
+  - percent: 100
+    latestRevision: true
+status:
+  observedGeneration: 10
+  conditions:
+  - type: Ready
+    status: 'True'
+    lastTransitionTime: '2023-04-12T07:23:18.944044Z'
+  - type: ConfigurationsReady
+    status: 'True'
+    lastTransitionTime: '2023-04-12T07:23:14.211206Z'
+  - type: RoutesReady
+    status: 'True'
+    lastTransitionTime: '2023-04-12T07:23:19.116539Z'
+  latestReadyRevisionName: garden-server-00010-nev
+  latestCreatedRevisionName: garden-server-00010-nev
+  traffic:
+  - revisionName: garden-server-00010-nev
+    percent: 100
+    latestRevision: true
+  url: https://garden-server-yxg7g6itpq-ew.a.run.app
+  address:
+    url: https://garden-server-yxg7g6itpq-ew.a.run.app
