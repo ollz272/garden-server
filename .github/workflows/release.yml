@@ -68,4 +68,5 @@ jobs:
         name: Deploy to GCR
         uses: google-github-actions/deploy-cloudrun@v1
         with:
+          region: europe-west1
           metadata: ./service.yaml
