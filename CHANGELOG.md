@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/ollz272/garden-server/compare/v1.2.3...v1.2.4) (2023-04-13)
+
+
+### Bug Fixes
+
+* **ci:** fixes service.yaml? ([#170](https://github.com/ollz272/garden-server/issues/170)) ([fef7294](https://github.com/ollz272/garden-server/commit/fef7294b60caaa82281963ce19073f9eeb3a71c0))
+
 ## [1.2.3](https://github.com/ollz272/garden-server/compare/v1.2.2...v1.2.3) (2023-04-13)
 
 
