@@ -99,27 +99,3 @@ spec:
           failureThreshold: 1
           tcpSocket:
             port: 8000
-  traffic:
-  - percent: 100
-    latestRevision: true
-status:
-  observedGeneration: 10
-  conditions:
-  - type: Ready
-    status: 'True'
-    lastTransitionTime: '2023-04-12T07:23:18.944044Z'
-  - type: ConfigurationsReady
-    status: 'True'
-    lastTransitionTime: '2023-04-12T07:23:14.211206Z'
-  - type: RoutesReady
-    status: 'True'
-    lastTransitionTime: '2023-04-12T07:23:19.116539Z'
-  latestReadyRevisionName: garden-server-00010-nev
-  latestCreatedRevisionName: garden-server-00010-nev
-  traffic:
-  - revisionName: garden-server-00010-nev
-    percent: 100
-    latestRevision: true
-  url: https://garden-server-yxg7g6itpq-ew.a.run.app
-  address:
-    url: https://garden-server-yxg7g6itpq-ew.a.run.app
