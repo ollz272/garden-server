@@ -17,6 +17,7 @@ jobs:
         with:
           release-type: python
           package-name: garden-server
+          include-v-in-tag: False
           token: ${{ secrets.GH_TOKEN }}
           extra-files: |
             service.yaml
