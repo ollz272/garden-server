@@ -1,11 +1,10 @@
 name: Release
 on:
-  release:
+  push:
     tags:
       - '*'
 
 jobs:
-
   gcr-push:
       name: Push to GCR
       needs: release
