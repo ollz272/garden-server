@@ -17,5 +17,6 @@ jobs:
         with:
           release-type: python
           package-name: garden-server
+          token: ${{ secrets.GH_TOKEN }}
           extra-files: |
             service.yaml
