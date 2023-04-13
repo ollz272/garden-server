@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.5](https://github.com/ollz272/garden-server/compare/v1.2.4...v1.2.5) (2023-04-13)
+
+
+### Bug Fixes
+
+* **ci:** fixes docker tag ([#172](https://github.com/ollz272/garden-server/issues/172)) ([3e41285](https://github.com/ollz272/garden-server/commit/3e41285ddc53ef5e8aacade94791589b5c8648f1))
+
 ## [1.2.4](https://github.com/ollz272/garden-server/compare/v1.2.3...v1.2.4) (2023-04-13)
 
 
