@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "\\"
+name = "garden-server"
 version = "0.1.0"
 description = "A django server used to collect and display data from garden IoT devices"
 authors = ["Oli <oli.edmund.parker@gmail.com>"]
