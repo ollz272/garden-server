@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "garden-server"
-version = "1.2.8"
+version = "1.2.9"
 description = "A django server used to collect and display data from garden IoT devices"
 authors = ["Oli <oli.edmund.parker@gmail.com>"]
 readme = "README.md"
