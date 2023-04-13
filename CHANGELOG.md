@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/ollz272/garden-server/compare/v1.2.1...v1.2.2) (2023-04-13)
+
+
+### Bug Fixes
+
+* **CI:** fixes release ci ([#166](https://github.com/ollz272/garden-server/issues/166)) ([72d75d9](https://github.com/ollz272/garden-server/commit/72d75d936257a8e56704ca241e4eaa61f4f7e4aa))
+
 ## [1.2.1](https://github.com/ollz272/garden-server/compare/v1.2.0...v1.2.1) (2023-04-13)
 
 
