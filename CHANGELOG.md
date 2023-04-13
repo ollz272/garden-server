@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.6](https://github.com/ollz272/garden-server/compare/v1.2.5...1.2.6) (2023-04-13)
+
+
+### Bug Fixes
+
+* remove v from tag ([#174](https://github.com/ollz272/garden-server/issues/174)) ([b0938c1](https://github.com/ollz272/garden-server/commit/b0938c138c347798e4f803127eb74216af893dee))
+
 ## [1.2.5](https://github.com/ollz272/garden-server/compare/v1.2.4...v1.2.5) (2023-04-13)
 
 
