@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/ollz272/garden-server/compare/v1.2.2...v1.2.3) (2023-04-13)
+
+
+### Bug Fixes
+
+* **CI:** change region of GCR deploy ([#168](https://github.com/ollz272/garden-server/issues/168)) ([b304c03](https://github.com/ollz272/garden-server/commit/b304c03f8faad62b71eb1ac07d232e53ef776a1d))
+
 ## [1.2.2](https://github.com/ollz272/garden-server/compare/v1.2.1...v1.2.2) (2023-04-13)
 
 
