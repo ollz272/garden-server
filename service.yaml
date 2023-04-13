@@ -28,7 +28,7 @@ spec:
       timeoutSeconds: 30
       serviceAccountName: 400668159616-compute@developer.gserviceaccount.com
       containers:
-      - image: gcr.io/garden-server-381815/garden-server:1.2.7  # x-release-please-version
+      - image: gcr.io/garden-server-381815/garden-server:1.2.8  # x-release-please-version
         ports:
         - name: http1
           containerPort: 8000
