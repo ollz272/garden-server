@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/ollz272/garden-server/compare/v1.2.0...v1.2.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* add our own token ([#164](https://github.com/ollz272/garden-server/issues/164)) ([4816fcf](https://github.com/ollz272/garden-server/commit/4816fcf1ccc74148f18259c2fac63a7696835497))
+
 ## [1.2.0](https://github.com/ollz272/garden-server/compare/1.1.0...v1.2.0) (2023-04-13)
 
 
