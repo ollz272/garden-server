@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.2.7](https://github.com/ollz272/garden-server/compare/1.2.6...1.2.7) (2023-04-13)
+
+
+### Bug Fixes
+
+* add checkouts ([a759344](https://github.com/ollz272/garden-server/commit/a759344d33d14938c8f231a719dfbe4de0d112ef))
+* add our own token ([#164](https://github.com/ollz272/garden-server/issues/164)) ([4816fcf](https://github.com/ollz272/garden-server/commit/4816fcf1ccc74148f18259c2fac63a7696835497))
+* adds service.yaml, points deployment there, adds releaserc to update versions ([#159](https://github.com/ollz272/garden-server/issues/159)) ([d85f69d](https://github.com/ollz272/garden-server/commit/d85f69d10c7d11775dd02ff07e6f5502ae8cd6c6))
+* **CI:** change region of GCR deploy ([#168](https://github.com/ollz272/garden-server/issues/168)) ([b304c03](https://github.com/ollz272/garden-server/commit/b304c03f8faad62b71eb1ac07d232e53ef776a1d))
+* **ci:** fixes docker tag ([#172](https://github.com/ollz272/garden-server/issues/172)) ([3e41285](https://github.com/ollz272/garden-server/commit/3e41285ddc53ef5e8aacade94791589b5c8648f1))
+* **CI:** fixes release ci ([#166](https://github.com/ollz272/garden-server/issues/166)) ([72d75d9](https://github.com/ollz272/garden-server/commit/72d75d936257a8e56704ca241e4eaa61f4f7e4aa))
+* **ci:** fixes service.yaml? ([#170](https://github.com/ollz272/garden-server/issues/170)) ([fef7294](https://github.com/ollz272/garden-server/commit/fef7294b60caaa82281963ce19073f9eeb3a71c0))
+* fix image name ([4bd8978](https://github.com/ollz272/garden-server/commit/4bd89783cca55f800ab890eea44d429c9abb0472))
+* fix release me please ([#162](https://github.com/ollz272/garden-server/issues/162)) ([2ceb768](https://github.com/ollz272/garden-server/commit/2ceb768fdd842c4a89068b9bad5b9a95c42d0356))
+* fix releaserc? ([b9fb690](https://github.com/ollz272/garden-server/commit/b9fb690d3dc442971556b23252e4481f0cb69e97))
+* redo release ([#160](https://github.com/ollz272/garden-server/issues/160)) ([7f9e22d](https://github.com/ollz272/garden-server/commit/7f9e22d6c829621414c5e4f472f5e1378b96598e))
+* remove v from tag ([#174](https://github.com/ollz272/garden-server/issues/174)) ([b0938c1](https://github.com/ollz272/garden-server/commit/b0938c138c347798e4f803127eb74216af893dee))
+
 ## [1.2.6](https://github.com/ollz272/garden-server/compare/v1.2.5...1.2.6) (2023-04-13)
 
 
