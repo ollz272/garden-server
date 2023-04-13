@@ -18,7 +18,7 @@ jobs:
           registry: gcr.io
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
           image_name: ${{ secrets.GCLOUD_IMAGE_NAME }}
-          image_tag: latest,${{ github.event.release.tag_name }}
+          image_tag: latest,${{ github.ref_name }}
           dockerfile: ./Dockerfile
 
   migrate:

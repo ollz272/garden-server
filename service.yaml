@@ -20,10 +20,9 @@ metadata:
 spec:
   template:
     metadata:
-      name: garden-server-00010-nev
       annotations:
-        run.googleapis.com/client-name: cloud-console
-        autoscaling.knative.dev/maxScale: '4'
+        autoscaling.knative.dev/minScale: '1'
+        autoscaling.knative.dev/maxScale: '100'
     spec:
       containerConcurrency: 80
       timeoutSeconds: 30
