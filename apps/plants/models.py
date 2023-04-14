@@ -43,13 +43,15 @@ class Plant(models.Model):
                 data_points = data_points.filter(time__lte=time_to)
 
             if resolution:
-                data_points = data_points.time_bucket("time", resolution).annotate(avg_data=Avg("data"))
+                data_points = (
+                    data_points.time_bucket("time", resolution).annotate(avg_data=Avg("data")).order_by("bucket")
+                )
             else:
-                data_points = data_points.time_bucket("time", "PT1M").annotate(avg_data=Avg("data"))
+                data_points = data_points.time_bucket("time", "PT1M").annotate(avg_data=Avg("data")).order_by("bucket")
 
             charts[sensor.slug] = {
-                "time": [data["bucket"] for data in sorted(data_points, key=lambda x: x["bucket"])],
-                "data": [data["avg_data"] for data in sorted(data_points, key=lambda x: x["bucket"])],
+                "time": [data["bucket"] for data in data_points],
+                "data": [data["avg_data"] for data in data_points],
                 "chart_title": f"Chart of {sensor.name}",
                 "element_id": f"chart-{sensor.slug}",
                 "unit": f"{sensor.unit}",
