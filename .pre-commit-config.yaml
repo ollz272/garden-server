@@ -28,3 +28,9 @@ repos:
     rev: v2.12.0
     hooks:
       - id: hadolint-docker
+
+  - repo: https://github.com/remastr/pre-commit-django-check-migrations
+    rev: v0.1.0
+    hooks:
+    - id: check-migrations-created
+      args: [--exec-command=poetry run python, --manage-path=sample_project/manage.py]
