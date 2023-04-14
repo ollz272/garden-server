@@ -5,6 +5,27 @@ plugins:
           scope: "deps"
           release: "patch"
 
+  - - "@google/semantic-release-replace-plugin"
+    - replacements:
+        - files:
+            - "pyproject.toml"
+          from: "^version = \".*\""
+          to: "version = \"${nextRelease.version}\""
+          results:
+            - file: "pyproject.toml"
+              hasChanged: true
+              numMatches: 1
+              numReplacements: 1
+          countMatches: true
+        - files:
+            - "service.yaml"
+          from: "gcr.io/garden-server-381815/garden-server:.*"
+          to: "gcr.io/garden-server-381815/garden-server:${nextRelease.version}"
+          results:
+            - file: "service.yaml"
+              hasChanged: true
+
+
 branches:
   - "main"
   - "+([0-9])?(.{+([0-9]),x}).x"
