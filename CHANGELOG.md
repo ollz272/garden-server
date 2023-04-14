@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.10](https://github.com/ollz272/garden-server/compare/1.2.9...1.2.10) (2023-04-14)
+
+
+### Bug Fixes
+
+* fixes chart query to correctly bucket datapoints.= ([#155](https://github.com/ollz272/garden-server/issues/155)) ([4663e82](https://github.com/ollz272/garden-server/commit/4663e8202250090f979890f245067b759c5ac437))
+
 ## [1.2.9](https://github.com/ollz272/garden-server/compare/1.2.8...1.2.9) (2023-04-13)
 
 
