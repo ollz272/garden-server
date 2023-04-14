@@ -48,8 +48,8 @@ class Plant(models.Model):
                 data_points = data_points.time_bucket("time", "PT1M").annotate(avg_data=Avg("data"))
 
             charts[sensor.slug] = {
-                "time": [data["bucket"] for data in data_points],
-                "data": [data["avg_data"] for data in data_points],
+                "time": [data["bucket"] for data in sorted(data_points, key=lambda x: x["bucket"])],
+                "data": [data["avg_data"] for data in sorted(data_points, key=lambda x: x["bucket"])],
                 "chart_title": f"Chart of {sensor.name}",
                 "element_id": f"chart-{sensor.slug}",
                 "unit": f"{sensor.unit}",
