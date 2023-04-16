@@ -1,5 +1,6 @@
 import abc
 import csv
+import datetime as dt
 
 from api.v1.serializers import DataPointSerializer, PlantSerializer, SensorSerializer
 from django.db.models import Avg
@@ -84,16 +85,48 @@ class PlantViewSet(viewsets.ModelViewSet):
         }
         return Response(resp)
 
-    @action(detail=True, methods=["get"])
-    def csv_data(self, request, pk=None):
+    @action(detail=True, methods=["get"], url_path="get_csv")
+    def individual_plant_csv_data(self, request, pk=None):
         """Endpoint for downloading a plants CSV data."""
+        plant = self.get_object()
         response = HttpResponse(content_type="text/csv")
-        response["Content-Disposition"] = 'attachment; filename="export.csv"'
-
+        response["Content-Disposition"] = f'attachment; filename="{plant.name} plant data on {dt.datetime.now()}.csv"'
         writer = csv.writer(response)
 
         period_resolution = request.query_params.get("period_resolution", "PT1M")
-        data_points = DataPoint.timescale.filter(plant=self.get_object())
+        data_points = DataPoint.timescale.filter(plant=plant)
+        if start := request.query_params.get("start"):
+            data_points = data_points.filter(time__gte=start)
+
+        if end := request.query_params.get("end"):
+            data_points = data_points.filter(time__lte=end)
+
+        data_points = (
+            data_points.time_bucket("time", period_resolution)
+            .annotate(avg_data=Avg("data"))
+            .values("plant_id", "sensor_id", "avg_data", "bucket")
+            .order_by("bucket", "sensor")
+        )
+
+        writer.writerow(["Plant ID", "Sensor ID", "Time", "Data"])
+        output = [
+            [row["plant_id"], row["sensor_id"], row["bucket"].isoformat(), row["avg_data"]] for row in data_points
+        ]
+        writer.writerows(output)
+
+        return response
+
+    @action(detail=False, methods=["get"], url_path="get_csv")
+    def plant_csv_data(self, request, pk=None):
+        """Endpoint for downloading a plants CSV data."""
+        response = HttpResponse(content_type="text/csv")
+        response[
+            "Content-Disposition"
+        ] = f'attachment; filename="{self.request.user} plant data on {dt.datetime.now()}.csv"'
+        writer = csv.writer(response)
+
+        period_resolution = request.query_params.get("period_resolution", "PT1M")
+        data_points = DataPoint.timescale.filter(plant__in=self.get_queryset().values("id"))
         if start := request.query_params.get("start"):
             data_points = data_points.filter(time__gte=start)
 
