@@ -1,6 +1,9 @@
+import datetime
+
 from accounts.tests.factories import UserFactory
 from django.test import TestCase
 from django.urls import reverse
+from parameterized import parameterized
 from plants.tests.factories import PlantFactory
 
 
@@ -38,6 +41,29 @@ class TestPlantListAPIView(TestCase):
             resp = self.client.get(reverse(url))
         self.assertEqual(resp.status_code, 200)
 
+    @parameterized.expand(
+        [
+            [None, None, None],
+            [datetime.datetime(2023, 1, 1), None, None],
+            [None, datetime.datetime(2023, 1, 1), None],
+            [None, None, "PT1S"],
+        ]
+    )
+    def test_view_200_csv(self, start, end, period_resolution):
+        url = "v1-plants-plant-csv-data"
+        self.client.force_login(self.super_user)
+        get = {}
+        if start:
+            get["start"] = start
+        if end:
+            get["end"] = end
+        if period_resolution:
+            get["period_resolution"] = period_resolution
+        resp = self.client.get(reverse(url), get)
+        self.assertEqual(resp.status_code, 200)
+
+        # todo test response.
+
 
 class TestPlantDetailAPIView(TestCase):
     def setUp(self):
@@ -68,3 +94,26 @@ class TestPlantDetailAPIView(TestCase):
         url = "v1-plants-detail"
         resp = self.client.get(reverse(url, kwargs={"pk": self.super_user_plant.pk}))
         self.assertEqual(resp.status_code, 401)
+
+    @parameterized.expand(
+        [
+            [None, None, None],
+            [datetime.datetime(2023, 1, 1), None, None],
+            [None, datetime.datetime(2023, 1, 1), None],
+            [None, None, "PT1S"],
+        ]
+    )
+    def test_view_200_csv(self, start, end, period_resolution):
+        url = "v1-plants-individual-plant-csv-data"
+        self.client.force_login(self.super_user)
+        get = {}
+        if start:
+            get["start"] = start
+        if end:
+            get["end"] = end
+        if period_resolution:
+            get["period_resolution"] = period_resolution
+        resp = self.client.get(reverse(url, kwargs={"pk": self.super_user_plant.pk}), get)
+        self.assertEqual(resp.status_code, 200)
+
+        # todo test response.

@@ -15,6 +15,7 @@
     <a href="{% url 'plant-update' plant_pk=plant.pk %}">Make changes to plant.</a>
     <a href="{% url 'create-sensor' plant_pk=plant.pk %}">Create a Sensor</a>
     <a href="{% url 'plant-api-details' plant_pk=plant.pk %}">View API details.</a>
+    <a id="download_data_link_id">Download Data</a>
     <div class="container center">
         <form method="get" action=".">
             {% crispy form %}
@@ -33,4 +34,6 @@
 {% block extra_footer_js %}
     {{ chart_data|json_script:"chartData" }}
     <script src="{% static 'js/plant_chart.js' %}"></script>
+
+    <script src="{% static 'js/get_plant_csv.js' %}" url="{% url 'v1-plants-individual-plant-csv-data' pk=plant.pk %}"></script>
 {% endblock %}
