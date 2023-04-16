@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.11](https://github.com/ollz272/garden-server/compare/1.2.10...1.2.11) (2023-04-16)
+
+
+### Bug Fixes
+
+* **deps:** bump django-crispy-forms from 1.14.0 to 2.0  ([1a57ea2](https://github.com/ollz272/garden-server/commit/1a57ea255c31e4ae69dc0d307e0d1dc7a55fbfc0))
+
 ## [1.2.10](https://github.com/ollz272/garden-server/compare/1.2.9...1.2.10) (2023-04-14)
 
 
