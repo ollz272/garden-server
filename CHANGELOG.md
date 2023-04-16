@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/ollz272/garden-server/compare/1.2.11...1.3.0) (2023-04-16)
+
+
+### Features
+
+* first draft of CSV data endpoint ([#189](https://github.com/ollz272/garden-server/issues/189)) ([bfd6064](https://github.com/ollz272/garden-server/commit/bfd60642713e1be0564305a3e1d837901592c4f0))
+
 ## [1.2.11](https://github.com/ollz272/garden-server/compare/1.2.10...1.2.11) (2023-04-16)
 
 
