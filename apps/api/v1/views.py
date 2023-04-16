@@ -1,6 +1,9 @@
 import abc
+import csv
 
 from api.v1.serializers import DataPointSerializer, PlantSerializer, SensorSerializer
+from django.db.models import Avg
+from django.http import HttpResponse
 from plants.models import DataPoint, Plant, Sensor
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
@@ -80,6 +83,37 @@ class PlantViewSet(viewsets.ModelViewSet):
             for data_type in Sensor.objects.filter(plant_id=pk).prefetch_related("plant_data")
         }
         return Response(resp)
+
+    @action(detail=True, methods=["get"])
+    def csv_data(self, request, pk=None):
+        """Endpoint for downloading a plants CSV data."""
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="export.csv"'
+
+        writer = csv.writer(response)
+
+        period_resolution = request.query_params.get("period_resolution", "PT1M")
+        data_points = DataPoint.timescale.filter(plant=self.get_object())
+        if start := request.query_params.get("start"):
+            data_points = data_points.filter(time__gte=start)
+
+        if end := request.query_params.get("end"):
+            data_points = data_points.filter(time__lte=end)
+
+        data_points = (
+            data_points.time_bucket("time", period_resolution)
+            .annotate(avg_data=Avg("data"))
+            .values("plant_id", "sensor_id", "avg_data", "bucket")
+            .order_by("bucket", "sensor")
+        )
+
+        writer.writerow(["Plant ID", "Sensor ID", "Time", "Data"])
+        output = [
+            [row["plant_id"], row["sensor_id"], row["bucket"].isoformat(), row["avg_data"]] for row in data_points
+        ]
+        writer.writerows(output)
+
+        return response
 
 
 class SensorViewSet(PlantBelongsToUserMixin, viewsets.ModelViewSet):
