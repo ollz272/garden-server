@@ -11,6 +11,10 @@ jobs:
       steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Ubuntu packages
+        run: |
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+          libgdal26
       - name: Push to GCR
         uses: RafikFarhad/push-to-gcr-github-action@v5-beta
         with:
@@ -62,6 +66,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install Ubuntu packages
+        run: |
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+          libgdal26
       - id: auth
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
