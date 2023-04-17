@@ -556,9 +556,14 @@ description = "A Django database backend for integration with TimescaleDB"
 category = "main"
 optional = false
 python-versions = "*"
-files = [
-    {file = "django-timescaledb-0.2.13.tar.gz", hash = "sha256:3a2dcdf224af318c6c813c7fbf323fa73ae9bd12d33cdf7540e34344ae62f739"},
-]
+files = []
+develop = false
+
+[package.source]
+type = "git"
+url = "https://github.com/ollz272/django-timescaledb.git"
+reference = "HEAD"
+resolved_reference = "7d5fa2b94b688b9afd9e61be6e461bcee1ca4af3"
 
 [[package]]
 name = "django-webtest"
@@ -1593,4 +1598,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "3f5b46b395b12c389813c1a72262a5121afb50b91b21b9f06bd23f7d63ac8204"
+content-hash = "96b4b6ad75fc61974bd9473ba076dd5f352d0f4c1b00919acf6bad2ef5b140a0"
