@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/ollz272/garden-server/compare/1.4.1...1.4.2) (2023-04-17)
+
+
+### Bug Fixes
+
+* fix ci by installing libgdal ([#197](https://github.com/ollz272/garden-server/issues/197)) ([1e22e76](https://github.com/ollz272/garden-server/commit/1e22e76d507d084417da72c40904f774e5cc88d1))
+
 ## [1.4.1](https://github.com/ollz272/garden-server/compare/1.4.0...1.4.1) (2023-04-17)
 
 
