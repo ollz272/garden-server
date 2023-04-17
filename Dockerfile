@@ -2,7 +2,7 @@
 FROM python:3.11-bullseye
 # Install GDAL dependencies
 RUN apt-get update &&\
-    apt-get install -y binutils=2.4 libproj-dev=4.9.3-2 gdal-bin=3.6.2+dfsg-1 --no-install-recommends \
+    apt-get install -y binutils libproj-dev gdal-bin --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
