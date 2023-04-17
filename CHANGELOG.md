@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/ollz272/garden-server/compare/1.4.2...1.4.3) (2023-04-17)
+
+
+### Bug Fixes
+
+* use different ubuntu image? ([#199](https://github.com/ollz272/garden-server/issues/199)) ([2295edd](https://github.com/ollz272/garden-server/commit/2295edd5cce2633fcce6d5c916af9ef5dd99dd02))
+
 ## [1.4.2](https://github.com/ollz272/garden-server/compare/1.4.1...1.4.2) (2023-04-17)
 
 
