@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.5](https://github.com/ollz272/garden-server/compare/1.4.4...1.4.5) (2023-04-17)
+
+
+### Bug Fixes
+
+* install gdal in dockerfile ([#203](https://github.com/ollz272/garden-server/issues/203)) ([4ce69ff](https://github.com/ollz272/garden-server/commit/4ce69ffbc2784216426172eb3b8d441fb5b196fd))
+
 ## [1.4.4](https://github.com/ollz272/garden-server/compare/1.4.3...1.4.4) (2023-04-17)
 
 
