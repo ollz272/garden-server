@@ -7,7 +7,7 @@ on:
 jobs:
   gcr-push:
       name: Push to GCR
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-20.04
       steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
 
   migrate:
       name: Migrate Database
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-20.04
       steps:
         - name: Checkout
           uses: actions/checkout@v3
@@ -57,7 +57,7 @@ jobs:
             CSRF_TRUSTED_ORIGINS: http://127.0.0.1
 
   deploy:      
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [migrate, gcr-push]
     steps:
       - name: Checkout
