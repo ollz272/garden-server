@@ -5,7 +5,7 @@ from .base import *  # noqa
 
 DATABASES = {
     "default": {
-        "ENGINE": "timescale.db.backends.postgresql",
+        "ENGINE": "timescale.db.backends.postgis",
         "NAME": os.environ.get("DJANGO_DATABASE_NAME", "test_gardenserver_django"),
         "USER": "postgres",
         "PASSWORD": "password",
