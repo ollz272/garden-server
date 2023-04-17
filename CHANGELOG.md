@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/ollz272/garden-server/compare/1.4.0...1.4.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* fix weather ([#195](https://github.com/ollz272/garden-server/issues/195)) ([3501c4c](https://github.com/ollz272/garden-server/commit/3501c4c07fa5d09d48a20961f5d867720a8e965e))
+
 ## [1.4.0](https://github.com/ollz272/garden-server/compare/1.3.0...1.4.0) (2023-04-17)
 
 
