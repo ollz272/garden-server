@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/ollz272/garden-server/compare/1.3.0...1.4.0) (2023-04-17)
+
+
+### Features
+
+* add weather to database ([#193](https://github.com/ollz272/garden-server/issues/193)) ([970b530](https://github.com/ollz272/garden-server/commit/970b530879293de56cd07ce56225094d209d5437))
+
 ## [1.3.0](https://github.com/ollz272/garden-server/compare/1.2.11...1.3.0) (2023-04-16)
 
 
