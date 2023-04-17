@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/ollz272/garden-server/compare/1.4.3...1.4.4) (2023-04-17)
+
+
+### Bug Fixes
+
+* add ubuntu install to ci steps ([#201](https://github.com/ollz272/garden-server/issues/201)) ([eac272d](https://github.com/ollz272/garden-server/commit/eac272d832e5938c6df78894fbf4e4ab32302e3c))
+
 ## [1.4.3](https://github.com/ollz272/garden-server/compare/1.4.2...1.4.3) (2023-04-17)
 
 
