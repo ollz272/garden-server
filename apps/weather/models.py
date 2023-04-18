@@ -26,3 +26,6 @@ class Weather(models.Model):
         constraints = [
             models.UniqueConstraint(name="unique_weather_for_location_time", fields=["date_time", "location"])
         ]
+
+    def __str__(self):
+        return f"Weather at {self.location} on {self.date_time}"
