@@ -72,7 +72,7 @@ jobs:
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
           libgdal26
       - id: auth
-f        name: Authenticate to Google Cloud
+        name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
