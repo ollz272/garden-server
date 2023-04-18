@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/ollz272/garden-server/compare/1.6.0...1.6.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* adds some fixes to the weather model and admin ([#215](https://github.com/ollz272/garden-server/issues/215)) ([4361115](https://github.com/ollz272/garden-server/commit/4361115ff5e1afd06ebab922232f913a4ea33817))
+
 ## [1.6.0](https://github.com/ollz272/garden-server/compare/1.5.0...1.6.0) (2023-04-18)
 
 
