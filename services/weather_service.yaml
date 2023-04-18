@@ -1,0 +1,95 @@
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: garden-server
+  namespace: '400668159616'
+  selfLink: /apis/run.googleapis.com/v1/namespaces/400668159616/jobs/garden-server
+  uid: 28632f04-2e89-4236-b8b9-8576a54351f5
+  resourceVersion: AAX5lghBBZM
+  generation: 7
+  creationTimestamp: '2023-04-17T06:03:52.644269Z'
+  labels:
+    cloud.googleapis.com/location: europe-west1
+    run.googleapis.com/lastUpdatedTime: '2023-04-17T08:27:06.512391Z'
+  annotations:
+    run.googleapis.com/client-name: cloud-console
+    run.googleapis.com/lastModifier: oli.edmund.parker@gmail.com
+    client.knative.dev/user-image: gcr.io/garden-server-381815/garden-server:1.4.5  # x-release-please-version
+    run.googleapis.com/creator: oli.edmund.parker@gmail.com
+    run.googleapis.com/operation-id: f9c1acaa-196a-4913-9488-2a633a6ddebc
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/client-name: cloud-console
+        client.knative.dev/user-image: gcr.io/garden-server-381815/garden-server:1.4.5  # x-release-please-version
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      parallelism: 1
+      taskCount: 1
+      template:
+        spec:
+          containers:
+          - image: gcr.io/garden-server-381815/garden-server:1.4.5  # x-release-please-version
+            command:
+            - ./manage.py
+            - populate_weather
+            env:
+            - name: DJANGO_SETTINGS_MODULE
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: DJANGO_SETTINGS_MODULE
+            - name: DJANGO_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: DJANGO_DATABASE_PASSWORD
+            - name: DJANGO_DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: DJANGO_DATABASE_HOST
+            - name: DJANGO_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: DJANGO_DATABASE_NAME
+            - name: CSRF_TRUSTED_ORIGINS
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: CSRF_TRUSTED_ORIGINS
+            - name: ALLOWED_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: ALLOWED_HOST
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: SECRET_KEY
+            - name: DJANGO_DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: DJANGO_DATABASE_USER
+            resources:
+              limits:
+                cpu: 1000m
+                memory: 512Mi
+          maxRetries: 0
+          timeoutSeconds: '600'
+          serviceAccountName: 400668159616-compute@developer.gserviceaccount.com
+status:
+  observedGeneration: 7
+  conditions:
+  - type: Ready
+    status: 'True'
+    lastTransitionTime: '2023-04-17T06:03:53.219778Z'
+  executionCount: 27
+  latestCreatedExecution:
+    name: garden-server-mfm8r
+    completionTimestamp: '2023-04-18T06:01:01.535013Z'
+    creationTimestamp: '2023-04-18T06:00:00.769788Z'
