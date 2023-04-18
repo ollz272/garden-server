@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/ollz272/garden-server/compare/1.5.0...1.6.0) (2023-04-18)
+
+
+### Features
+
+* add weather is forecast, update cron job, add logging for weather ([#213](https://github.com/ollz272/garden-server/issues/213)) ([ac1ff9a](https://github.com/ollz272/garden-server/commit/ac1ff9ad15d92aa23471fb888dac009682d47f87))
+
 ## [1.5.0](https://github.com/ollz272/garden-server/compare/1.4.7...1.5.0) (2023-04-18)
 
 
