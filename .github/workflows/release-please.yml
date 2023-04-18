@@ -20,4 +20,5 @@ jobs:
           include-v-in-tag: False
           token: ${{ secrets.GH_TOKEN }}
           extra-files: |
-            service.yaml
+            services/web_service.yaml
+            services/weather_service.yaml
