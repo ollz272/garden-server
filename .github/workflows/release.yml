@@ -72,7 +72,7 @@ jobs:
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
           libgdal26
       - id: auth
-        name: Authenticate to Google Cloud
+f        name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
@@ -101,9 +101,11 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
 
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          version: '>= 363.0.0'
+
       - id: deploy
         name: Deploy to GCR
-        uses: google-github-actions/deploy-cloudrun@v1
-        with:
-          region: europe-west1
-          metadata: ./services/weather_service.yaml
+        run: gcloud run jobs replace ./services/weather_service.yaml
