@@ -22,6 +22,11 @@ class Weather(models.Model):
     cloud_cover = models.FloatField()
     weather_code = models.FloatField()  # TODO there are choices.
 
+    is_forecast = models.BooleanField()
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
     class Meta:
         constraints = [
             models.UniqueConstraint(name="unique_weather_for_location_time", fields=["date_time", "location"])

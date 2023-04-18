@@ -1,7 +1,14 @@
+import logging
+
 import requests
 from django.contrib.gis.geos import Point
 from django.core.management.base import BaseCommand
+from django.utils.timezone import datetime, now
+from pytz import utc
 from weather.models import Weather
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -18,7 +25,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # TODO get lat/lon from database.
         for lat, lon in [(52.52, 13.41), (52.40, -2.01)]:
+            logger.debug(f"Fetching data for {lat}, {lon}")
             resp = requests.get(self.url.format(lat, lon)).json()
+            time_now = now()
 
             for time, temp, apparent_temp, rain, weather_code, cloud_cover in zip(
                 resp["hourly"]["time"],
@@ -28,9 +37,11 @@ class Command(BaseCommand):
                 resp["hourly"]["weathercode"],
                 resp["hourly"]["cloudcover"],
             ):
+                tz_aware_time = datetime.fromisoformat(time)
+                tz_aware_time = utc.localize(tz_aware_time)
                 # this is bad! optimise later!
                 Weather.objects.update_or_create(
-                    date_time=time,
+                    date_time=tz_aware_time,
                     location=Point(lat, lon),
                     defaults={
                         "temperature": temp,
@@ -38,5 +49,6 @@ class Command(BaseCommand):
                         "rain": rain,
                         "cloud_cover": cloud_cover,
                         "weather_code": weather_code,
+                        "is_forecast": tz_aware_time > time_now,
                     },
                 )

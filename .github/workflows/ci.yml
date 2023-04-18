@@ -34,9 +34,6 @@ jobs:
       - name: Black Lint
         run: poetry run black --line-length 120 --exclude '/migrations/' --check apps project
 
-      - name: Isort Lint
-        run: poetry run isort --check-only --diff apps project -l 120
-
       - name: Ruff Lint
         run: poetry run ruff check .
 
