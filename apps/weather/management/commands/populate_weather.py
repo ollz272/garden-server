@@ -2,6 +2,7 @@ import requests
 from django.contrib.gis.geos import Point
 from django.core.management.base import BaseCommand
 from weather.models import Weather
+import datetime as dt
 
 
 class Command(BaseCommand):
@@ -19,6 +20,7 @@ class Command(BaseCommand):
         # TODO get lat/lon from database.
         for lat, lon in [(52.52, 13.41), (52.40, -2.01)]:
             resp = requests.get(self.url.format(lat, lon)).json()
+            now = dt.datetime.now()
 
             for time, temp, apparent_temp, rain, weather_code, cloud_cover in zip(
                 resp["hourly"]["time"],
@@ -38,5 +40,6 @@ class Command(BaseCommand):
                         "rain": rain,
                         "cloud_cover": cloud_cover,
                         "weather_code": weather_code,
+                        "is_forecast": time > now
                     },
                 )
