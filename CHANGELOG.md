@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/ollz272/garden-server/compare/1.4.7...1.5.0) (2023-04-18)
+
+
+### Features
+
+* add weather admin, add weather str ([#211](https://github.com/ollz272/garden-server/issues/211)) ([eab76c4](https://github.com/ollz272/garden-server/commit/eab76c4a95bce4e8db760eeef46a259821431c4a))
+
 ## [1.4.7](https://github.com/ollz272/garden-server/compare/1.4.6...1.4.7) (2023-04-18)
 
 
