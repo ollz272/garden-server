@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('weather', '0002_rename_apparent_temperate_weather_apparent_temperature'),
+        ("weather", "0002_rename_apparent_temperate_weather_apparent_temperature"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='weather',
-            name='is_forecast',
+            model_name="weather",
+            name="is_forecast",
             field=models.BooleanField(default=False),
         ),
     ]
