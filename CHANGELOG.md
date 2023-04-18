@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.7](https://github.com/ollz272/garden-server/compare/1.4.6...1.4.7) (2023-04-18)
+
+
+### Bug Fixes
+
+* use gcloud to deploy job ([#209](https://github.com/ollz272/garden-server/issues/209)) ([c833830](https://github.com/ollz272/garden-server/commit/c8338308893855afe9341b7cd3da6c099964c1e6))
+
 ## [1.4.6](https://github.com/ollz272/garden-server/compare/1.4.5...1.4.6) (2023-04-18)
 
 
