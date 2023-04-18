@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.6](https://github.com/ollz272/garden-server/compare/1.4.5...1.4.6) (2023-04-18)
+
+
+### Bug Fixes
+
+* deploy weather service on update ([#206](https://github.com/ollz272/garden-server/issues/206)) ([05f3f48](https://github.com/ollz272/garden-server/commit/05f3f48d6aa5895c57fceb4dca67804ec0a9dfdd))
+* update release please confid ([#208](https://github.com/ollz272/garden-server/issues/208)) ([bedb8eb](https://github.com/ollz272/garden-server/commit/bedb8eb2f6a4996b3e8f28d93fc753f843b5b4ed))
+
 ## [1.4.5](https://github.com/ollz272/garden-server/compare/1.4.4...1.4.5) (2023-04-17)
 
 
