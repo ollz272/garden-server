@@ -14,7 +14,7 @@ metadata:
   annotations:
     run.googleapis.com/client-name: cloud-console
     run.googleapis.com/lastModifier: oli.edmund.parker@gmail.com
-    client.knative.dev/user-image: gcr.io/garden-server-381815/garden-server:1.4.5  # x-release-please-version
+    client.knative.dev/user-image: gcr.io/garden-server-381815/garden-server:1.4.6  # x-release-please-version
     run.googleapis.com/creator: oli.edmund.parker@gmail.com
     run.googleapis.com/operation-id: f9c1acaa-196a-4913-9488-2a633a6ddebc
 spec:
@@ -22,7 +22,7 @@ spec:
     metadata:
       annotations:
         run.googleapis.com/client-name: cloud-console
-        client.knative.dev/user-image: gcr.io/garden-server-381815/garden-server:1.4.5  # x-release-please-version
+        client.knative.dev/user-image: gcr.io/garden-server-381815/garden-server:1.4.6  # x-release-please-version
         run.googleapis.com/execution-environment: gen2
     spec:
       parallelism: 1
@@ -30,7 +30,7 @@ spec:
       template:
         spec:
           containers:
-          - image: gcr.io/garden-server-381815/garden-server:1.4.5  # x-release-please-version
+          - image: gcr.io/garden-server-381815/garden-server:1.4.6  # x-release-please-version
             command:
             - ./manage.py
             - populate_weather
