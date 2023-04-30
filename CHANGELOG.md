@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/ollz272/garden-server/compare/1.7.1...1.7.2) (2023-04-30)
+
+
+### Bug Fixes
+
+* **ci:** alert services change ([#241](https://github.com/ollz272/garden-server/issues/241)) ([39ad892](https://github.com/ollz272/garden-server/commit/39ad89202e22dadf86657cd4125efe6d3d3a1bf4))
+
 ## [1.7.1](https://github.com/ollz272/garden-server/compare/1.7.0...1.7.1) (2023-04-30)
 
 
