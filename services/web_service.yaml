@@ -14,9 +14,11 @@ metadata:
     run.googleapis.com/client-name: cloud-console
     serving.knative.dev/creator: oli.edmund.parker@gmail.com
     serving.knative.dev/lastModifier: oli.edmund.parker@gmail.com
-    run.googleapis.com/operation-id: 0f14d534-9526-4cd8-9373-152369832368
-    run.googleapis.com/ingress: all
-    run.googleapis.com/ingress-status: all
+    autoscaling.knative.dev/minScale: '1'
+    autoscaling.knative.dev/maxScale: '100'
+    run.googleapis.com/operation-id: c93ff518-487c-4e3b-bfac-20260ba2aae9
+    run.googleapis.com/cpu-throttling: 'true'
+    run.googleapis.com/startup-cpu-boost: 'true'
 spec:
   template:
     metadata:
