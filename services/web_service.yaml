@@ -48,11 +48,6 @@ spec:
             secretKeyRef:
               key: latest
               name: DJANGO_SUPERUSER_EMAIL
-        - name: DJANGO_DATABASE_NAME
-          valueFrom:
-            secretKeyRef:
-              key: latest
-              name: DJANGO_DATABASE_NAME
         - name: DJANGO_SUPERUSER_USERNAME
           valueFrom:
             secretKeyRef:

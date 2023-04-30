@@ -1,3 +1,5 @@
+import dj_database_url
+
 from .base import *
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
@@ -8,16 +10,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 if os.environ.get("DEBUG"):
     DEBUG = True
 
-DATABASES = {
-    "default": {
-        "ENGINE": "timescale.db.backends.postgis",
-        "NAME": os.environ.get("DJANGO_DATABASE_NAME", "gardenserver_django"),
-        "USER": os.environ.get("DJANGO_DATABASE_USER"),
-        "PASSWORD": os.environ.get("DJANGO_DATABASE_PASSWORD"),
-        "PORT": "5432",
-        "HOST": os.environ.get("DJANGO_DATABASE_HOST"),
-    },
-}
+DATABASES = {"default": dj_database_url.config()}
 
 
 # Cache sessions for optimum performance
