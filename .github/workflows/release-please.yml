@@ -22,3 +22,4 @@ jobs:
           extra-files: |
             services/web_service.yaml
             services/weather_service.yaml
+            services/alert_service.yaml
