@@ -1,8 +1,7 @@
 import logging
 
-from django.core.management.base import BaseCommand
-
 from alerts.models import Alert, AlertLog
+from django.core.management.base import BaseCommand
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
