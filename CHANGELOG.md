@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.4](https://github.com/ollz272/garden-server/compare/1.7.3...1.7.4) (2023-04-30)
+
+
+### Performance Improvements
+
+* **weather:** bulk upsert weather for quicker query ([#245](https://github.com/ollz272/garden-server/issues/245)) ([7c920ab](https://github.com/ollz272/garden-server/commit/7c920ab11f7749d01d68048eec0c830d03774530))
+
 ## [1.7.3](https://github.com/ollz272/garden-server/compare/1.7.2...1.7.3) (2023-04-30)
 
 
