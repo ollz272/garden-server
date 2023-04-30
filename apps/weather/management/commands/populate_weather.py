@@ -25,7 +25,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # TODO get lat/lon from database.
         for lat, lon in [(52.52, 13.41), (52.40, -2.01)]:
-            logger.debug(f"Fetching data for {lat}, {lon}")
+            self.stdout.write(f"Fetching data for {lat}, {lon}")
             resp = requests.get(self.url.format(lat, lon)).json()
             time_now = now()
 
