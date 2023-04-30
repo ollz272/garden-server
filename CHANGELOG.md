@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.2](https://github.com/ollz272/garden-server/compare/1.6.1...1.6.2) (2023-04-30)
+
+
+### Bug Fixes
+
+* **database:** use dj_database_url for database config ([#234](https://github.com/ollz272/garden-server/issues/234)) ([be133ff](https://github.com/ollz272/garden-server/commit/be133ffd63a75ca7bd67615e3e678fff78f41693))
+* fixes weather code descriptions ([#231](https://github.com/ollz272/garden-server/issues/231)) ([6d5f890](https://github.com/ollz272/garden-server/commit/6d5f890ed1c83a134e3d329fd1a948e19270016a))
+* **web_service:** update web service to use cpu boost for quicker start up times ([#235](https://github.com/ollz272/garden-server/issues/235)) ([301737c](https://github.com/ollz272/garden-server/commit/301737cbd5cae7d069721c44d5431c7c7de3383e))
+
 ## [1.6.1](https://github.com/ollz272/garden-server/compare/1.6.0...1.6.1) (2023-04-18)
 
 
