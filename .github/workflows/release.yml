@@ -106,3 +106,29 @@ jobs:
       - id: deploy
         name: Deploy to GCR
         run: gcloud run jobs replace ./services/weather_service.yaml
+
+  deploy-alert-scan-cron:
+    name: Deploy Alert Scanner Cron Job
+    runs-on: ubuntu-20.04
+    needs: [ migrate, gcr-push ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Ubuntu packages
+        run: |
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+          libgdal26
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          version: '>= 363.0.0'
+
+      - id: deploy
+        name: Deploy to GCR
+        run: gcloud run jobs replace ./services/alert_service.yaml
