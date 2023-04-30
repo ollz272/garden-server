@@ -22,11 +22,14 @@ class Command(BaseCommand):
         "rain,weathercode,cloudcover&past_days=7&forecast_days=7"
     )
 
+    def get_weather_data(self, lat, lon):
+        return requests.get(self.url.format(lat, lon)).json()
+
     def handle(self, *args, **options):
         # TODO get lat/lon from database.
         for lat, lon in [(52.52, 13.41), (52.40, -2.01)]:
             self.stdout.write(f"Fetching data for {lat}, {lon}")
-            resp = requests.get(self.url.format(lat, lon)).json()
+            resp = self.get_weather_data(lat, lon)
             time_now = now()
             weather_objs = []
 
