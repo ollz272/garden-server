@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/ollz272/garden-server/compare/1.7.0...1.7.1) (2023-04-30)
+
+
+### Bug Fixes
+
+* **logging:** add logging to server ([#239](https://github.com/ollz272/garden-server/issues/239)) ([b3c26d1](https://github.com/ollz272/garden-server/commit/b3c26d1cc99c5e64bf5e2ce6ac6a27799095f424))
+
 ## [1.7.0](https://github.com/ollz272/garden-server/compare/1.6.2...1.7.0) (2023-04-30)
 
 
