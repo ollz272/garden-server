@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.3](https://github.com/ollz272/garden-server/compare/1.7.2...1.7.3) (2023-04-30)
+
+
+### Bug Fixes
+
+* **alerts:** add alert log admin, fixes some issues with script. ([#243](https://github.com/ollz272/garden-server/issues/243)) ([3e86a80](https://github.com/ollz272/garden-server/commit/3e86a8077d17fa33ddeed33663b48ab4c59491ef))
+
 ## [1.7.2](https://github.com/ollz272/garden-server/compare/1.7.1...1.7.2) (2023-04-30)
 
 
