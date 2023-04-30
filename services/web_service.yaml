@@ -38,16 +38,11 @@ spec:
             secretKeyRef:
               key: latest
               name: DJANGO_SETTINGS_MODULE
-        - name: DJANGO_DATABASE_PASSWORD
+        - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
               key: latest
-              name: DJANGO_DATABASE_PASSWORD
-        - name: DJANGO_DATABASE_HOST
-          valueFrom:
-            secretKeyRef:
-              key: latest
-              name: DJANGO_DATABASE_HOST
+              name: DATABASE_URL
         - name: DJANGO_SUPERUSER_EMAIL
           valueFrom:
             secretKeyRef:
@@ -78,11 +73,6 @@ spec:
             secretKeyRef:
               key: latest
               name: SECRET_KEY
-        - name: DJANGO_DATABASE_USER
-          valueFrom:
-            secretKeyRef:
-              key: latest
-              name: DJANGO_DATABASE_USER
         - name: DJANGO_SUPERUSER_PASSWORD
           valueFrom:
             secretKeyRef:
