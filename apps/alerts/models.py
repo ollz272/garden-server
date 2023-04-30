@@ -26,7 +26,7 @@ class Alert(models.Model):
 
     @cached_property
     def latest_data_point(self):
-        return self.sensor.data_points.order_by("time").first()
+        return self.sensor.plant_data.order_by("time").first()
 
     def __str__(self):
         return self.name

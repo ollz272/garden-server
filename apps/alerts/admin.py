@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from alerts.models import Alert
+from alerts.models import Alert, AlertLog
 
 
 # Register your models here.
@@ -17,6 +17,29 @@ class AlertAdmin(admin.ModelAdmin):
             "Alert Info",
             {
                 "fields": ["user", "plant", "sensor", "name", "upper_threshold", "lower_threshold"],
+            },
+        ),
+        (
+            "Meta Data",
+            {
+                "classes": ["collapse"],
+                "fields": ["created", "updated"],
+            },
+        ),
+    ]
+
+
+@admin.register(AlertLog)
+class AlertLogAdmin(admin.ModelAdmin):
+    list_filter = ["user", "addressed"]
+    readonly_fields = ["created", "updated"]
+    list_display = ["alert", "created", "updated", "addressed"]
+
+    fieldsets = [
+        (
+            "Alert Log Info",
+            {
+                "fields": ["user", "alert", "addressed"],
             },
         ),
         (
