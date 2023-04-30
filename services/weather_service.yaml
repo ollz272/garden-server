@@ -18,46 +18,31 @@ spec:
             - ./manage.py
             - populate_weather
             env:
-            - name: DJANGO_SETTINGS_MODULE
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: DJANGO_SETTINGS_MODULE
-            - name: DJANGO_DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: DJANGO_DATABASE_PASSWORD
-            - name: DJANGO_DATABASE_HOST
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: DJANGO_DATABASE_HOST
-            - name: DJANGO_DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: DJANGO_DATABASE_NAME
-            - name: CSRF_TRUSTED_ORIGINS
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: CSRF_TRUSTED_ORIGINS
-            - name: ALLOWED_HOST
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: ALLOWED_HOST
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: SECRET_KEY
-            - name: DJANGO_DATABASE_USER
-              valueFrom:
-                secretKeyRef:
-                  key: latest
-                  name: DJANGO_DATABASE_USER
+              - name: DJANGO_SETTINGS_MODULE
+                valueFrom:
+                  secretKeyRef:
+                    key: latest
+                    name: DJANGO_SETTINGS_MODULE
+              - name: CSRF_TRUSTED_ORIGINS
+                valueFrom:
+                  secretKeyRef:
+                    key: latest
+                    name: CSRF_TRUSTED_ORIGINS
+              - name: ALLOWED_HOST
+                valueFrom:
+                  secretKeyRef:
+                    key: latest
+                    name: ALLOWED_HOST
+              - name: SECRET_KEY
+                valueFrom:
+                  secretKeyRef:
+                    key: latest
+                    name: SECRET_KEY
+              - name: DATABASE_URL
+                valueFrom:
+                  secretKeyRef:
+                    key: latest
+                    name: DATABASE_URL
             resources:
               limits:
                 cpu: 1000m
