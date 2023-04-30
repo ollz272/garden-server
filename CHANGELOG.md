@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://github.com/ollz272/garden-server/compare/1.6.2...1.7.0) (2023-04-30)
+
+
+### Features
+
+* **alerts:** add alerts models, admin, script and service ([#237](https://github.com/ollz272/garden-server/issues/237)) ([4f50441](https://github.com/ollz272/garden-server/commit/4f5044136c83e1c98d492f5efa4363eab5b4eea3))
+
+
+### Bug Fixes
+
+* **ci:** add alert scanner job to release job ([#238](https://github.com/ollz272/garden-server/issues/238)) ([9e9f507](https://github.com/ollz272/garden-server/commit/9e9f50782d6504fae61672738851b2e810b8bdde))
+
 ## [1.6.2](https://github.com/ollz272/garden-server/compare/1.6.1...1.6.2) (2023-04-30)
 
 
