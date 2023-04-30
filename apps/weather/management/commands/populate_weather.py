@@ -22,12 +22,16 @@ class Command(BaseCommand):
         "rain,weathercode,cloudcover&past_days=7&forecast_days=7"
     )
 
+    def get_weather_data(self, lat, lon):
+        return requests.get(self.url.format(lat, lon)).json()
+
     def handle(self, *args, **options):
         # TODO get lat/lon from database.
         for lat, lon in [(52.52, 13.41), (52.40, -2.01)]:
-            logger.debug(f"Fetching data for {lat}, {lon}")
-            resp = requests.get(self.url.format(lat, lon)).json()
+            self.stdout.write(f"Fetching data for {lat}, {lon}")
+            resp = self.get_weather_data(lat, lon)
             time_now = now()
+            weather_objs = []
 
             for time, temp, apparent_temp, rain, weather_code, cloud_cover in zip(
                 resp["hourly"]["time"],
@@ -39,16 +43,30 @@ class Command(BaseCommand):
             ):
                 tz_aware_time = datetime.fromisoformat(time)
                 tz_aware_time = utc.localize(tz_aware_time)
-                # this is bad! optimise later!
-                Weather.objects.update_or_create(
-                    date_time=tz_aware_time,
-                    location=Point(lat, lon),
-                    defaults={
-                        "temperature": temp,
-                        "apparent_temperature": apparent_temp,
-                        "rain": rain,
-                        "cloud_cover": cloud_cover,
-                        "weather_code": weather_code,
-                        "is_forecast": tz_aware_time > time_now,
-                    },
+                weather_objs.append(
+                    Weather(
+                        date_time=tz_aware_time,
+                        location=Point(lat, lon),
+                        temperature=temp,
+                        apparent_temperature=apparent_temp,
+                        rain=rain,
+                        cloud_cover=cloud_cover,
+                        weather_code=weather_code,
+                        is_forecast=tz_aware_time > time_now,
+                    )
                 )
+
+            # Bulk insert them, updating where needed
+            Weather.objects.bulk_create(
+                weather_objs,
+                update_conflicts=True,
+                update_fields=[
+                    "temperature",
+                    "apparent_temperature",
+                    "rain",
+                    "cloud_cover",
+                    "weather_code",
+                    "is_forecast",
+                ],
+                unique_fields=["date_time", "location"],
+            )

@@ -1,7 +1,5 @@
-from django.contrib import admin
-
 from alerts.models import Alert, AlertLog
-
+from django.contrib import admin
 
 # Register your models here.
 
