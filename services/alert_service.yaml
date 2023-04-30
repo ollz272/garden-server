@@ -1,0 +1,52 @@
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: alert-scanner
+  labels:
+    cloud.googleapis.com/location: europe-west1
+
+spec:
+  template:
+    spec:
+      parallelism: 1
+      taskCount: 1
+      template:
+        spec:
+          containers:
+          - image: gcr.io/garden-server-381815/garden-server:1.6.2  # x-release-please-version
+            command:
+            - ./manage.py
+            - scan_for_alerts
+            env:
+            - name: DJANGO_SETTINGS_MODULE
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: DJANGO_SETTINGS_MODULE
+            - name: CSRF_TRUSTED_ORIGINS
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: CSRF_TRUSTED_ORIGINS
+            - name: ALLOWED_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: ALLOWED_HOST
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: SECRET_KEY
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: DATABASE_URL
+            resources:
+              limits:
+                cpu: 1000m
+                memory: 512Mi
+          maxRetries: 0
+          timeoutSeconds: '600'
+          serviceAccountName: 400668159616-compute@developer.gserviceaccount.com
