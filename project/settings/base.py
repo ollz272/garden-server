@@ -47,7 +47,6 @@ THIRD_PARTY_APPS = [
     "crispy_bootstrap5",
     "django_extensions",
     "colorfield",
-    "maskpostgresdata",
 ]
 
 PROJECT_APPS = ["plants", "api", "accounts", "weather", "alerts", "zones"]

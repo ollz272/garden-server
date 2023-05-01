@@ -528,18 +528,20 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-maskpostgresdata"
-version = "0.1.16"
+version = "0.1.15"
 description = "Creates a pg_dumpish output which masks data without saving changes to the source database."
 category = "main"
 optional = false
 python-versions = "*"
-files = [
-    {file = "django-maskpostgresdata-0.1.16.tar.gz", hash = "sha256:f67ecd6f372ef5d891295bd5f65f18c636f0dc716ac4e897b64e4ba6f63dd50e"},
-    {file = "django_maskpostgresdata-0.1.16-py3-none-any.whl", hash = "sha256:2124d724f452f71b7c729284efbcf2a75ee0b6ec6e8eae563df5242d21b1ff5e"},
-]
+files = []
+develop = false
 
 [package.dependencies]
 django = ">=1.8"
+
+[package.source]
+type = "directory"
+url = "../django-maskpostgresdata"
 
 [[package]]
 name = "django-storages"
@@ -1618,4 +1620,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f727d43bab2f699d1b1d5490efcb575ee1a9c986409563d917c38c9d729143b0"
+content-hash = "f1fa638ff1909a7bb1535b72600aca94961af76a2410289c202e3ceda0a11d84"
