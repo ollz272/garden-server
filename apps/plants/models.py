@@ -14,8 +14,8 @@ class Plant(models.Model):
     """
 
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    zone = models.ForeignKey("zones.Zone", on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
-    indoor = models.BooleanField()
     slug = models.SlugField()
 
     class Meta:

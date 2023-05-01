@@ -52,7 +52,7 @@ class PlantForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             "name",
-            "indoor",
+            "zone",
             ButtonHolder(Submit("save", "Save", css_class="submit")),
         )
 
@@ -60,7 +60,7 @@ class PlantForm(forms.ModelForm):
         model = Plant
         fields = (
             "name",
-            "indoor",
+            "zone",
         )
 
     def save(self, commit=True):

@@ -6,7 +6,6 @@ from .models import DataPoint, Plant, SensorUnit
 @admin.register(Plant)
 class PlantAdmin(admin.ModelAdmin):
     readonly_fields = ("slug",)
-    list_filter = ("indoor",)
 
 
 @admin.register(DataPoint)

@@ -49,13 +49,7 @@ THIRD_PARTY_APPS = [
     "colorfield",
 ]
 
-PROJECT_APPS = [
-    "plants",
-    "api",
-    "accounts",
-    "weather",
-    "alerts",
-]
+PROJECT_APPS = ["plants", "api", "accounts", "weather", "alerts", "zones"]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 

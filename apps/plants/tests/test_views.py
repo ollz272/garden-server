@@ -6,6 +6,7 @@ from django.urls import reverse
 from django_webtest import WebTest
 from plants.models import Plant, Sensor
 from plants.tests.factories import PlantFactory, SensorFactory, SensorUnitFactory
+from zones.tests.factories import ZoneFactory
 
 
 class TestListPlantView(TestCase):
@@ -37,22 +38,21 @@ class TestPlantCreateView(WebTest):
         self.assertEqual(resp.status_code, 200)
 
     def test_create_plant_301_submit_form(self):
+        zone = ZoneFactory()
         resp = self.app.get(reverse(self.url_name))
         form = resp.forms[0]
         form["name"] = "test"
-        form["indoor"] = True
+        form["zone"] = zone.id
         resp = form.submit()
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(Plant.objects.count(), 1)
         plant = Plant.objects.get(name="test")
         self.assertEqual(plant.user, self.user)
-        self.assertEqual(plant.indoor, True)
         self.assertEqual(plant.slug, "test")
 
     def test_create_plant_200_submit_form_error(self):
         resp = self.app.get(reverse(self.url_name))
         form = resp.forms[0]
-        form["indoor"] = True
         resp = form.submit()
         self.assertEqual(resp.status_code, 200)
 
@@ -77,19 +77,16 @@ class TestPlantUpdateView(WebTest):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
         form = resp.forms[0]
         form["name"] = "test"
-        form["indoor"] = True
         resp = form.submit()
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(Plant.objects.count(), 1)
         plant = Plant.objects.get(id=self.plant.id)
         self.assertEqual(plant.user, self.user)
-        self.assertEqual(plant.indoor, True)
         self.assertEqual(plant.slug, "test")
 
     def test_update_plant_200_submit_form_error(self):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
         form = resp.forms[0]
-        form["indoor"] = True
         form["name"] = ""
         resp = form.submit()
         self.assertEqual(resp.status_code, 200)
