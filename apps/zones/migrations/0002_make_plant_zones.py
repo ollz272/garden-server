@@ -7,10 +7,10 @@ def set_plant_zone(apps, schema_editor):
     # Set the partners' region as the needs region as a default.
     for plant in Plant.objects.all():
         if plant.indoor:
-            zone = Zone.objects.get_or_create(user=plant.user, name="indoor")
+            zone, _ = Zone.objects.get_or_create(user=plant.user, name="indoor")
 
         else:
-            zone = Zone.objects.get_or_create(user=plant.user, name="outdoor")
+            zone, _ = Zone.objects.get_or_create(user=plant.user, name="outdoor")
 
         plant.zone = zone
         plant.save()

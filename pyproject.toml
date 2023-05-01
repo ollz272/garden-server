@@ -27,6 +27,7 @@ psycopg = "^3.1.8"
 whitenoise = "^6.4.0"
 crispy-bootstrap5 = "^0.7"
 pytz = "^2023.3"
+django-maskpostgresdata = "^0.1.16"
 
 
 [tool.poetry.group.local.dependencies]
