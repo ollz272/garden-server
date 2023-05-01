@@ -14,7 +14,7 @@ class TestPlantForm(TestCase):
     def test_create_plant(self):
         user = UserFactory()
         zone = ZoneFactory()
-        plant_form = PlantForm(user=user, data={"name": "test", "indoor": True, "zone": zone.id})
+        plant_form = PlantForm(user=user, data={"name": "test", "zone": zone.id})
         plant_form.save()
 
         self.assertTrue(Plant.objects.filter(name="test").exists())
@@ -22,7 +22,7 @@ class TestPlantForm(TestCase):
     def test_create_plant_no_user(self):
         UserFactory()
         zone = ZoneFactory()
-        plant_form = PlantForm(data={"name": "test", "indoor": True, "zone": zone.id})
+        plant_form = PlantForm(data={"name": "test", "zone": zone.id})
 
         with self.assertRaises(IntegrityError):
             plant_form.save()

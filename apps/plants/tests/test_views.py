@@ -43,19 +43,16 @@ class TestPlantCreateView(WebTest):
         form = resp.forms[0]
         form["name"] = "test"
         form["zone"] = zone.id
-        form["indoor"] = True
         resp = form.submit()
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(Plant.objects.count(), 1)
         plant = Plant.objects.get(name="test")
         self.assertEqual(plant.user, self.user)
-        self.assertEqual(plant.indoor, True)
         self.assertEqual(plant.slug, "test")
 
     def test_create_plant_200_submit_form_error(self):
         resp = self.app.get(reverse(self.url_name))
         form = resp.forms[0]
-        form["indoor"] = True
         resp = form.submit()
         self.assertEqual(resp.status_code, 200)
 
@@ -80,19 +77,16 @@ class TestPlantUpdateView(WebTest):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
         form = resp.forms[0]
         form["name"] = "test"
-        form["indoor"] = True
         resp = form.submit()
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(Plant.objects.count(), 1)
         plant = Plant.objects.get(id=self.plant.id)
         self.assertEqual(plant.user, self.user)
-        self.assertEqual(plant.indoor, True)
         self.assertEqual(plant.slug, "test")
 
     def test_update_plant_200_submit_form_error(self):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))
         form = resp.forms[0]
-        form["indoor"] = True
         form["name"] = ""
         resp = form.submit()
         self.assertEqual(resp.status_code, 200)

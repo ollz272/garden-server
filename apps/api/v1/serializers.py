@@ -40,6 +40,6 @@ class PlantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Plant
-        fields = ["id", "user", "name", "indoor", "sensors"]
+        fields = ["id", "user", "name", "sensors"]
         read_only_fields = ("user",)
         depth = 1

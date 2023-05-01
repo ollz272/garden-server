@@ -11,7 +11,6 @@ class PlantFactory(DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     name = factory.Sequence(lambda n: f"plant {n}")
     zone = factory.SubFactory(ZoneFactory)
-    indoor = True
 
     class Meta:
         model = models.Plant
