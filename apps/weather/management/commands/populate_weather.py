@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # TODO get lat/lon from database.
-        for lat, lon in Zone.objects.order_by("location").distinct("location"):
+        for lat, lon in Zone.objects.order_by("location").distinct("location").values_list("location", flat=True):
             self.stdout.write(f"Fetching data for {lat}, {lon}")
             resp = self.get_weather_data(lat, lon)
             time_now = now()
