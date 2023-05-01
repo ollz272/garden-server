@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/ollz272/garden-server/compare/1.8.0...1.8.1) (2023-05-01)
+
+
+### Bug Fixes
+
+* **zone:** add way to get data from db, fix migration ([3df9dcb](https://github.com/ollz272/garden-server/commit/3df9dcb1ca47bfd0ebcd7dc8b7dd77edb3578c9d))
+
 ## [1.8.0](https://github.com/ollz272/garden-server/compare/1.7.4...1.8.0) (2023-05-01)
 
 
