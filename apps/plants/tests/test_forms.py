@@ -7,19 +7,22 @@ from parameterized import parameterized
 from plants.forms import PlantDataFilterForm, PlantForm, SensorForm
 from plants.models import Plant, Sensor
 from plants.tests.factories import DataPointFactory, PlantFactory, SensorFactory, SensorUnitFactory
+from zones.tests.factories import ZoneFactory
 
 
 class TestPlantForm(TestCase):
     def test_create_plant(self):
         user = UserFactory()
-        plant_form = PlantForm(user=user, data={"name": "test", "indoor": True})
+        zone = ZoneFactory()
+        plant_form = PlantForm(user=user, data={"name": "test", "indoor": True, "zone": zone.id})
         plant_form.save()
 
         self.assertTrue(Plant.objects.filter(name="test").exists())
 
     def test_create_plant_no_user(self):
         UserFactory()
-        plant_form = PlantForm(data={"name": "test", "indoor": True})
+        zone = ZoneFactory()
+        plant_form = PlantForm(data={"name": "test", "indoor": True, "zone": zone.id})
 
         with self.assertRaises(IntegrityError):
             plant_form.save()

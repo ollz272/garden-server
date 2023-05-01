@@ -4,11 +4,13 @@ import factory
 from accounts.tests.factories import UserFactory
 from factory.django import DjangoModelFactory
 from plants import models
+from zones.tests.factories import ZoneFactory
 
 
 class PlantFactory(DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     name = factory.Sequence(lambda n: f"plant {n}")
+    zone = factory.SubFactory(ZoneFactory)
     indoor = True
 
     class Meta:

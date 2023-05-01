@@ -6,6 +6,7 @@ from django.urls import reverse
 from django_webtest import WebTest
 from plants.models import Plant, Sensor
 from plants.tests.factories import PlantFactory, SensorFactory, SensorUnitFactory
+from zones.tests.factories import ZoneFactory
 
 
 class TestListPlantView(TestCase):
@@ -37,9 +38,11 @@ class TestPlantCreateView(WebTest):
         self.assertEqual(resp.status_code, 200)
 
     def test_create_plant_301_submit_form(self):
+        zone = ZoneFactory()
         resp = self.app.get(reverse(self.url_name))
         form = resp.forms[0]
         form["name"] = "test"
+        form["zone"] = zone.id
         form["indoor"] = True
         resp = form.submit()
         self.assertEqual(resp.status_code, 302)

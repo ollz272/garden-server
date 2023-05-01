@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand
 from django.utils.timezone import datetime, now
 from pytz import utc
 from weather.models import Weather
+from zones.models import Zone
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -27,7 +28,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # TODO get lat/lon from database.
-        for lat, lon in [(52.52, 13.41), (52.40, -2.01)]:
+        for lat, lon in Zone.objects.order_by("location").distinct("location"):
             self.stdout.write(f"Fetching data for {lat}, {lon}")
             resp = self.get_weather_data(lat, lon)
             time_now = now()
