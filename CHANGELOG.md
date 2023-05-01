@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/ollz272/garden-server/compare/1.7.4...1.8.0) (2023-05-01)
+
+
+### Features
+
+* **zone:** add zone models, admin, and some changes to other models ([#247](https://github.com/ollz272/garden-server/issues/247)) ([451a69d](https://github.com/ollz272/garden-server/commit/451a69d487def9e9e4fd6e6e709a3708c44630b7))
+
 ## [1.7.4](https://github.com/ollz272/garden-server/compare/1.7.3...1.7.4) (2023-04-30)
 
 
