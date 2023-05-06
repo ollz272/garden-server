@@ -10,7 +10,7 @@ from zones.tests.factories import ZoneFactory
 class PlantFactory(DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     name = factory.Sequence(lambda n: f"plant {n}")
-    zone = factory.SubFactory(ZoneFactory)
+    zone = factory.SubFactory(ZoneFactory, user=factory.SelfAttribute("..user"))
 
     class Meta:
         model = models.Plant
