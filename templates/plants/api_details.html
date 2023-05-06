@@ -1,21 +1,21 @@
 {% extends "base.html" %}
-
-{% block extratitle %} - API details{% endblock %}
-
+{% block extratitle %}- API details{% endblock %}
 {% block main %}
-<h2>How to add data to your plant.</h2>
-<h3>Your API token: {{ user.auth_token }}</h3>
-<p>To add data to your plant, you should use our API to post the right data types. We recommend using a product like a
-raspberry pi or an aurdino to record the data and make requests to our server. For your plant, {{ plant.name }}, you
-can post in the following ways:</p>
-<div class="row">
-    <div class="col-md-4">Data Type</div>
-    <div class="col-md-4">URL</div>
-    <div class="col-md-4">Example data</div>
-    {% for sensor in sensors %}
-        <div class="col-md-4">{{ sensor }}</div>
-        <div class="col-md-4">{{ sensor.api_url }}</div>
-        <div class="col-md-4">{{ sensor.api_example_data }}</div>
-    {% endfor %}
-</div>
+    <h2>How to add data to your plant.</h2>
+    <h3>Your API token: {{ user.auth_token }}</h3>
+    <p>
+        To add data to your plant, you should use our API to post the right data types. We recommend using a product like a
+        raspberry pi or an aurdino to record the data and make requests to our server. For your plant, {{ plant.name }}, you
+        can post in the following ways:
+    </p>
+    <div class="row">
+        <div class="col-md-4">Data Type</div>
+        <div class="col-md-4">URL</div>
+        <div class="col-md-4">Example data</div>
+        {% for sensor in sensors %}
+            <div class="col-md-4">{{ sensor }}</div>
+            <div class="col-md-4">{{ sensor.api_url }}</div>
+            <div class="col-md-4">{{ sensor.api_example_data }}</div>
+        {% endfor %}
+    </div>
 {% endblock %}

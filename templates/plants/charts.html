@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 {% load i18n crispy_forms_tags %}
 {% load static %}
-
 {% block extra_header_js %}
     <!-- chartjs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
 {% endblock %}
-
 {% block main %}
     <h2>Charts for {{ request.user }}'s {{ plant }}</h2>
     <a href="{% url 'plant-list' %}">Back to all plants.</a>
@@ -22,18 +20,15 @@
             <button aria-label="Filter data" type="submit" class="button-primary">Filter data</button>
         </form>
     </div>
-
     <div class="row">
         {% for chart in chart_data.values %}
             {% include "plants/includes/individual_chart.html" %}
         {% endfor %}
     </div>
-
 {% endblock %}
-
 {% block extra_footer_js %}
     {{ chart_data|json_script:"chartData" }}
     <script src="{% static 'js/plant_chart.js' %}"></script>
-
-    <script src="{% static 'js/get_plant_csv.js' %}" url="{% url 'v1-plants-individual-plant-csv-data' pk=plant.pk %}"></script>
+    <script src="{% static 'js/get_plant_csv.js' %}"
+            url="{% url 'v1-plants-individual-plant-csv-data' pk=plant.pk %}"></script>
 {% endblock %}
