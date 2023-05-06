@@ -1,41 +1,38 @@
 {% load static %}
-
 <head>
-
     {{ settings.site_settings.PageHTML.header_html|safe }}
     <!-- boostrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
     <link rel=”stylesheet” type='text/css' href="{% static 'css/base.css' %}">
-    {% block extra_header_js %}
-
-    {% endblock %}
+    {% block extra_header_js %}{% endblock %}
     <title>
-    Plants.io {% block extratitle %} {% endblock %}
+        Plants.io
+        {% block extratitle %}{% endblock %}
     </title>
 </head>
-
 {# todo add messages #}
 <body class="d-flex flex-column sticky-footer-wrapper min-vh-100">
     {% block header %}
         {% include "includes/header.html" %}
     {% endblock %}
-
-    <div class="container flex-fill" >
-        <h1>{% block title %}Garden Server{% endblock %}</h1>
-        {% block main %}
-
-        {% endblock %}
+    <div class="container flex-fill">
+        <h1>
+            {% block title %}Garden Server{% endblock %}
+        </h1>
+        {% block main %}{% endblock %}
     </div>
-
-
-
 </body>
-
 {% include 'includes/footer.html' %}
 {{ settings.site_settings.PageHTML.footer_html|safe }}
-
-{% block extra_footer_js %}
-
-{% endblock %}
+{% block extra_footer_js %}{% endblock %}

@@ -1,15 +1,9 @@
 {% extends "plants/base_update_or_create.html" %}
 {% load i18n crispy_forms_tags %}
 {% load static %}
-
-{% block extratitle %} - Update {{ plant.name }} {% endblock %}
-
-{% block header_text %}
-<h2>Create a Sensor</h2>
+{% block extratitle %}- Update {{ plant.name }}{% endblock %}
+{% block header_text %}<h2>Create a Sensor</h2>{% endblock %}
+{% block action_url %}
+    {% url 'sensor-create' plant_pk=plant.pk %}
 {% endblock %}
-
-
-{% block action_url %}{% url 'sensor-create' plant_pk=plant.pk %}{% endblock %}
-
 {% block form_submit_text %}Create{% endblock %}
-
