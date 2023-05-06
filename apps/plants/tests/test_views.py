@@ -38,7 +38,7 @@ class TestPlantCreateView(WebTest):
         self.assertEqual(resp.status_code, 200)
 
     def test_create_plant_301_submit_form(self):
-        zone = ZoneFactory()
+        zone = ZoneFactory(user=self.user)
         resp = self.app.get(reverse(self.url_name))
         form = resp.forms[0]
         form["name"] = "test"
@@ -63,6 +63,7 @@ class TestPlantUpdateView(WebTest):
         self.app.set_user(self.user)
         self.url_name = "plant-update"
         self.plant = PlantFactory(user=self.user)
+        self.zone = ZoneFactory(user=self.user)
 
     def test_update_plant_200(self):
         resp = self.app.get(reverse(self.url_name, kwargs={"plant_pk": self.plant.id}))

@@ -13,7 +13,7 @@ from zones.tests.factories import ZoneFactory
 class TestPlantForm(TestCase):
     def test_create_plant(self):
         user = UserFactory()
-        zone = ZoneFactory()
+        zone = ZoneFactory(user=user)
         plant_form = PlantForm(user=user, data={"name": "test", "zone": zone.id})
         plant_form.save()
 
