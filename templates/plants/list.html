@@ -1,13 +1,18 @@
 {% extends "base.html" %}
-
-{% block extratitle %} - Plants {% endblock %}
-
+{% block extratitle %}- Plants{% endblock %}
 {% block main %}
     <h2>{{ request.user }}'s Plants</h2>
     <ul class="list-group">
-        {% for plant in plants %}
-            <li class="list-group-item"><a href="{% url 'plant-chart' plant_pk=plant.pk %}">{{ plant.name }}</a></li>
+        {% regroup plants by zones as zone_list %}
+        {% for zone in zone_list %}
+            <h2>{{ zone.grouper }}</h2>
+            {% for plant in zone.list %}
+                <li class="list-group-item">
+                    <a href="{% url 'plant-chart' plant_pk=plant.pk %}">{{ plant.name }}</a>
+                </li>
+            {% endfor %}
         {% endfor %}
     </ul>
     <a href="{% url 'plant-create' %}">Create a new plant</a>
-{% endblock %}}
+{% endblock %}
+}

@@ -1,16 +1,12 @@
 {% extends "base.html" %}
 {% load i18n crispy_forms_tags %}
-
-{% block extratitle %} - Login {% endblock %}
-
+{% block extratitle %}- Login{% endblock %}
 {% block main %}
     <h2>Login</h2>
-
-        <form method="post" action="{% url 'signup' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="signup" class="btn btn__secondary center-align">
-            <input type="hidden" name="next" value="{{ next }}">
-        </form>
-
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="signup" class="btn btn__secondary center-align">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
 {% endblock %}

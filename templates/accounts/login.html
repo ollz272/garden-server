@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 {% load i18n crispy_forms_tags %}
-
-{% block extratitle %} - Login {% endblock %}
-
+{% block extratitle %}- Login{% endblock %}
 {% block main %}
     <h2>Login</h2>
-
     {% if form.errors %}
         <div class="errorlist">
             <p>Your email and password didn't match. Please try again.</p>
@@ -27,7 +24,6 @@
             <input type="submit" value="login" class="btn btn__secondary center-align">
             <input type="hidden" name="next" value="{{ next }}">
         </form>
-
         {# Assumes you setup the password_reset view in your URLconf #}
     </div>
 {% endblock %}
