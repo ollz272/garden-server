@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.2](https://github.com/ollz272/garden-server/compare/1.8.1...1.8.2) (2023-05-06)
+
+
+### Bug Fixes
+
+* deps ([#254](https://github.com/ollz272/garden-server/issues/254)) ([fd8e47b](https://github.com/ollz272/garden-server/commit/fd8e47baec327e95a530d7bf00953550d9171f08))
+* remove dep ([999ee0d](https://github.com/ollz272/garden-server/commit/999ee0db3894596f2e4156f0d72cb031c063133c))
+
 ## [1.8.1](https://github.com/ollz272/garden-server/compare/1.8.0...1.8.1) (2023-05-01)
 
 
