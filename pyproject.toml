@@ -16,7 +16,7 @@ django-extensions = "^3.2.1"
 martor = "1.6.26"
 django-colorfield = "^0.8.0"
 redis = "4.5.4"
-hiredis = "2.2.2"
+hiredis = "2.2.3"
 django-cookiefilter = "0.1"
 django-timescaledb = { git="https://github.com/ollz272/django-timescaledb.git", rev="7d5fa2b" }
 dj-database-url = "2.0.0"
