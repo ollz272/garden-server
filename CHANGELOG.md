@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.3](https://github.com/ollz272/garden-server/compare/1.8.2...1.8.3) (2023-05-06)
+
+
+### Bug Fixes
+
+* **frontend:** adds frontend grouping by zone ([#259](https://github.com/ollz272/garden-server/issues/259)) ([55dfa6d](https://github.com/ollz272/garden-server/commit/55dfa6df427ee37d63e5081289a75c869220ba5c))
+* **plant:** fixes form to only include zone objects the user has. ([#258](https://github.com/ollz272/garden-server/issues/258)) ([fb00c4b](https://github.com/ollz272/garden-server/commit/fb00c4b08dbca551f0f9b27f1620c265314cde5c))
+
 ## [1.8.2](https://github.com/ollz272/garden-server/compare/1.8.1...1.8.2) (2023-05-06)
 
 
