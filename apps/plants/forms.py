@@ -5,6 +5,8 @@ from plants.choices import PeriodResolutionChoices
 from plants.models import Plant, Sensor
 from rest_framework.exceptions import ValidationError
 
+from zones.models import Zone
+
 
 class PlantDataFilterForm(forms.Form):
     """
@@ -47,6 +49,9 @@ class PlantDataFilterForm(forms.Form):
 class PlantForm(forms.ModelForm):
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        if user is not None:
+            self.fields["zone"].queryset = Zone.objects.filter(user=user)
 
         self.user = user
         self.helper = FormHelper()
