@@ -614,14 +614,14 @@ pytz = "*"
 
 [[package]]
 name = "djlint"
-version = "1.27.0"
+version = "1.27.2"
 description = "HTML Template Linter and Formatter"
 category = "main"
 optional = false
 python-versions = ">=3.8.0,<4.0.0"
 files = [
-    {file = "djlint-1.27.0-py3-none-any.whl", hash = "sha256:14ac969c93e894dc541713fbcf02a72e70067d5e25b6ea4d1c3e6b24e99f4ba5"},
-    {file = "djlint-1.27.0.tar.gz", hash = "sha256:b3a698ac548dc75a46f60bf77b33d50ed9f3c0dc7b302d9222e7b1a6e87aa27d"},
+    {file = "djlint-1.27.2-py3-none-any.whl", hash = "sha256:ff221e6ff7b31ab20d38342a46915a4a5051c906a338b61e592f1b06528d367b"},
+    {file = "djlint-1.27.2.tar.gz", hash = "sha256:e84239bf7c4f722b80cf3b623a47a1bf00de8c1c55674d583f61aa71b26ada42"},
 ]
 
 [package.dependencies]
@@ -1829,4 +1829,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "898de16df1e342d4d6d7ef5a194a83336323ec904f88fbac5ef1ac97a7fe781d"
+content-hash = "d484c64488fd396f905a465fc690c4fc437eda540e4c07c374a1e715d220a00a"
