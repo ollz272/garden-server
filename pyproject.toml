@@ -37,7 +37,7 @@ django-debug-toolbar = "^4.1.0"
 [tool.poetry.group.prod.dependencies]
 gunicorn = "^20.1.0"
 django-storages = "^1.13.2"
-boto3 = "^1.26.142"
+boto3 = "^1.26.145"
 
 
 [tool.poetry.group.test.dependencies]
