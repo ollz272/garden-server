@@ -1177,18 +1177,18 @@ tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "pa
 
 [[package]]
 name = "pipdeptree"
-version = "2.7.1"
+version = "2.9.2"
 description = "Command line utility to show dependency tree of packages."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pipdeptree-2.7.1-py3-none-any.whl", hash = "sha256:bb0ffa98a49b0b4076364b367d1df37fcf6628ec3b5cbb61cf4bbaedc7502db0"},
-    {file = "pipdeptree-2.7.1.tar.gz", hash = "sha256:550bd7679379e7290739384f3e9518835620e814cc29ba709513952b627da506"},
+    {file = "pipdeptree-2.9.2-py3-none-any.whl", hash = "sha256:824bac9cb4a825d8b4adfab47492932e217e12021f04e428d2349344913e087e"},
+    {file = "pipdeptree-2.9.2.tar.gz", hash = "sha256:60ff48585f6fc6e283c41893a618faf4deb77b84781c45a3da29bf0c8e0ce4a7"},
 ]
 
 [package.extras]
 graphviz = ["graphviz (>=0.20.1)"]
-test = ["covdefaults (>=2.3)", "diff-cover (>=7.5)", "pip (>=23.1)", "pytest (>=7.3.1)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "virtualenv (>=20.21,<21)"]
+test = ["covdefaults (>=2.3)", "diff-cover (>=7.5)", "pip (>=23.1.2)", "pytest (>=7.3.1)", "pytest-cov (>=4.1)", "pytest-mock (>=3.10)", "virtualenv (>=20.23,<21)"]
 
 [[package]]
 name = "platformdirs"
@@ -1745,4 +1745,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d35f782e19cd27602f598baa702ebf68374bce39df023e13b57b716b63e72062"
+content-hash = "07d8e76d9aa8e9542390a03af3bfead122a211bb15df278a4956039b774908ce"
