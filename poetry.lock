@@ -430,13 +430,13 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-colorfield"
-version = "0.8.0"
-description = "simple color field for your models with a nice color-picker in the admin-interface."
+version = "0.9.0"
+description = "color field for django models with a nice color-picker in the admin."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-colorfield-0.8.0.tar.gz", hash = "sha256:e50423af639858d01c39980eed9970f7ae475610bf0709b81f6b21a3dc9c3f92"},
-    {file = "django_colorfield-0.8.0-py3-none-any.whl", hash = "sha256:b7a25e2c430f4e80726ab171805d0d76d1f82cc7ff3799d60c2682f50d2ca03c"},
+    {file = "django-colorfield-0.9.0.tar.gz", hash = "sha256:208e04dae669ed95f18c4aef02865e9c785873521ffbe5b46fb6ea7a1500c979"},
+    {file = "django_colorfield-0.9.0-py3-none-any.whl", hash = "sha256:7df5486de759dce70e54a1854f69bafd0a1e1bf98b66b09661d4d84342f447fc"},
 ]
 
 [package.dependencies]
@@ -1754,4 +1754,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d670b6dd5bc87c8cba465930284bc6ef22919a7a8fe3d301c0e8e569365ec4f0"
+content-hash = "7f3e3f02928be8c99ccb11f17fa81dcf1631da979c176c30a4eb43f5a7f43c73"
