@@ -444,17 +444,17 @@ Pillow = ">=9.0.0"
 
 [[package]]
 name = "django-cookiefilter"
-version = "0.1"
+version = "1.0"
 description = "Django Cookie Filter"
 optional = false
-python-versions = ">=3.4"
+python-versions = ">=3.7"
 files = [
-    {file = "django-cookiefilter-0.1.tar.gz", hash = "sha256:d40196fac8b64a691b9b657a82edda35071f0c31684ff167ace5ee65cae7a192"},
-    {file = "django_cookiefilter-0.1-py2.py3-none-any.whl", hash = "sha256:ee7594493ba5c01d0f2e21c83b288cd8fc774b31637111536e7d00126fcbc8d2"},
+    {file = "django-cookiefilter-1.0.tar.gz", hash = "sha256:ebdf26e698270eaa6f32e400a002a5ed412bd178557e479132c62a8d19f196a3"},
+    {file = "django_cookiefilter-1.0-py3-none-any.whl", hash = "sha256:66a328b009c3037b29f44c0f9f624284d4d5581fccb55e1e8351ca34b75776f1"},
 ]
 
 [package.dependencies]
-Django = ">=1.8"
+Django = ">=2.2"
 
 [[package]]
 name = "django-crispy-forms"
@@ -1754,4 +1754,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "bc66f472c3572c3d3ce49f030719fd2a07df9dd326f1f9f60b187ab302dc6a7d"
+content-hash = "960ecaa2f37dca317950332a9ab7f91d2671f07d8a506a53537dd2e158668f96"
