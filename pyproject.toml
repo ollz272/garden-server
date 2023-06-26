@@ -27,7 +27,7 @@ psycopg = "^3.1.8"
 whitenoise = "^6.5.0"
 crispy-bootstrap5 = "^0.7"
 pytz = "^2023.3"
-djlint = "^1.31.0"
+djlint = "^1.31.1"
 
 
 [tool.poetry.group.local.dependencies]
