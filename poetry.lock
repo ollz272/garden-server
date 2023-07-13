@@ -1016,12 +1016,12 @@ testing = ["coverage", "pyyaml"]
 
 [[package]]
 name = "martor"
-version = "1.6.26"
+version = "1.6.27"
 description = "Django Markdown Editor"
 optional = false
 python-versions = "*"
 files = [
-    {file = "martor-1.6.26.tar.gz", hash = "sha256:f44af117695b5b62c002e1c67a727b46ece9d9662738d551ded018611b8bfc86"},
+    {file = "martor-1.6.27.tar.gz", hash = "sha256:1fb38fec0115bd8b8d9e99a5b80c005cf32d1903d0fafa6963f8c0c9b597f24f"},
 ]
 
 [package.dependencies]
@@ -1029,6 +1029,7 @@ bleach = "*"
 Django = ">=3.2"
 Markdown = "3.3.4"
 requests = "*"
+tzdata = "*"
 
 [[package]]
 name = "mccabe"
@@ -1751,4 +1752,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a296916ea52f446a77665dfb5a91d762507ae5646b42b8e0ac2ebfa9f87faf2a"
+content-hash = "eea5be130f2d017303b5e4b8a4df1e5f73fb7fdedd9138af6ca6f66ce76a8562"
