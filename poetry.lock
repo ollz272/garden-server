@@ -1184,13 +1184,13 @@ tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "pa
 
 [[package]]
 name = "pipdeptree"
-version = "2.9.5"
+version = "2.10.2"
 description = "Command line utility to show dependency tree of packages."
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pipdeptree-2.9.5-py3-none-any.whl", hash = "sha256:65ddcb15b05a396fa2a0d6e1696881b80463942a8cef12071141898bfff24255"},
-    {file = "pipdeptree-2.9.5.tar.gz", hash = "sha256:47bfc150560709420b647bcc6293868d6f0848fb33a7d9ccbfc0abe343999953"},
+    {file = "pipdeptree-2.10.2-py3-none-any.whl", hash = "sha256:6bcc50ad4c06f05996e2fad3dc56585c323c9a7aa18694ca5b2d8115db183e80"},
+    {file = "pipdeptree-2.10.2.tar.gz", hash = "sha256:0d64fe4e9573d3e992fc84f8dc025bd9cfdf00ce9850c1252dcbdbd1734d324d"},
 ]
 
 [package.extras]
@@ -1752,4 +1752,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "8c190b5b6a063c9f422f9760661ea37452c1159f0c87c615a38a58a39d91f4e7"
+content-hash = "0dd0e4bbd058e39a899e5c2f3ee01206a87d620883b28c4004d4f74c8b4bc6b4"
