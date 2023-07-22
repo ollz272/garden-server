@@ -689,13 +689,13 @@ pyflakes = ">=3.0.0,<3.1.0"
 
 [[package]]
 name = "gunicorn"
-version = "21.0.0"
+version = "21.2.0"
 description = "WSGI HTTP Server for UNIX"
 optional = false
 python-versions = ">=3.5"
 files = [
-    {file = "gunicorn-21.0.0-py3-none-any.whl", hash = "sha256:f3a52f282306059b3a39761559c086d326449a2d67eb8ab224f057caa7cd1cff"},
-    {file = "gunicorn-21.0.0.tar.gz", hash = "sha256:d01d18d61ba58fa1e3a1ae4f15c77989a95478edbaaf95f3e3ff92a2b69d1ff2"},
+    {file = "gunicorn-21.2.0-py3-none-any.whl", hash = "sha256:3213aa5e8c24949e792bcacfc176fef362e7aac80b76c56f6b5122bf350722f0"},
+    {file = "gunicorn-21.2.0.tar.gz", hash = "sha256:88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033"},
 ]
 
 [package.dependencies]
@@ -1787,4 +1787,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "0e74adf4e0bb7799d0a9b2370cdf61d34dc8bda40af3a230278c7a1716c9d4f2"
+content-hash = "4b4c70c4e690fd26cd9b90e47a71beab9f0b531145a90b5aa1cc7031347ca957"
