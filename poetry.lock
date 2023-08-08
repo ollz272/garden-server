@@ -1204,18 +1204,18 @@ tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "pa
 
 [[package]]
 name = "pipdeptree"
-version = "2.10.2"
+version = "2.12.0"
 description = "Command line utility to show dependency tree of packages."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pipdeptree-2.10.2-py3-none-any.whl", hash = "sha256:6bcc50ad4c06f05996e2fad3dc56585c323c9a7aa18694ca5b2d8115db183e80"},
-    {file = "pipdeptree-2.10.2.tar.gz", hash = "sha256:0d64fe4e9573d3e992fc84f8dc025bd9cfdf00ce9850c1252dcbdbd1734d324d"},
+    {file = "pipdeptree-2.12.0-py3-none-any.whl", hash = "sha256:9b1f82b2a7b9755e0f8d97bdc461161dcfaf20844fd9b34df55d1cffa933925c"},
+    {file = "pipdeptree-2.12.0.tar.gz", hash = "sha256:d58b34eca0092d56cba92961cee6edebef2beba56c88dcc11e411c753c155b86"},
 ]
 
 [package.extras]
 graphviz = ["graphviz (>=0.20.1)"]
-test = ["covdefaults (>=2.3)", "diff-cover (>=7.6)", "pip (>=23.1.2)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "virtualenv (>=20.23.1,<21)"]
+test = ["covdefaults (>=2.3)", "diff-cover (>=7.7)", "pip (>=23.2)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "virtualenv (>=20.24,<21)"]
 
 [[package]]
 name = "platformdirs"
@@ -1787,4 +1787,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "2686ba7304902fe11c87d82695450354b8c962d07b664b2f5a1be22ba4b74cc7"
+content-hash = "e3e975fa362c53f6d68c402c485b83aa5377782e8619643cb68ae9d396cf92d3"
