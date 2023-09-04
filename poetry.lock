@@ -419,13 +419,13 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-colorfield"
-version = "0.9.0"
+version = "0.10.0"
 description = "color field for django models with a nice color-picker in the admin."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-colorfield-0.9.0.tar.gz", hash = "sha256:208e04dae669ed95f18c4aef02865e9c785873521ffbe5b46fb6ea7a1500c979"},
-    {file = "django_colorfield-0.9.0-py3-none-any.whl", hash = "sha256:7df5486de759dce70e54a1854f69bafd0a1e1bf98b66b09661d4d84342f447fc"},
+    {file = "django-colorfield-0.10.0.tar.gz", hash = "sha256:0273777bd282d1277fe7a241cd9f9c4a1224ff8cbb9d386f396f983aa523fd5f"},
+    {file = "django_colorfield-0.10.0-py3-none-any.whl", hash = "sha256:50858017f4462e7459644cd0575b57d924f3f6b12707523f5df70b49181347d0"},
 ]
 
 [package.dependencies]
@@ -1779,4 +1779,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "aa85016b1a7f2d88cc66f65a8dc8471e87e5e05381d5b90b1d5d124602cba3c5"
+content-hash = "311b034e18a757a08c43f8f67666c345cf0e9bdfa7be24e51cd822d0cb1ec176"
