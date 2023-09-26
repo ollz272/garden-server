@@ -15,7 +15,7 @@ django-extra-views = "^0.14.0"
 django-extensions = "^3.2.3"
 martor = "1.6.28"
 django-colorfield = "^0.10.1"
-redis = "5.0.0"
+redis = "5.0.1"
 hiredis = "2.2.3"
 django-cookiefilter = "1.0"
 django-timescaledb = { git="https://github.com/ollz272/django-timescaledb.git", rev="7d5fa2b" }
