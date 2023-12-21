@@ -20,7 +20,7 @@ hiredis = "2.2.3"
 django-cookiefilter = "1.0"
 django-timescaledb = { git="https://github.com/ollz272/django-timescaledb.git", rev="7d5fa2b" }
 dj-database-url = "2.1.0"
-ruff = "^0.0.291"
+ruff = "^0.1.9"
 pre-commit = "^3.4.0"
 parameterized = "^0.9.0"
 psycopg = "^3.1.10"
